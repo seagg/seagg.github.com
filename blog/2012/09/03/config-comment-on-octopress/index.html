@@ -1,0 +1,289 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>给octopress添加Disqus评论功能 - 心静茹水</title>
+	<meta name="author" content="Zhao, Xuhai">
+
+	
+	<meta name="description" content="经过了几天的折腾，昨天终于把octopress博客建立好了。更新起来很方便，只需要编写类似Latex语言的markdown文件，然后rake generate, rake deploy就可以啦。 今天加入了评论功能，这里主要记录下添加评论的过程。 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="心静茹水" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">心静茹水</a></h1>
+<nav id="main-nav"><ul class="main">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/tags">标签</a></li>
+  <li><a href="/blog/gallery/demo">相册</a></li>
+  <li><a href="/blog/about_me">关于</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/tags">标签</a></li>
+  <li><a href="/blog/gallery/demo">相册</a></li>
+  <li><a href="/blog/about_me">关于</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:seagg.github.com">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:seagg.github.com">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	
+	<h2 class="title">给octopress添加Disqus评论功能</h2>
+	<div class="entry-content"><p>经过了几天的折腾，昨天终于把octopress博客建立好了。更新起来很方便，只需要编写类似Latex语言的markdown文件，然后<code>rake generate</code>, <code>rake deploy</code>就可以啦。</p>
+
+<p>今天加入了评论功能，这里主要记录下添加评论的过程。Octopress中其实已经集成了Disqus评论插件，只需要简单设置一下就可以。</p>
+
+<ul>
+<li><p><strong>登录<a href="http://disqus.com">Disqus网站</a></strong>, 然后注册用户名密码，邮箱验证。</p></li>
+<li><p>单击<em>Get this on your site</em>按钮</p></li>
+</ul>
+
+
+<center>
+<img src="/images/add_comment1.PNG" >
+</center>
+
+
+<ul>
+<li><strong>填写网站的信息</strong></li>
+</ul>
+
+
+<center>
+<img src="/images/add_comment2.PNG">
+</center>
+
+
+<ul>
+<li>修改_config.yml文件:</li>
+</ul>
+
+
+<pre><code>#Disqus Comments
+disqus_short_name: Site Shortname
+disqus_show_comment_count: true</code></pre>
+
+
+<p>之后就可以通过<code>rake new_post['title']</code>创建日志，日志中设定：</p>
+
+<pre><code>comment: true
+</code></pre>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-03T19:16:00+08:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2012</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/octopress/'>octopress</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/disqus/'>Disqus</a>, <a class='tag' href='/tags/comment/'>comment</a>, <a class='tag' href='/tags/评论/'>评论</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2012/09/03/config-comment-on-octopress/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+
+<aside class="sidebar">
+  
+    <!--
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/c语言/'>C语言 (2)</a></li>
+<li class='category'><a href='/blog/categories/lua/'>Lua (2)</a></li>
+<li class='category'><a href='/blog/categories/php/'>PHP (2)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (4)</a></li>
+<li class='category'><a href='/blog/categories/web前端/'>web前端 (2)</a></li>
+<li class='category'><a href='/blog/categories/实习生活/'>实习生活 (1)</a></li>
+<li class='category'><a href='/blog/categories/算法/'>算法 (2)</a></li>
+<li class='category'><a href='/blog/categories/转载/'>转载 (1)</a></li>
+
+  </ul>
+</section>
+--><!--
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/22/php-extension/">nginx+fastcgi下开发php扩展</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/14/yaf-nginx/">Yaf框架在nginx虚拟主机中的配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/24/lua-struct/">Lua中通过ffi调用c的结构体变量</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/22/lua-php-serialize/">Lua中实现php序列化及反序列化函数</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/11/binary-tree-sort/">二叉树排序</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/10/string-html/">textarea的内容中含有html的情况</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/08/css-hack/">CSS Hack: 浏览器兼容性问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/06/support-gallery/">向Octopress博客添加相册功能</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/06/array-and-pointer/">指针数组与数组指针</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/05/add-tag-cloud-and-support-chinese/">Octopress添加tag cloud且支持中文</a>
+      </li>
+    
+  </ul>
+</section>
+-->
+
+
+
+
+
+  
+</aside>
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
+
+    Zhao, Xuhai
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'proudxu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://seagg.github.com/blog/2012/09/03/config-comment-on-octopress/';
+        var disqus_url = 'http://seagg.github.com/blog/2012/09/03/config-comment-on-octopress/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-34658066-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

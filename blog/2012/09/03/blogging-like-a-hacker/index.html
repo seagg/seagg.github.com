@@ -1,0 +1,288 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Blogging Like a Hacker - 心静茹水</title>
+	<meta name="author" content="Zhao, Xuhai">
+
+	
+	<meta name="description" content="转载自Blogging like a hacker h1. Blogging Like a Hacker p(meta). 17 Nov 2008 - San Francisco Back in 2000, when I thought I was going to be a &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="心静茹水" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">心静茹水</a></h1>
+<nav id="main-nav"><ul class="main">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/tags">标签</a></li>
+  <li><a href="/blog/gallery/demo">相册</a></li>
+  <li><a href="/blog/about_me">关于</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/tags">标签</a></li>
+  <li><a href="/blog/gallery/demo">相册</a></li>
+  <li><a href="/blog/about_me">关于</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:seagg.github.com">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:seagg.github.com">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	
+	<h2 class="title">Blogging Like a Hacker</h2>
+	<div class="entry-content"><p><strong>转载自<a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html">Blogging like a hacker</a></strong></p>
+
+<p>h1. Blogging Like a Hacker</p>
+
+<p>p(meta). 17 Nov 2008 - San Francisco</p>
+
+<p>Back in 2000, when I thought I was going to be a professional writer, I spent hours a day on LiveJournal doing writing practice with other aspiring poets and authors. Since then I&#8217;ve blogged at three different domains about web standards, print design, photography, Flash, illustration, information architecture, ColdFusion, package management, PHP, CSS, advertising, Ruby, Rails, and Erlang.</p>
+
+<p>I love writing. I get a kick out of sharing my thoughts with others. The act of transforming ideas into words is an amazingly efficient way to solidify and refine your thoughts about a given topic. But as much as I enjoy blogging, I seem to be stuck in a cycle of quitting and starting over. Before starting the current iteration, I resolved to do some introspection to determine the factors that were leading to this destructive pattern.</p>
+
+<p>I already knew a lot about what I <em>didn&#8217;t</em> want. I was tired of complicated blogging engines like WordPress and Mephisto. I wanted to write great posts, not style a zillion template pages, moderate comments all day long, and constantly lag behind the latest software release. Something like Posterous looked attractive, but I wanted to style my blog, and it needed to be hosted at the domain of my choosing. For the same reason, other hosted sites (wordpress.com, blogger.com) were disqualified. There are a few people directly using GitHub as a blog (which is very cool), but that&#8217;s a bit too much of an impedance mismatch for my tastes.</p>
+
+<p>On Sunday, October 19th, I sat down in my San Francisco apartment with a glass of apple cider and a clear mind. After a period of reflection, I had an idea. While I&#8217;m not specifically trained as an author of prose, I <em>am</em> trained as an author of code. What would happen if I approached blogging from a software development perspective? What would that look like?</p>
+
+<p>First, all my writing would be stored in a Git repository. This would ensure that I could try out different ideas and explore a variety of posts all from the comfort of my preferred editor and the command line. I&#8217;d be able to publish a post via a simple deploy script or post-commit hook. Complexity would be kept to an absolute minimum, so a static site would be preferable to a dynamic site that required ongoing maintenance. My blog would need to be easily customizable; coming from a graphic design background means I&#8217;ll always be tweaking the site&#8217;s appearance and layout.</p>
+
+<p>Over the last month I&#8217;ve brought these concepts to fruition and I&#8217;m pleased to announce &#8220;Jekyll&#8221;:http://github.com/mojombo/jekyll. Jekyll is a simple, blog aware, static site generator. It takes a template directory (representing the raw form of a website), runs it through Textile and Liquid converters, and spits out a complete, static website suitable for serving with Apache or your favorite web server. If you&#8217;re reading this on the website (http://tom.preston-werner.com), you&#8217;re seeing a Jekyll generated blog!</p>
+
+<p>To understand how this all works, open up my &#8220;TPW&#8221;:http://github.com/mojombo/tpw repo in a new browser window. I&#8217;ll be referencing the code there.</p>
+
+<p>Take a look at &#8220;index.html&#8221;:http://github.com/mojombo/tpw/tree/master/index.html. This file represents the homepage of the site. At the top of the file is a chunk of YAML that contains metadata about the file. This data tells Jekyll what layout to give the file, what the page&#8217;s title should be, etc. In this case, I specify that the &#8220;default&#8221; template should be used. You can find the layout files in the &#8221;<em>layouts&#8221;:http://github.com/mojombo/tpw/tree/master/</em>layouts directory. If you open &#8220;default.html&#8221;:http://github.com/mojombo/tpw/tree/master/_layouts/default.html you can see that the homepage is constructed by wrapping index.html with this layout.</p>
+
+<p>You&#8217;ll also notice Liquid templating code in these files. &#8220;Liquid&#8221;:http://www.liquidmarkup.org/ is a simple, extensible templating language that makes it easy to embed data in your templates. For my homepage I wanted to have a list of all my blog posts. Jekyll hands me a Hash containing various data about my site. A reverse chronological list of all my blog posts can be found in <code>site.posts</code>. Each post, in turn, contains various fields such as <code>title</code> and <code>date</code>.</p>
+
+<p>Jekyll gets the list of blog posts by parsing the files in the &#8221;<em>posts&#8221;:http://github.com/mojombo/tpw/tree/master/</em>posts directory. Each post&#8217;s filename contains the publishing date and slug (what shows up in the URL) that the final HTML file should have. Open up the file corresponding to this blog post: &#8220;2008-11-17-blogging-like-a-hacker.textile&#8221;:http://github.com/mojombo/tpw/tree/master/<em>posts/2008-11-17-blogging-like-a-hacker.textile. GitHub renders textile files by default, so to better understand the file, click on the &#8220;raw&#8221;:http://github.com/mojombo/tpw/tree/master/</em>posts/2008-11-17-blogging-like-a-hacker.textile?raw=true view to see the original file. Here I&#8217;ve specified the <code>post</code> layout. If you look at that file you&#8217;ll see an example of a nested layout. Layouts can contain other layouts allowing you a great deal of flexibility in how pages are assembled. In my case I use a nested layout in order to show related posts for each blog entry. The YAML also specifies the post&#8217;s title which is then embedded in the post&#8217;s body via Liquid.</p>
+
+<p>Posts are handled in a special way by Jekyll. The date you specify in the filename is used to construct the URL in the generated site. This post, for instance, ends up at <code>http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html</code>.</p>
+
+<p>Files that do not reside in directories prefixed with an underscore are mirrored into a corresponding directory structure in the generated site. If a file does not have a YAML preface, it is not run through the Liquid interpreter. Binary files are copied over unmodified.</p>
+
+<p>In order to convert your raw site into the finished version, you simply run:</p>
+
+<pre class="terminal"><code>$ jekyll /path/to/raw/site /path/to/place/generated/site</code></pre>
+
+
+<p>Jekyll is still a very young project. I&#8217;ve only developed the exact functionality that I&#8217;ve needed. As time goes on I&#8217;d like to see the project mature and support additional features. If you end up using Jekyll for your own blog, drop me a line and let me know what you&#8217;d like to see in future versions. Better yet, fork the project over at GitHub and hack in the features yourself!</p>
+
+<p>I&#8217;ve been living with Jekyll for just over a month now. I love it. Driving the development of Jekyll based on the needs of my blog has been very rewarding. I can edit my posts in TextMate, giving me automatic and competent spell checking. I have immediate and first class access to the CSS and page templates. Everything is backed up on GitHub. I feel a lightness now when I&#8217;m writing a post. The system is simple enough that I can keep the entire conversion process in my head. The distance from my brain to my blog has shrunk, and, in the end, I think that will make me a better author.</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-03T12:42:00+08:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2012</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/转载/'>转载</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/octopress/'>octopress</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2012/09/03/blogging-like-a-hacker/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+
+<aside class="sidebar">
+  
+    <!--
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/c语言/'>C语言 (2)</a></li>
+<li class='category'><a href='/blog/categories/lua/'>Lua (2)</a></li>
+<li class='category'><a href='/blog/categories/php/'>PHP (2)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (4)</a></li>
+<li class='category'><a href='/blog/categories/web前端/'>web前端 (2)</a></li>
+<li class='category'><a href='/blog/categories/实习生活/'>实习生活 (1)</a></li>
+<li class='category'><a href='/blog/categories/算法/'>算法 (2)</a></li>
+<li class='category'><a href='/blog/categories/转载/'>转载 (1)</a></li>
+
+  </ul>
+</section>
+--><!--
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/22/php-extension/">nginx+fastcgi下开发php扩展</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/14/yaf-nginx/">Yaf框架在nginx虚拟主机中的配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/24/lua-struct/">Lua中通过ffi调用c的结构体变量</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/22/lua-php-serialize/">Lua中实现php序列化及反序列化函数</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/11/binary-tree-sort/">二叉树排序</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/10/string-html/">textarea的内容中含有html的情况</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/08/css-hack/">CSS Hack: 浏览器兼容性问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/06/support-gallery/">向Octopress博客添加相册功能</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/06/array-and-pointer/">指针数组与数组指针</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/05/add-tag-cloud-and-support-chinese/">Octopress添加tag cloud且支持中文</a>
+      </li>
+    
+  </ul>
+</section>
+-->
+
+
+
+
+
+  
+</aside>
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
+
+    Zhao, Xuhai
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'proudxu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://seagg.github.com/blog/2012/09/03/blogging-like-a-hacker/';
+        var disqus_url = 'http://seagg.github.com/blog/2012/09/03/blogging-like-a-hacker/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-34658066-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>
