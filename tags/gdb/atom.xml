@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: gdb | 心静茹水]]></title>
   <link href="http://seagg.github.com/tags/gdb/atom.xml" rel="self"/>
   <link href="http://seagg.github.com/"/>
-  <updated>2013-02-25T11:51:04+08:00</updated>
+  <updated>2013-02-25T12:01:19+08:00</updated>
   <id>http://seagg.github.com/</id>
   <author>
     <name><![CDATA[Zhao, Xuhai]]></name>
@@ -35,6 +35,7 @@ GDB 概述</p>
 
 <p>一个调试示例  <br/>
 源程序：
+<i>
 ``` c tst.c</p>
 
 <h1>include &lt;stdio.h></h1>
@@ -169,7 +170,8 @@ result[1-250] = 31375    &lt;---------- 程序输出。</p>
 <p>Program exited with code 027. <-------- 程序退出，调试结束。
 (gdb) q     <--------------------- 退出 gdb 。
 hchen/test>
-```</p>
+```
+</i></p>
 ]]></content>
   </entry>
   
