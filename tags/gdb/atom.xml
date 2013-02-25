@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: C | 心静茹水]]></title>
-  <link href="http://seagg.github.com/blog/categories/c/atom.xml" rel="self"/>
+  <title><![CDATA[Tag: gdb | 心静茹水]]></title>
+  <link href="http://seagg.github.com/tags/gdb/atom.xml" rel="self"/>
   <link href="http://seagg.github.com/"/>
-  <updated>2013-02-25T11:49:53+08:00</updated>
+  <updated>2013-02-25T11:51:04+08:00</updated>
   <id>http://seagg.github.com/</id>
   <author>
     <name><![CDATA[Zhao, Xuhai]]></name>
