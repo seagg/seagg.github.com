@@ -7,7 +7,36 @@
 	<meta name="author" content="Zhao, Xuhai">
 
 	
-	<meta name="description" content="还有一周就可以回学校然后回家了，上周五很顺利的跟老板和经理请了两周假，所以这周得认真工作了。 接着测试我写的插件，果然发现了问题。。。 大概是这样的，这个插件是JIRA系统间传递issues，每个issue有很多的field，老板为了保证安全，要求在传输的时候检测每个域，看有没有指定的敏感关键字 &hellip;">
+	<meta name="description" content="唉，在公司实习都呆傻了，现在写起C++的程序都这么费劲。早上试着写了个二叉树排序都花了半个多小时，这要是半年前的我。。。 二叉树排序1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +107,208 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/09/11/binary-tree-sort/">
+		
+			二叉树排序</a>
+	</h2>
+	<div class="entry-content">
+		<p>唉，在公司实习都呆傻了，现在写起C++的程序都这么费劲。早上试着写了个二叉树排序都花了半个多小时，这要是半年前的我。。。</p>
+
+<figure class='code'><figcaption><span>二叉树排序</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span><span class='line'><span class="k">typedef</span> <span class="k">struct</span> <span class="n">Node</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span> <span class="n">left</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">struct</span> <span class="n">Node</span> <span class="o">*</span> <span class="n">right</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="n">node</span><span class="p">;</span>
+</span><span class='line'><span class="n">node</span> <span class="o">*</span> <span class="n">root</span><span class="o">=</span><span class="k">new</span> <span class="n">node</span><span class="p">;</span>
+</span><span class='line'><span class="kt">void</span> <span class="n">addToTree</span><span class="p">(</span><span class="n">node</span> <span class="o">*</span><span class="n">current</span><span class="p">,</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="n">current</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">node</span> <span class="o">*</span> <span class="n">r</span><span class="o">=</span><span class="k">new</span> <span class="n">node</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">current</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">=</span><span class="n">r</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">r</span><span class="o">-&gt;</span><span class="n">value</span><span class="o">=</span><span class="n">n</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">r</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">r</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">addToTree</span><span class="p">(</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">node</span> <span class="o">*</span> <span class="n">l</span><span class="o">=</span><span class="k">new</span> <span class="n">node</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">current</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">=</span><span class="n">l</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">l</span><span class="o">-&gt;</span><span class="n">value</span><span class="o">=</span><span class="n">n</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">l</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">l</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">addToTree</span><span class="p">(</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">printTree</span><span class="p">(</span><span class="n">node</span> <span class="o">*</span> <span class="n">current</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">current</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">printTree</span><span class="p">(</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">value</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">printTree</span><span class="p">(</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">root</span><span class="o">-&gt;</span><span class="n">value</span><span class="o">=</span><span class="mi">13</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">addToTree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="mi">31</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">addToTree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="mi">11</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">addToTree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="mi">61</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">addToTree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="mi">23</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">addToTree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="mi">8</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">addToTree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="mi">18</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">addToTree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">addToTree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">addToTree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="mi">9</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">addToTree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">printTree</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-11T09:02:00+08:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/算法/'>算法</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/排序/'>排序</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2012/09/11/binary-tree-sort//blog/page/2/index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
 
 
     <article class="post">
@@ -508,90 +739,6 @@ Tags:
 </div>
 	
 		<div class="comments"><a href="/blog/2012/09/06/array-and-pointer//blog/page/2/index.html#disqus_thread">Comments</a></div>
-	
-</div></article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2012/09/05/add-tag-cloud-and-support-chinese/">
-		
-			Octopress添加tag Cloud且支持中文</a>
-	</h2>
-	<div class="entry-content">
-		<p>今天上班又不务正业了，主要是昨天晚上就完成了老板最近布置的修改JIRA插件，添加敏感关键字检测及提供修改功能的任务，上午给老板演示了一下，在他提出的各种极端情况下插件都能很好的工作，老板让我今天在界面上加些交互信息，使交互更加友好。 <br/>
-整个白天都在折腾我的Octopress博客，这个果然很需要耐心，还好我最近已经被java的各种bug折磨的宠辱不惊了。今天主要添加了tag功能。正如<a href="http://log4d.com/2012/05/tag-cloud/">Log4D</a>所说的那样，一篇文章只能输入一个category，但可以有多个tag，我很同意这个观点。我这里也是用了他所用的两个插件<a href="https://github.com/robbyedwards/octopress-tag-pages">robbyedwards/octopress-tag-pages</a>和<a href="https://github.com/robbyedwards/octopress-tag-cloud">robbyedwards/octopress-tag-cloud</a>,不过跟他不同的是，我只用了官方网站上提供的两个插件，因为我觉得category还是排列整齐点的好，毕竟一个博客的category不会很多，没有必要弄成tag那种有大有小的样式，所以category我还沿用了Octopress官方的样式。这两个插件安装起来不太难，不过有些细节需要注意的。  <br/>
-第一个插件的功能是使文章支持<code>tag</code>，第二个是集中显示<code>tag cloud</code>。</p>
-
-<p><strong>关于第一个插件的安装</strong>，我是把官网上提供的文件都复制到了相应的目录，这样在Archives中就能看到tag的信息，<a href="https://github.com/robbyedwards/octopress-tag-pages">robbyedwards/octopress-tag-pages</a>中提到的<code>Usage</code>,上面的我没有用到，只是往<code>config.yml</code>中添加了</p>
-
-<pre><code>tag_dir: tags    
-</code></pre>
-
-<p>第二个配置信息添加的时候总是出错，不过不添加也没关系。可以在下属文件中进行修改。</p>
-
-<pre><code>\source\includes\post\tags.html    
-</code></pre>
-
-<p>只需在<code>span</code>标签中添加Tags:即可。
-添加之后就可以使用tag功能了，具体是在新post出的日志中添加,语法是</p>
-
-<pre><code>tags: [tag1, tag2, ...]
-</code></pre>
-
-<p>为了使每次新post出的日志都能自动附带tags: 标签，可以修改<code>config.rb</code>文件，在110行左右添加<code>post.puts "tags: "</code>。  <br/>
-<strong>第二个插件的安装</strong>，复制相应文件到对应的目录，然后到<code>source\_includes\custom\navigation.html</code>中添加一个tag cloud页面的链接，指向刚刚添加的tags.html文件。对了，还得修改下样式，到<code>sass/custom/_styles.scss</code>中添加如下css样式：</p>
-
-<pre><code>#content article .cloud li{
-  display: inline;
-  list-style: none outside none;
-  padding: 0 4px;
-}</code></pre>
-
-
-<p>  <br/>
-之后把tags.html中的样式换成cloud即可。  <br/>
-<strong>关于使category，和tag支持中文</strong>，由于我没有用Log4D修改之后的插件，所以出现了category和tag不支持中文的情况，这个的修改参考了<a href="http://pfmiles.github.com/blog/liquid-error-about-regexp-match-when-using-octopress-tagcloud/">pf_miles</a>的日志，说的挺好的，不过对于像我这样两个tag插件都用官方原版的来说，就不能直接复制里面的代码了，否则会出现tag和category相混淆的情况。但他的思想还是可以学的嘛，提炼出来，就是把<code>plugins</code>目录下的<code>tag_cloud.rb</code>、<code>tag_generator.rb</code>、<code>catetory_generator.rb</code>这几个文件的#正则表达式#部分都加上\u，就可以了。  <br/>
-思路可能有点乱，这是我凭借记忆写出来的，有可能有些出入，如果有什么不明白的，可以评论，我会及时回复的。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-05T19:06:00+08:00" pubdate data-updated="true">Sep 5<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-Category:
-
-	<a class='category' href='/blog/categories/octopress/'>octopress</a>
-
-
-</div>
-	<div class="tags">
-
-Tags:
-  
-    <a class='tag' href='/tags/octopress/'>octopress</a>, <a class='tag' href='/tags/tag/'>tag</a>, <a class='tag' href='/tags/中文支持/'>中文支持</a>
-  
-
-</div>
-	
-		<div class="comments"><a href="/blog/2012/09/05/add-tag-cloud-and-support-chinese//blog/page/2/index.html#disqus_thread">Comments</a></div>
 	
 </div></article>
 

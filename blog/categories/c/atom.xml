@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: C | 心静茹水]]></title>
+  <link href="http://seagg.github.com/blog/categories/c/atom.xml" rel="self"/>
+  <link href="http://seagg.github.com/"/>
+  <updated>2013-02-25T11:47:58+08:00</updated>
+  <id>http://seagg.github.com/</id>
+  <author>
+    <name><![CDATA[Zhao, Xuhai]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[转]用 GDB 调试程序]]></title>
+    <link href="http://seagg.github.com/blog/2013/02/25/gcc/"/>
+    <updated>2013-02-25T11:42:00+08:00</updated>
+    <id>http://seagg.github.com/blog/2013/02/25/gcc</id>
+    <content type="html"><![CDATA[<p>转载自<a href="http://blog.csdn.net/niuniuchou/article/details/5385890">http://blog.csdn.net/niuniuchou/article/details/5385890</a>  <br/>
+GDB 概述</p>
+
+<p>GDB 是 GNU 开源组织发布的一个强大的 UNIX 下的程序调试工具。或许，各位比较喜欢那种图形界面方式的，像 VC 、 BCB 等 IDE 的调试，但如果你是在 UNIX 平台下做软件，你会发现 GDB 这个调试工具有比 VC 、 BCB 的图形化调试器更强大的功能。所谓 “ 寸有所长，尺有所短 ” 就是这个道理。</p>
+
+<p>一般来说， GDB 主要帮忙你完成下面四个方面的功能：</p>
+
+<pre><code>1 、启动你的程序，可以按照你的自定义的要求随心所欲的运行程序。
+2 、可让被调试的程序在你所指定的调置的断点处停住。（断点可以是条件表达式）
+3 、当程序被停住时，可以检查此时你的程序中所发生的事。
+4 、动态的改变你程序的执行环境。
+</code></pre>
+
+<p>从上面看来， GDB 和一般的调试工具没有什么两样，基本上也是完成这些功能，不过在细节上，你会发现 GDB 这个调试工具的强大，大家可能比较习惯了图形化的调试工具，但有时候，命令行的调试工具却有着图形化工具所不能完成的功能。让我们一一看来。</p>
+
+<p>一个调试示例  <br/>
+源程序：
+``` c tst.c</p>
+
+<h1>include &lt;stdio.h></h1>
+
+<p>int func(int n)
+{</p>
+
+<pre><code>int sum=0,i;
+for(i=0; i&lt;n; i++)
+{
+    sum+=i;
+}
+return sum;
+</code></pre>
+
+<p>}
+int main()
+{</p>
+
+<pre><code>int i;
+long result = 0;
+for(i=1; i&lt;=100; i++)
+{
+    result += i;
+}
+printf("result[1-100] = %ld \n", result );
+printf("result[1-250] = %d \n", func(250) );
+return 0;
+</code></pre>
+
+<p>}
+```
+编译生成执行文件：（ Linux 下）</p>
+
+<pre><code>hchen/test&gt; g++ -g -Wall tst.c -o tst
+</code></pre>
+
+<p>使用 GDB 调试：
+``` c
+hchen/test> gdb ./tst <---------- 启动 GDB
+GNU gdb 5.1.1
+Copyright 2002 Free Software Foundation, Inc.
+GDB is free software, covered by the GNU General Public License, and you are
+welcome to change it and/or distribute copies of it under certain conditions.
+Type "show copying" to see the conditions.
+There is absolutely no warranty for GDB. Type "show warranty" for details.
+This GDB was configured as "i386-suse-linux"...
+(gdb) l     <-------------------- l 命令相当于 list ，从第一行开始例出原码。
+1        #include <stdio.h>
+2
+3        int func(int n)
+4        {
+5                int sum=0,i;
+6                for(i=0; i&lt;n; i++)
+7                {
+8                        sum+=i;
+9                }
+10               return sum;
+(gdb)       &lt;-------------------- 直接回车表示，重复上一次命令
+11       }
+12
+13
+14       main()
+15       {
+16               int i;
+17               long result = 0;
+18               for(i=1; i&lt;=100; i++)
+19               {
+20                       result += i;<br/>
+(gdb) break 16    &lt;-------------------- 设置断点，在源程序第 16 行处。
+Breakpoint 1 at 0x8048496: file tst.c, line 16.
+(gdb) break func &lt;-------------------- 设置断点，在函数 func() 入口处。
+Breakpoint 2 at 0x8048456: file tst.c, line 5.
+(gdb) info break &lt;-------------------- 查看断点信息。
+Num Type           Disp Enb Address    What
+1   breakpoint     keep y   0x08048496 in main at tst.c:16
+2   breakpoint     keep y   0x08048456 in func at tst.c:5
+(gdb) r           &lt;--------------------- 运行程序， run 命令简写
+Starting program: /home/hchen/test/tst</p>
+
+<p>Breakpoint 1, main () at tst.c:17    &lt;---------- 在断点处停住。
+17               long result = 0;
+(gdb) n          &lt;--------------------- 单条语句执行， next 命令简写。
+18               for(i=1; i&lt;=100; i++)
+(gdb) n
+20                       result += i;
+(gdb) n
+18               for(i=1; i&lt;=100; i++)
+(gdb) n
+20                       result += i;
+(gdb) c          &lt;--------------------- 继续运行程序， continue 命令简写。
+Continuing.
+result[1-100] = 5050       &lt;---------- 程序输出。</p>
+
+<p>Breakpoint 2, func (n=250) at tst.c:5
+5                int sum=0,i;
+(gdb) n
+6                for(i=1; i&lt;=n; i++)
+(gdb) p i        &lt;--------------------- 打印变量 i 的值， print 命令简写。
+$1 = 134513808
+(gdb) n
+8                        sum+=i;
+(gdb) n
+6                for(i=1; i&lt;=n; i++)
+(gdb) p sum
+$2 = 1
+(gdb) n
+8                        sum+=i;
+(gdb) p i
+$3 = 2
+(gdb) n
+6                for(i=1; i&lt;=n; i++)
+(gdb) p sum
+$4 = 3
+(gdb) bt        &lt;--------------------- 查看函数堆栈。</p>
+
+<h1>0 func (n=250) at tst.c:5</h1>
+
+<h1>1 0x080484e4 in main () at tst.c:24</h1>
+
+<h1>2 0x400409ed in __libc_start_main () from /lib/libc.so.6</h1>
+
+<p>(gdb) finish    &lt;--------------------- 退出函数。
+Run till exit from #0 func (n=250) at tst.c:5
+0x080484e4 in main () at tst.c:24
+24              printf("result[1-250] = %d /n", func(250) );
+Value returned is $6 = 31375
+(gdb) c     &lt;--------------------- 继续运行。
+Continuing.
+result[1-250] = 31375    &lt;---------- 程序输出。</p>
+
+<p>Program exited with code 027. <-------- 程序退出，调试结束。
+(gdb) q     <--------------------- 退出 gdb 。
+hchen/test>
+```</p>
+]]></content>
+  </entry>
+  
+</feed>
