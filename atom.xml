@@ -4,7 +4,7 @@
   <title><![CDATA[心静茹水]]></title>
   <link href="http://seagg.github.com/atom.xml" rel="self"/>
   <link href="http://seagg.github.com/"/>
-  <updated>2013-02-27T19:01:11+08:00</updated>
+  <updated>2013-02-27T19:02:05+08:00</updated>
   <id>http://seagg.github.com/</id>
   <author>
     <name><![CDATA[Zhao, Xuhai]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[RubyWarrior--一个人工智能小游戏]]></title>
+    <title type="html"><![CDATA[RubyWarrior 一个人工智能小游戏]]></title>
     <link href="http://seagg.github.com/blog/2013/02/27/rubywarrior/"/>
     <updated>2013-02-27T18:24:00+08:00</updated>
     <id>http://seagg.github.com/blog/2013/02/27/rubywarrior</id>
@@ -86,9 +86,9 @@
 </span><span class='line'>
 </span><span class='line'><span class="nl">Tip:</span> <span class="n">You</span> <span class="n">are</span> <span class="n">not</span> <span class="n">as</span> <span class="n">effective</span> <span class="n">at</span> <span class="n">attacking</span> <span class="n">backward</span><span class="p">.</span> <span class="n">Use</span> <span class="n">warrior</span><span class="p">.</span><span class="n">feel</span><span class="p">.</span><span class="n">wall</span><span class="o">?</span> <span class="n">and</span> <span class="n">warrior</span><span class="p">.</span><span class="n">pivot</span><span class="o">!</span> <span class="n">to</span> <span class="n">turn</span> <span class="n">around</span><span class="p">.</span>
 </span><span class='line'>
-</span><span class='line'> <span class="o">------</span>
-</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span> <span class="err">@</span><span class="o">|</span>
-</span><span class='line'> <span class="o">------</span>
+</span><span class='line'>     <span class="o">------</span>
+</span><span class='line'>    <span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span> <span class="err">@</span><span class="o">|</span>
+</span><span class='line'>     <span class="o">------</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="o">&gt;</span> <span class="o">=</span> <span class="n">Stairs</span>
 </span><span class='line'>  <span class="err">@</span> <span class="o">=</span> <span class="n">xuhai</span> <span class="p">(</span><span class="mi">20</span> <span class="n">HP</span><span class="p">)</span>
