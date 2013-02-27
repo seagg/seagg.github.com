@@ -4,7 +4,7 @@
   <title><![CDATA[心静茹水]]></title>
   <link href="http://seagg.github.com/atom.xml" rel="self"/>
   <link href="http://seagg.github.com/"/>
-  <updated>2013-02-27T18:40:41+08:00</updated>
+  <updated>2013-02-27T18:41:19+08:00</updated>
   <id>http://seagg.github.com/</id>
   <author>
     <name><![CDATA[Zhao, Xuhai]]></name>
@@ -18,7 +18,7 @@
     <link href="http://seagg.github.com/blog/2013/02/27/rubywarrior/"/>
     <updated>2013-02-27T18:24:00+08:00</updated>
     <id>http://seagg.github.com/blog/2013/02/27/rubywarrior</id>
-    <content type="html"><![CDATA[<p>项目主页：<a href="http://github.com/ryanb/ruby-warrior/tree/master">http://github.com/ryanb/ruby-warrior/tree/master</a>
+    <content type="html"><![CDATA[<p>项目主页：<a href="http://github.com/ryanb/ruby-warrior/tree/master">http://github.com/ryanb/ruby-warrior/tree/master</a>  <br/>
 这个游戏以一种有趣交互的方式来教你使用Ruby语言和人工智能。   <br/>
 在游戏中你扮演一个勇士去攀登高塔得到顶层的珍贵的红宝石。   <br/>
 在塔中每一层也就是每一关，你需要编写一个Ruby脚本来指导主角如何到达楼梯处然后进入下一关。   <br/>
