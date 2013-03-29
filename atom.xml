@@ -4,7 +4,7 @@
   <title><![CDATA[心静茹水]]></title>
   <link href="http://seagg.github.com/atom.xml" rel="self"/>
   <link href="http://seagg.github.com/"/>
-  <updated>2013-03-29T10:46:02+08:00</updated>
+  <updated>2013-03-29T10:47:48+08:00</updated>
   <id>http://seagg.github.com/</id>
   <author>
     <name><![CDATA[Zhao, Xuhai]]></name>
@@ -18,7 +18,13 @@
     <link href="http://seagg.github.com/blog/2013/03/29/github-develop/"/>
     <updated>2013-03-29T00:00:00+08:00</updated>
     <id>http://seagg.github.com/blog/2013/03/29/github-develop</id>
-    <content type="html"><![CDATA[<p>使用github开发项目</p>
+    <content type="html"><![CDATA[<p>layout: post
+title: &#8220;使用github开发项目&#8221;
+date: 2013-03-29 10:45
+comments: true
+categories:</p>
+
+<h2>tags: [js]</h2>
 
 <h3>上传本地项目到github</h3>
 
