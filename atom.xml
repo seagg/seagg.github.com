@@ -4,7 +4,7 @@
   <title><![CDATA[心静茹水]]></title>
   <link href="http://seagg.github.com/atom.xml" rel="self"/>
   <link href="http://seagg.github.com/"/>
-  <updated>2013-03-29T10:48:32+08:00</updated>
+  <updated>2013-03-29T10:49:40+08:00</updated>
   <id>http://seagg.github.com/</id>
   <author>
     <name><![CDATA[Zhao, Xuhai]]></name>
@@ -36,7 +36,7 @@
 <p>下载代码
 <code>git clone git@github.com:seagg/myProject.git</code></p>
 
-<h3>在别人项目基础上开发###</h3>
+<h3>在别人项目基础上开发</h3>
 
 <p>1、进入别人的项目主页，点fork链接  <br/>
 2、之后就可以clone到自己的电脑里进行开发  <br/>
