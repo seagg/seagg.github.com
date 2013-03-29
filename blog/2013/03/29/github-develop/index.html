@@ -3,31 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Lua中通过ffi调用c的结构体变量 - 心静茹水</title>
+	<title>github_develop - 心静茹水</title>
 	<meta name="author" content="Zhao, Xuhai">
 
 	
-	<meta name="description" content="1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-local ffi = require(&quot;ffi&quot;)
-ffi.cdef[[ typedef struct { uint8_t id; char * name; } stuInfo &hellip;">
+	<meta name="description" content="使用github开发项目 上传本地项目到github 1、进入代码所在目录并在github下创建目录 如myProject 2、初始化 git init 3、将本目录下的文件添加 git add . 4、提交并增加注释 git commit -am "first commit" 5、 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -99,47 +79,37 @@ ffi.cdef[[ typedef struct { uint8_t id; char * name; } stuInfo &hellip;">
 	
 	<div id="content" class="inner"><article class="post">
 	
-	<h2 class="title">Lua中通过ffi调用c的结构体变量</h2>
-	<div class="entry-content"><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="kd">local</span> <span class="n">ffi</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">ffi&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="n">ffi</span><span class="p">.</span><span class="n">cdef</span><span class="s">[[</span>
-</span><span class='line'><span class="s">   typedef struct { </span>
-</span><span class='line'><span class="s">     uint8_t id;</span>
-</span><span class='line'><span class="s">     char * name; </span>
-</span><span class='line'><span class="s">   } stuInfo;</span>
-</span><span class='line'><span class="s">]]</span><span class="c1">--新建一个结构体</span>
-</span><span class='line'><span class="kd">local</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span class='line'><span class="kd">local</span> <span class="n">stu</span> <span class="o">=</span> <span class="n">ffi</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">stuInfo[?]&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="c1">--新建变长的结构体变量</span>
-</span><span class='line'><span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span> <span class="k">do</span>
-</span><span class='line'>   <span class="n">stu</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>   <span class="kd">local</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">zhao&quot;</span><span class="p">;</span>
-</span><span class='line'>   <span class="kd">local</span> <span class="n">ptr</span><span class="o">=</span><span class="n">ffi</span><span class="p">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">char *&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span><span class="c1">--将lua中字符串转换为c的`char *`</span>
-</span><span class='line'>   <span class="n">stu</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">print</span><span class="p">(</span><span class="n">stu</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">id</span><span class="p">);</span>
-</span><span class='line'><span class="kd">local</span> <span class="n">myname</span> <span class="o">=</span> <span class="n">ffi</span><span class="p">.</span><span class="n">string</span><span class="p">(</span><span class="n">stu</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">name</span><span class="p">);</span><span class="c1">--将c中`char *`类型转换为lua的字符串</span>
-</span><span class='line'><span class="nb">print</span><span class="p">(</span><span class="n">myname</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+	<h2 class="title">Github_develop</h2>
+	<div class="entry-content"><p>使用github开发项目</p>
 
+<h3>上传本地项目到github</h3>
+
+<p>1、进入代码所在目录并在github下创建目录  <br/>
+如<code>myProject</code>  <br/>
+2、初始化  <br/>
+ <code>git init</code>  <br/>
+3、将本目录下的文件添加  <br/>
+ <code>git add .</code>  <br/>
+4、提交并增加注释  <br/>
+ <code>git commit -am "first commit"</code>  <br/>
+5、提交到远程服务器上的指定目录<code>seagg</code>用户下的<code>myProject</code>目录  <br/>
+ <code>git remote add origin git@github.com:seagg/myProject.git</code>  <br/>
+6、将其push到指定分支，其中master是远程分支，origin是前面创建的本地名称  <br/>
+ <code>git push -u origin master</code></p>
+
+<p>下载代码
+<code>git clone git@github.com:seagg/myProject.git</code></p>
+
+<h3>在别人项目基础上开发###</h3>
+
+<p>1、进入别人的项目主页，点fork链接  <br/>
+2、之后就可以clone到自己的电脑里进行开发  <br/>
+3、提交时执行如下命令即可：</p>
+
+<pre><code>git add .
+git commit -am "first commit"
+git push -u origin master
+</code></pre>
 </div>
 
 
@@ -156,25 +126,15 @@ ffi.cdef[[ typedef struct { uint8_t id; char * name; } stuInfo &hellip;">
   
 
 
-<time datetime="2012-12-24T18:08:00+08:00" pubdate data-updated="true">Dec 24<span>th</span>, 2012</time></div>
+<time datetime="2013-03-29T10:40:00+08:00" pubdate data-updated="true">Mar 29<span>th</span>, 2013</time></div>
 	<div class="tags">
-
-Category:
-
-	<a class='category' href='/blog/categories/lua/'>Lua</a>
-
 
 </div>
 	<div class="tags">
-
-Tags:
-  
-    <a class='tag' href='/tags/ffi/'>ffi</a>
-  
 
 </div>
 	
-		<div class="comments"><a href="/blog/2012/12/24/lua-struct/#disqus_thread">Comments</a></div>
+		<div class="comments"><a href="/blog/2013/03/29/github-develop/#disqus_thread">Comments</a></div>
 	
 </div>
 </article>
@@ -283,8 +243,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://seagg.github.com/blog/2012/12/24/lua-struct/';
-        var disqus_url = 'http://seagg.github.com/blog/2012/12/24/lua-struct/';
+        var disqus_identifier = 'http://seagg.github.com/blog/2013/03/29/github-develop/';
+        var disqus_url = 'http://seagg.github.com/blog/2013/03/29/github-develop/';
         var disqus_script = 'embed.js';
       
     (function () {

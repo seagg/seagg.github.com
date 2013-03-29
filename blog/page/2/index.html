@@ -7,11 +7,27 @@
 	<meta name="author" content="Zhao, Xuhai">
 
 	
-	<meta name="description" content="好高兴啊，昨天翻遍了lua自带的库，又在网上找了一天如何在lua中序列化以及反序列化，但结果都不是我要的，因为我要在lua中反序列化由php序列化函数序列化的一个字符串，比如这样的： 1
+	<meta name="description" content="1
 2
 3
 4
-a:9:{s:10:"comment_id";s:1:"1";s:7:"user_id";s:7 &hellip;">
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+local ffi = require(&quot;ffi&quot;)
+ffi.cdef[[ typedef struct { uint8_t id; char * name; } stuInfo &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -82,6 +98,96 @@ a:9:{s:10:"comment_id";s:1:"1";s:7:"user_id";s:7 &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/12/24/lua-struct/">
+		
+			Lua中通过ffi调用c的结构体变量</a>
+	</h2>
+	<div class="entry-content">
+		<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="kd">local</span> <span class="n">ffi</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">ffi&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">ffi</span><span class="p">.</span><span class="n">cdef</span><span class="s">[[</span>
+</span><span class='line'><span class="s">   typedef struct { </span>
+</span><span class='line'><span class="s">     uint8_t id;</span>
+</span><span class='line'><span class="s">     char * name; </span>
+</span><span class='line'><span class="s">   } stuInfo;</span>
+</span><span class='line'><span class="s">]]</span><span class="c1">--新建一个结构体</span>
+</span><span class='line'><span class="kd">local</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'><span class="kd">local</span> <span class="n">stu</span> <span class="o">=</span> <span class="n">ffi</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">stuInfo[?]&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="c1">--新建变长的结构体变量</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span> <span class="k">do</span>
+</span><span class='line'>   <span class="n">stu</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>   <span class="kd">local</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">zhao&quot;</span><span class="p">;</span>
+</span><span class='line'>   <span class="kd">local</span> <span class="n">ptr</span><span class="o">=</span><span class="n">ffi</span><span class="p">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">char *&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span><span class="c1">--将lua中字符串转换为c的`char *`</span>
+</span><span class='line'>   <span class="n">stu</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">print</span><span class="p">(</span><span class="n">stu</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">id</span><span class="p">);</span>
+</span><span class='line'><span class="kd">local</span> <span class="n">myname</span> <span class="o">=</span> <span class="n">ffi</span><span class="p">.</span><span class="n">string</span><span class="p">(</span><span class="n">stu</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">name</span><span class="p">);</span><span class="c1">--将c中`char *`类型转换为lua的字符串</span>
+</span><span class='line'><span class="nb">print</span><span class="p">(</span><span class="n">myname</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-24T18:08:00+08:00" pubdate data-updated="true">Dec 24<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/lua/'>Lua</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/ffi/'>ffi</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2012/12/24/lua-struct//blog/page/2/index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
 
 
     <article class="post">
@@ -1141,92 +1247,6 @@ Tags:
 </div>
 	
 		<div class="comments"><a href="/blog/2012/09/08/css-hack//blog/page/2/index.html#disqus_thread">Comments</a></div>
-	
-</div></article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2012/09/06/support-gallery/">
-		
-			向Octopress博客添加相册功能</a>
-	</h2>
-	<div class="entry-content">
-		<p>唉，今天又没干别的，调试了一整天的Octopress，老板我对不起你。。。 <br/>
-今天向我的博客添加了About Me页面和相册页面，这里主要说说相册功能是如何添加的。  <br/>
-对于Octopress这种轻量级的静态博客，没有必要将相册功能做的很完善，神马添加相册，上传照片功能啥的都本地手动添加就行了，这里的相册主要就是展示一下照片，而且在简洁素雅的前提下最好有一些酷酷的效果，这就是我的追求。  <br/>
-下午一直在找JS和Jquery的相册，试验了几个效果比较炫的，相册自带的css总是会和Octopress的css相冲突，导致切换到相册页面的时候整体排版就相当凌乱，在我很无助的时候，找到了这里：<a href="http://www.forceappx.com/blog/2011/12/28/getting-fancybox-to-play-nice-with-octopress/">appX</a>，这个文章主要讲的是如何将<a href="http://fancyapps.com/fancybox/#license">fancyBox</a>这个JQuery相册嵌入到Octopress日志中，给日志中的图片添加动态效果。在我试验他的方法之前，先试验了下fancyBox，效果出奇的让我满意，就是我要找的那种功能。  <br/>
-fancyBox主要用于在网页中展示相册，单击相片墙中的一个相片的时候，能够有淡入淡出的效果，且能自如的通过鼠标滚轮或者相片两侧的向上向下按钮浏览整个相册的内容。从<a href="http://fancyapps.com/fancybox/#license">fancyBox</a>下载之后运行一下Demo会有更好的理解。</p>
-
-<center>
-<img src="/images/support_gallery.JPG">
-</center>
-
-
-<p>“安装过程”大概是这样的，首先得在博客中添加一个相册的导航按钮，方法是修改</p>
-
-<pre><code>\source\_includes\custom\navigation.html    
-</code></pre>
-
-<p>仿造上面的添加一个相册页面的链接，比如这样：</p>
-
-<pre><code>&lt;li&gt;&lt;a href="/blog/gallery/demo"&gt;Gallery&lt;/a&gt;&lt;/li&gt;    
-</code></pre>
-
-<p>我这里偷懒了，直接在他的demo上建立的我的相册功能，这样很方便，而且完全能满足我要的功能。  <br/>
-添加了链接之后，将demo目录复制到<code>/source/blog/gallery/</code>目录下，当然，其他的目录比如<code>lib</code>、<code>source</code>目录也是必不可少的，这些里面包含了jquery和css等。别急，还得对<code>index.html</code>页面进行一下修改。如果不修改的话，这个相册就不能嵌入到网页当中，也就是说，单击相册链接之后，导航，边栏神马的就都不见了，所以得让Octopress将这个相册网页当成子页面，如下修改：将<code>&lt;html&gt;</code>、<code>&lt;body&gt;</code>、<code>&lt;head&gt;</code>等等独立页面拥有的元素统统去掉，然后在页面最开始部位添加</p>
-
-<pre><code>---
-layout: page
-title: Gallery
-footer: false
----</code></pre>
-
-
-<p>  <br/>
-这样Octopress就会认为这个页面是子网页。然后选择demo中自己喜欢的样式，剩余的该删就删吧，不要舍不得。。。  <br/>
-添加相片呢，就按照他的格式添加就好了，对了，每个相片还需一个缩略图。  <br/>
-嗯，大致就是这样吧，然后生成博客，就能看到相册功能了。  <br/>
-如果还有什么不明白的，可以在下面给我留言。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-06T17:27:00+08:00" pubdate data-updated="true">Sep 6<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-Category:
-
-	<a class='category' href='/blog/categories/octopress/'>octopress</a>
-
-
-</div>
-	<div class="tags">
-
-Tags:
-  
-    <a class='tag' href='/tags/相册/'>相册</a>
-  
-
-</div>
-	
-		<div class="comments"><a href="/blog/2012/09/06/support-gallery//blog/page/2/index.html#disqus_thread">Comments</a></div>
 	
 </div></article>
 
