@@ -7,7 +7,7 @@
 	<meta name="author" content="Zhao, Xuhai">
 
 	
-	<meta name="description" content="上传本地项目到github 1、进入代码所在目录并在github下创建目录 如myProject 2、初始化 git init 3、将本目录下的文件添加 git add . 4、提交并增加注释 git commit -am "first commit" 5、 &hellip;">
+	<meta name="description" content="Shift+Ctrl+T:新建标签页 Shift+Ctrl+W:关闭标签页 Ctrl+PageUp:前一标签页 Ctrl+PageDown:后一标签页 Shift+Ctrl+PageUp:标签页左移 Shift+Ctrl+PageDown:标签页右移 Alt+1:切换到标签页1 Alt+2: &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +78,74 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/04/16/linux-cut/">
+		
+			Linux终端快捷键</a>
+	</h2>
+	<div class="entry-content">
+		<p><code>Shift+Ctrl+T</code>:新建标签页  <br/>
+<code>Shift+Ctrl+W</code>:关闭标签页  <br/>
+<code>Ctrl+PageUp</code>:前一标签页  <br/>
+<code>Ctrl+PageDown</code>:后一标签页  <br/>
+<code>Shift+Ctrl+PageUp</code>:标签页左移  <br/>
+<code>Shift+Ctrl+PageDown</code>:标签页右移  <br/>
+<code>Alt+1</code>:切换到标签页1  <br/>
+<code>Alt+2</code>:切换到标签页2  <br/>
+<code>Alt+3</code>:切换到标签页3  <br/>
+<code>Shift+Ctrl+N</code>:新建窗口  <br/>
+<code>Shift+Ctrl+Q</code>:关闭终端</p>
+
+<h3>终端中的复制／粘贴:</h3>
+
+<p><code>Shift+Ctrl+C</code>:复制  <br/>
+<code>Shift+Ctrl+V</code>:粘贴</p>
+
+<h3>终端改变大小：</h3>
+
+<p><code>F11</code>：全屏  <br/>
+<code>Ctrl+plus</code>:放大  <br/>
+<code>Ctrl+minus</code>:减小  <br/>
+<code>Ctrl+0</code>:原始大小</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-16T17:28:00+08:00" pubdate data-updated="true">Apr 16<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/linux/'>Linux</a>
+
+
+</div>
+	<div class="tags">
+
+</div>
+	
+		<div class="comments"><a href="/blog/2013/04/16/linux-cut//index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
 
 
     <article class="post">
@@ -1184,142 +1252,6 @@ Tags:
 </div>
 	
 		<div class="comments"><a href="/blog/2013/01/22/php-extension//index.html#disqus_thread">Comments</a></div>
-	
-</div></article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2013/01/14/yaf-nginx/">
-		
-			Yaf框架在nginx虚拟主机中的配置</a>
-	</h2>
-	<div class="entry-content">
-		<p>主要是配置一下rewrite规则，重写URL。另外，<code>fastcgi_param PATH_INFO</code>这个不能有，要不然rewrite不能生效&#8230;</p>
-
-<figure class='code'><figcaption><span>Yaf框架在nginx虚拟主机中的配置</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-</pre></td><td class='code'><pre><code class='nginx'><span class='line'><span class="k">server</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>      <span class="kn">listen</span>       <span class="mi">80</span><span class="p">;</span>
-</span><span class='line'>      <span class="kn">server_name</span> <span class="s">demo.yafphp.com</span><span class="p">;</span>
-</span><span class='line'>      <span class="kn">index</span> <span class="s">index.html</span> <span class="s">index.htm</span> <span class="s">index.php</span><span class="p">;</span>
-</span><span class='line'>      <span class="kn">root</span>  <span class="s">/home/wwwroot/demo.yafphp.com/public</span><span class="p">;</span>
-</span><span class='line'>      <span class="kn">error_log</span> <span class="s">/data/order8.log</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="kn">location</span> <span class="p">~</span> <span class="sr">\.php$</span>
-</span><span class='line'>      <span class="p">{</span>
-</span><span class='line'>              <span class="kn">fastcgi_pass</span>  <span class="s">unix:/tmp/php-cgi.sock</span><span class="p">;</span>
-</span><span class='line'>              <span class="kn">fastcgi_index</span> <span class="s">index.php</span><span class="p">;</span>
-</span><span class='line'>              <span class="kn">include</span> <span class="s">fcgi.conf</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>              <span class="kn">include</span> <span class="s">fastcgi_params</span><span class="p">;</span>
-</span><span class='line'>              <span class="kn">fastcgi_param</span> <span class="s">SCRIPT_FILENAME</span> <span class="nv">$document_root$fastcgi_script_name</span><span class="p">;</span>
-</span><span class='line'>            <span class="c1"># fastcgi_param PATH_INFO $fastcgi_script_name; # Don&#39;t include this line. </span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>     <span class="kn">if</span> <span class="s">(!-e</span> <span class="nv">$request_filename</span><span class="s">)</span> <span class="p">{</span>
-</span><span class='line'>             <span class="kn">rewrite</span> <span class="s">^/(.*\.(js|ico|gif|jpg|png|css|bmp|html|xls)</span>$<span class="s">)</span> <span class="s">/public/</span><span class="nv">$1</span> <span class="s">last</span><span class="p">;</span>
-</span><span class='line'>             <span class="kn">rewrite</span> <span class="s">^/(.*)</span> <span class="s">/index.php?</span><span class="nv">$1</span> <span class="s">last</span><span class="p">;</span>
-</span><span class='line'>     <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>      <span class="kn">location</span> <span class="s">/status</span> <span class="p">{</span>
-</span><span class='line'>              <span class="kn">stub_status</span> <span class="no">on</span><span class="p">;</span>
-</span><span class='line'>              <span class="kn">access_log</span>   <span class="no">off</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="kn">location</span> <span class="p">~</span> <span class="sr">.*\.(gif|jpg|jpeg|png|bmp|swf)$</span>
-</span><span class='line'>              <span class="p">{</span>
-</span><span class='line'>                      <span class="kn">expires</span>      <span class="s">30d</span><span class="p">;</span>
-</span><span class='line'>              <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="kn">location</span> <span class="p">~</span> <span class="sr">.*\.(js|css)?$</span>
-</span><span class='line'>              <span class="p">{</span>
-</span><span class='line'>                      <span class="kn">expires</span>      <span class="s">12h</span><span class="p">;</span>
-</span><span class='line'>              <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-14T20:19:00+08:00" pubdate data-updated="true">Jan 14<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-Category:
-
-	<a class='category' href='/blog/categories/php/'>PHP</a>
-
-
-</div>
-	<div class="tags">
-
-Tags:
-  
-    <a class='tag' href='/tags/nginx/'>nginx</a>, <a class='tag' href='/tags/yaf/'>yaf</a>
-  
-
-</div>
-	
-		<div class="comments"><a href="/blog/2013/01/14/yaf-nginx//index.html#disqus_thread">Comments</a></div>
 	
 </div></article>
 
