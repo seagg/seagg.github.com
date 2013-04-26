@@ -7,10 +7,7 @@
 	<meta name="author" content="Zhao, Xuhai">
 
 	
-	<meta name="description" content="直接看实例吧，下面的程序转载自: Superc和飘 "\9"　例:"margin:0px auto\9;".这里的"\9"可以区别所有IE和FireFox.
-"*"　IE6、IE7可以识别.IE8、FireFox不能.
-"_"　IE6可以识别"_",IE7、IE8、FireFox不能.
-如此, &hellip;">
+	<meta name="description" content="还有一周就可以回学校然后回家了，上周五很顺利的跟老板和经理请了两周假，所以这周得认真工作了。 接着测试我写的插件，果然发现了问题。。。 大概是这样的，这个插件是JIRA系统间传递issues，每个issue有很多的field，老板为了保证安全，要求在传输的时候检测每个域，看有没有指定的敏感关键字 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -81,6 +78,72 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/09/10/string-html/">
+		
+			Textarea的内容中含有html的情况</a>
+	</h2>
+	<div class="entry-content">
+		<p>还有一周就可以回学校然后回家了，上周五很顺利的跟老板和经理请了两周假，所以这周得认真工作了。 <br/>
+接着测试我写的插件，果然发现了问题。。。  <br/>
+大概是这样的，这个插件是JIRA系统间传递issues，每个issue有很多的field，老板为了保证安全，要求在传输的时候检测每个域，看有没有指定的敏感关键字，如果有要求用户传输issue中进行修改，今天测试的时候，发现有个description域传输有问题，即如果description中含有关键字，要求用户在textarea中修改，程序再读取textarea中的内容重新存入issue中供传输。  <br/>
+可是今天传输过程中，发现有个issue的description居然有很多html标签，显示到textarea中倒是没问题，可是读取的时候就郁闷了：</p>
+
+<pre><code>本来应该是这样：    
+<textarea ...>string</textarea>
+可是这个issue的description是这样的。。。
+<textarea cols="60" rows=“2”> &lt;feature name= &quot;http://... required= true &quot; /&gt;... </textarea>
+</code></pre>
+
+
+<p>这样的话用textarea的value属性读取的时候就会遇到问题，双引号，大于小于号都会对value产生影响，导致传过去的有错误。  <br/>
+我记得好像有个类似的函数来用字符串传输html的，但函数名称想不起来了，只能用java的字符串替换函数将&#8221;替换为<code>&amp;quot;</code>，将&lt;>分别替换为<code>&amp;lt;</code>，<code>&amp;gt;</code>  <br/>
+然后就传输正确了。好惊险啊，这要是突然出了什么大bug，我就走不了了。。。  <br/>
+附上<a href="http://114.xixik.com/character/">转义字符表</a></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-10T11:22:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/web前端/'>web前端</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/textarea/'>textarea</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2012/09/10/string-html//blog/page/3/index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
 
 
     <article class="post">
@@ -529,95 +592,6 @@ Tags:
 </div>
 	
 		<div class="comments"><a href="/blog/2012/09/05/add-tag-cloud-and-support-chinese//blog/page/3/index.html#disqus_thread">Comments</a></div>
-	
-</div></article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2012/09/03/config-comment-on-octopress/">
-		
-			给octopress添加Disqus评论功能</a>
-	</h2>
-	<div class="entry-content">
-		<p>经过了几天的折腾，昨天终于把octopress博客建立好了。更新起来很方便，只需要编写类似Latex语言的markdown文件，然后<code>rake generate</code>, <code>rake deploy</code>就可以啦。</p>
-
-<p>今天加入了评论功能，这里主要记录下添加评论的过程。Octopress中其实已经集成了Disqus评论插件，只需要简单设置一下就可以。</p>
-
-<ul>
-<li><p><strong>登录<a href="http://disqus.com">Disqus网站</a></strong>, 然后注册用户名密码，邮箱验证。</p></li>
-<li><p>单击<em>Get this on your site</em>按钮</p></li>
-</ul>
-
-
-<center>
-<img src="/images/add_comment1.PNG" >
-</center>
-
-
-<ul>
-<li><strong>填写网站的信息</strong></li>
-</ul>
-
-
-<center>
-<img src="/images/add_comment2.PNG">
-</center>
-
-
-<ul>
-<li>修改_config.yml文件:</li>
-</ul>
-
-
-<pre><code>#Disqus Comments
-disqus_short_name: Site Shortname
-disqus_show_comment_count: true</code></pre>
-
-
-<p>之后就可以通过<code>rake new_post['title']</code>创建日志，日志中设定：</p>
-
-<pre><code>comment: true
-</code></pre>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-03T19:16:00+08:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2012</time></div>
-	<div class="tags">
-
-Category:
-
-	<a class='category' href='/blog/categories/octopress/'>octopress</a>
-
-
-</div>
-	<div class="tags">
-
-Tags:
-  
-    <a class='tag' href='/tags/disqus/'>Disqus</a>, <a class='tag' href='/tags/comment/'>comment</a>, <a class='tag' href='/tags/评论/'>评论</a>
-  
-
-</div>
-	
-		<div class="comments"><a href="/blog/2012/09/03/config-comment-on-octopress//blog/page/3/index.html#disqus_thread">Comments</a></div>
 	
 </div></article>
 

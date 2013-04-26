@@ -7,7 +7,7 @@
 	<meta name="author" content="Zhao, Xuhai">
 
 	
-	<meta name="description" content="转载自Blogging like a hacker h1. Blogging Like a Hacker p(meta). 17 Nov 2008 - San Francisco Back in 2000, when I thought I was going to be a &hellip;">
+	<meta name="description" content="经过了几天的折腾，昨天终于把octopress博客建立好了。更新起来很方便，只需要编写类似Latex语言的markdown文件，然后rake generate, rake deploy就可以啦。 今天加入了评论功能，这里主要记录下添加评论的过程。 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +78,95 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/09/03/config-comment-on-octopress/">
+		
+			给octopress添加Disqus评论功能</a>
+	</h2>
+	<div class="entry-content">
+		<p>经过了几天的折腾，昨天终于把octopress博客建立好了。更新起来很方便，只需要编写类似Latex语言的markdown文件，然后<code>rake generate</code>, <code>rake deploy</code>就可以啦。</p>
+
+<p>今天加入了评论功能，这里主要记录下添加评论的过程。Octopress中其实已经集成了Disqus评论插件，只需要简单设置一下就可以。</p>
+
+<ul>
+<li><p><strong>登录<a href="http://disqus.com">Disqus网站</a></strong>, 然后注册用户名密码，邮箱验证。</p></li>
+<li><p>单击<em>Get this on your site</em>按钮</p></li>
+</ul>
+
+
+<center>
+<img src="/images/add_comment1.PNG" >
+</center>
+
+
+<ul>
+<li><strong>填写网站的信息</strong></li>
+</ul>
+
+
+<center>
+<img src="/images/add_comment2.PNG">
+</center>
+
+
+<ul>
+<li>修改_config.yml文件:</li>
+</ul>
+
+
+<pre><code>#Disqus Comments
+disqus_short_name: Site Shortname
+disqus_show_comment_count: true</code></pre>
+
+
+<p>之后就可以通过<code>rake new_post['title']</code>创建日志，日志中设定：</p>
+
+<pre><code>comment: true
+</code></pre>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-03T19:16:00+08:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2012</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/octopress/'>octopress</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/disqus/'>Disqus</a>, <a class='tag' href='/tags/comment/'>comment</a>, <a class='tag' href='/tags/评论/'>评论</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2012/09/03/config-comment-on-octopress//blog/page/4/index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
 
 
     <article class="post">

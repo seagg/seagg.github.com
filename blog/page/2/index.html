@@ -7,26 +7,7 @@
 	<meta name="author" content="Zhao, Xuhai">
 
 	
-	<meta name="description" content="主要是配置一下rewrite规则，重写URL。另外，fastcgi_param PATH_INFO这个不能有，要不然rewrite不能生效&#8230; Yaf框架在nginx虚拟主机中的配置1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20 &hellip;">
+	<meta name="description" content="本文参考：用C/C++扩展你的PHP 要开发扩展，首先需要有php的源码包，可以到php官网下载，我使用的版本是5.3.10，之后解压，进入ext目录里。 先建立一个函数定义到.def文件当中，比如string self_concat(string str, int n)，这样的话， &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -97,6 +78,180 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/01/22/php-extension/">
+		
+			Nginx+fastcgi下开发php扩展</a>
+	</h2>
+	<div class="entry-content">
+		<p>本文参考：<a href="http://www.laruence.com/2009/04/28/719.html">用C/C++扩展你的PHP</a>  <br/>
+要开发扩展，首先需要有php的源码包，可以到php官网下载，我使用的版本是5.3.10，之后解压，进入ext目录里。  <br/>
+先建立一个函数定义到.def文件当中，比如<code>string self_concat(string str, int n)</code>，这样的话，会在稍后生成的扩展框架中自动添加函数原型和一个默认实现。当然，也可以不使用这个文件，手动去建立函数。</p>
+
+<pre><code>vi myfunctions.def
+</code></pre>
+
+<p>之后是用php的ext_skel生成php扩展的框架：</p>
+
+<pre><code>./ext_skel --extname=myfunctions --proto=../myfunctions.def
+</code></pre>
+
+<p>会在ext目录下生成一个名为<code>myfunctions</code>的目录，里面包含了php扩展框架基本文件。  <br/>
+之后，是修改<code>php_myfunctions.h</code>文件，在<code>PHP_FUNCTION(confirm_myfunctions_compiled);</code>之后添加函数定义</p>
+
+<pre><code>PHP_FUNCTION(self_concat);
+</code></pre>
+
+<p>再修改<code>myfunctions.c</code>文件，在文件末尾添加函数实现
+比如</p>
+
+<figure class='code'><figcaption><span>self_concat实现</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">PHP_FUNCTION</span><span class="p">(</span><span class="n">self_concat</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">char</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">argc</span> <span class="o">=</span> <span class="n">ZEND_NUM_ARGS</span><span class="p">();</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">str_len</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">long</span> <span class="n">n</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">char</span> <span class="o">*</span><span class="n">result</span><span class="p">;</span> <span class="cm">/* Points to resulting string */</span>
+</span><span class='line'>    <span class="kt">char</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span> <span class="cm">/* Points at the next location we want to copy to */</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">result_length</span><span class="p">;</span> <span class="cm">/* Length of resulting string */</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">zend_parse_parameters</span><span class="p">(</span><span class="n">argc</span> <span class="n">TSRMLS_CC</span><span class="p">,</span> <span class="s">&quot;sl&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">str_len</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="n">FAILURE</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>    <span class="cm">/* Calculate length of result */</span>
+</span><span class='line'>    <span class="n">result_length</span> <span class="o">=</span> <span class="p">(</span><span class="n">str_len</span> <span class="o">*</span> <span class="n">n</span><span class="p">);</span>
+</span><span class='line'>    <span class="cm">/* Allocate memory for result */</span>
+</span><span class='line'>    <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">emalloc</span><span class="p">(</span><span class="n">result_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>    <span class="cm">/* Point at the beginning of the result */</span>
+</span><span class='line'>    <span class="n">ptr</span> <span class="o">=</span> <span class="n">result</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="cm">/* Copy str to the result */</span>
+</span><span class='line'>        <span class="n">memcpy</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">str</span><span class="p">,</span> <span class="n">str_len</span><span class="p">);</span>
+</span><span class='line'>        <span class="cm">/* Increment ptr to point at the next position we want to write to */</span>
+</span><span class='line'>        <span class="n">ptr</span> <span class="o">+=</span> <span class="n">str_len</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="cm">/* Null terminate the result. Always null-terminate your strings</span>
+</span><span class='line'><span class="cm">    even if they are binary strings */</span>
+</span><span class='line'>    <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="cm">/* Return result to the scripting engine without duplicating it*/</span>
+</span><span class='line'>    <span class="n">RETURN_STRINGL</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">result_length</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>之后，修改<code>config.m4</code>文件,去掉如下两行前的dnl</p>
+
+<pre><code>PHP_ARG_ENABLE(myfunctions, whether to enable myfunctions support,
+[  --enable-myfunctions           Enable myfunctions support])
+</code></pre>
+
+<p>之后去php源码跟目录，执行</p>
+
+<pre><code>./buildconf --force
+</code></pre>
+
+<p>如果提示autoconf版本不对的话，我原来的版本是2.69&#8230; 很郁闷，版本高了居然还不行。执行</p>
+
+<pre><code>apt-get install autoconf2.59
+export PHP_AUTOCONF=autoconf2.59
+./buildconf --force
+</code></pre>
+
+<p>切换到<code>ext/myfunctions</code>目录，执行：</p>
+
+<pre><code>/usr/local/php/bin/phpize 
+./configure --with-php-config=/usr/local/php/bin/php-config 
+make
+make install
+</code></pre>
+
+<p>再就是修改<code>php.ini</code>文件，在[extension]部分加入</p>
+
+<pre><code>extension = "myfunctions.so"
+</code></pre>
+
+<p>之后重启php</p>
+
+<pre><code>/etc/init.d/php-fpm restart
+</code></pre>
+
+<p>如果修改了函数，或者新增加函数，需要重新编译php</p>
+
+<pre><code>make
+make install
+/etc/init.d/php-fpm restart
+</code></pre>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-22T15:26:00+08:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2013</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/c语言/'>C语言</a>, <a class='category' href='/blog/categories/php/'>PHP</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/extension/'>extension</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2013/01/22/php-extension//blog/page/2/index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
 
 
     <article class="post">
@@ -1114,72 +1269,6 @@ Tags:
 </div>
 	
 		<div class="comments"><a href="/blog/2012/09/11/binary-tree-sort//blog/page/2/index.html#disqus_thread">Comments</a></div>
-	
-</div></article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2012/09/10/string-html/">
-		
-			Textarea的内容中含有html的情况</a>
-	</h2>
-	<div class="entry-content">
-		<p>还有一周就可以回学校然后回家了，上周五很顺利的跟老板和经理请了两周假，所以这周得认真工作了。 <br/>
-接着测试我写的插件，果然发现了问题。。。  <br/>
-大概是这样的，这个插件是JIRA系统间传递issues，每个issue有很多的field，老板为了保证安全，要求在传输的时候检测每个域，看有没有指定的敏感关键字，如果有要求用户传输issue中进行修改，今天测试的时候，发现有个description域传输有问题，即如果description中含有关键字，要求用户在textarea中修改，程序再读取textarea中的内容重新存入issue中供传输。  <br/>
-可是今天传输过程中，发现有个issue的description居然有很多html标签，显示到textarea中倒是没问题，可是读取的时候就郁闷了：</p>
-
-<pre><code>本来应该是这样：    
-<textarea ...>string</textarea>
-可是这个issue的description是这样的。。。
-<textarea cols="60" rows=“2”> &lt;feature name= &quot;http://... required= true &quot; /&gt;... </textarea>
-</code></pre>
-
-
-<p>这样的话用textarea的value属性读取的时候就会遇到问题，双引号，大于小于号都会对value产生影响，导致传过去的有错误。  <br/>
-我记得好像有个类似的函数来用字符串传输html的，但函数名称想不起来了，只能用java的字符串替换函数将&#8221;替换为<code>&amp;quot;</code>，将&lt;>分别替换为<code>&amp;lt;</code>，<code>&amp;gt;</code>  <br/>
-然后就传输正确了。好惊险啊，这要是突然出了什么大bug，我就走不了了。。。  <br/>
-附上<a href="http://114.xixik.com/character/">转义字符表</a></p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-10T11:22:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-Category:
-
-	<a class='category' href='/blog/categories/web前端/'>web前端</a>
-
-
-</div>
-	<div class="tags">
-
-Tags:
-  
-    <a class='tag' href='/tags/textarea/'>textarea</a>
-  
-
-</div>
-	
-		<div class="comments"><a href="/blog/2012/09/10/string-html//blog/page/2/index.html#disqus_thread">Comments</a></div>
 	
 </div></article>
 
