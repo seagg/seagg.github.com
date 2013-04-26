@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 心静茹水]]></title>
   <link href="http://seagg.github.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://seagg.github.com/"/>
-  <updated>2013-04-26T10:10:04+08:00</updated>
+  <updated>2013-04-26T10:12:21+08:00</updated>
   <id>http://seagg.github.com/</id>
   <author>
     <name><![CDATA[Zhao, Xuhai]]></name>
@@ -24,12 +24,14 @@
 <code>q</code>     退出记录模式  <br/>
 <code>@x</code>     播放记录在x寄存器中的宏命令</p>
 
-<pre><code>稍微解释一下，当在normal模式下输入:qx后，你对文本的所有编辑动作将会被记录下来，再次输入q即退出了记录模式，然后输入@x对刚才记录下来的命令进行重复，此命令后可跟数字，表示要重复多少次，比如@x20，可以重复20次。这个在文本的批处理中是非常有用的。    
+<pre><code>稍微解释一下，当在normal模式下输入:qx后，你对文本的所有编辑动作将会被记录下来，再次输入q即退出了记录模式，
+然后输入@x对刚才记录下来的命令进行重复，此命令后可跟数字，表示要重复多少次，比如@x20，可以重复20次。
+这个在文本的批处理中是非常有用的。    
 </code></pre>
 
 <h4>同时编辑多个文件</h4>
 
-<pre><code>在vim众多的插件中，有一个叫minibuffer的插件，就是下面所说的标签页功能了，可以支持同时编辑多个文件。  
+<pre><code>在vim众多的插件中，有一个叫minibuffer的插件，就是下面所说的标签页功能了，可以支持同时编辑多个文件。    
 </code></pre>
 
 <h3>标签命令###</h3>
