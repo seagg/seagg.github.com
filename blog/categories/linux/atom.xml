@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 心静茹水]]></title>
   <link href="http://seagg.github.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://seagg.github.com/"/>
-  <updated>2013-04-26T10:12:21+08:00</updated>
+  <updated>2013-04-26T10:14:14+08:00</updated>
   <id>http://seagg.github.com/</id>
   <author>
     <name><![CDATA[Zhao, Xuhai]]></name>
@@ -43,7 +43,7 @@
 <code>:tabl</code>     切换到最后一个标签页  <br/>
 <code>:tabm [N]</code>     把当前tab移动到第N个tab之后</p>
 
-<pre><code>对，正如你所想象的那样，跟eclipse, ue等的标签页是一个意思！
+<pre><code>对，正如你所想象的那样，跟eclipse, ue等的标签页是一个意思！    
 </code></pre>
 
 <h3>窗口命令###</h3>
