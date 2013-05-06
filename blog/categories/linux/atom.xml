@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 心静茹水]]></title>
   <link href="http://seagg.github.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://seagg.github.com/"/>
-  <updated>2013-05-06T10:44:52+08:00</updated>
+  <updated>2013-05-06T10:50:49+08:00</updated>
   <id>http://seagg.github.com/</id>
   <author>
     <name><![CDATA[Zhao, Xuhai]]></name>
@@ -209,8 +209,8 @@
 <code>Ctrl+e</code>:最后位置  <br/>
 <code>Ctrl+k</code>:删除此处至末尾所有内容  <br/>
 <code>Ctrl+u</code>:删除此处至开始所有内容  <br/>
-<code>Ctrl-L</code>:-刷新屏幕  <br/>
-<code>Ctrl-C</code>:-杀死当前任务</p>
+<code>Ctrl-L</code>:刷新屏幕  <br/>
+<code>Ctrl-C</code>:杀死当前任务</p>
 
 <h3>终端:</h3>
 
