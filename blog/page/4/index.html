@@ -7,7 +7,7 @@
 	<meta name="author" content="Zhao, Xuhai">
 
 	
-	<meta name="description" content="经过了几天的折腾，昨天终于把octopress博客建立好了。更新起来很方便，只需要编写类似Latex语言的markdown文件，然后rake generate, rake deploy就可以啦。 今天加入了评论功能，这里主要记录下添加评论的过程。 &hellip;">
+	<meta name="description" content="今天上班又不务正业了，主要是昨天晚上就完成了老板最近布置的修改JIRA插件，添加敏感关键字检测及提供修改功能的任务，上午给老板演示了一下，在他提出的各种极端情况下插件都能很好的工作，老板让我今天在界面上加些交互信息，使交互更加友好。 整个白天都在折腾我的Octopress博客，这个果然很需要耐心 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -78,6 +78,90 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/09/05/add-tag-cloud-and-support-chinese/">
+		
+			Octopress添加tag Cloud且支持中文</a>
+	</h2>
+	<div class="entry-content">
+		<p>今天上班又不务正业了，主要是昨天晚上就完成了老板最近布置的修改JIRA插件，添加敏感关键字检测及提供修改功能的任务，上午给老板演示了一下，在他提出的各种极端情况下插件都能很好的工作，老板让我今天在界面上加些交互信息，使交互更加友好。 <br/>
+整个白天都在折腾我的Octopress博客，这个果然很需要耐心，还好我最近已经被java的各种bug折磨的宠辱不惊了。今天主要添加了tag功能。正如<a href="http://log4d.com/2012/05/tag-cloud/">Log4D</a>所说的那样，一篇文章只能输入一个category，但可以有多个tag，我很同意这个观点。我这里也是用了他所用的两个插件<a href="https://github.com/robbyedwards/octopress-tag-pages">robbyedwards/octopress-tag-pages</a>和<a href="https://github.com/robbyedwards/octopress-tag-cloud">robbyedwards/octopress-tag-cloud</a>,不过跟他不同的是，我只用了官方网站上提供的两个插件，因为我觉得category还是排列整齐点的好，毕竟一个博客的category不会很多，没有必要弄成tag那种有大有小的样式，所以category我还沿用了Octopress官方的样式。这两个插件安装起来不太难，不过有些细节需要注意的。  <br/>
+第一个插件的功能是使文章支持<code>tag</code>，第二个是集中显示<code>tag cloud</code>。</p>
+
+<p><strong>关于第一个插件的安装</strong>，我是把官网上提供的文件都复制到了相应的目录，这样在Archives中就能看到tag的信息，<a href="https://github.com/robbyedwards/octopress-tag-pages">robbyedwards/octopress-tag-pages</a>中提到的<code>Usage</code>,上面的我没有用到，只是往<code>config.yml</code>中添加了</p>
+
+<pre><code>tag_dir: tags    
+</code></pre>
+
+<p>第二个配置信息添加的时候总是出错，不过不添加也没关系。可以在下属文件中进行修改。</p>
+
+<pre><code>\source\includes\post\tags.html    
+</code></pre>
+
+<p>只需在<code>span</code>标签中添加Tags:即可。
+添加之后就可以使用tag功能了，具体是在新post出的日志中添加,语法是</p>
+
+<pre><code>tags: [tag1, tag2, ...]
+</code></pre>
+
+<p>为了使每次新post出的日志都能自动附带tags: 标签，可以修改<code>config.rb</code>文件，在110行左右添加<code>post.puts "tags: "</code>。  <br/>
+<strong>第二个插件的安装</strong>，复制相应文件到对应的目录，然后到<code>source\_includes\custom\navigation.html</code>中添加一个tag cloud页面的链接，指向刚刚添加的tags.html文件。对了，还得修改下样式，到<code>sass/custom/_styles.scss</code>中添加如下css样式：</p>
+
+<pre><code>#content article .cloud li{
+  display: inline;
+  list-style: none outside none;
+  padding: 0 4px;
+}</code></pre>
+
+
+<p>  <br/>
+之后把tags.html中的样式换成cloud即可。  <br/>
+<strong>关于使category，和tag支持中文</strong>，由于我没有用Log4D修改之后的插件，所以出现了category和tag不支持中文的情况，这个的修改参考了<a href="http://pfmiles.github.com/blog/liquid-error-about-regexp-match-when-using-octopress-tagcloud/">pf_miles</a>的日志，说的挺好的，不过对于像我这样两个tag插件都用官方原版的来说，就不能直接复制里面的代码了，否则会出现tag和category相混淆的情况。但他的思想还是可以学的嘛，提炼出来，就是把<code>plugins</code>目录下的<code>tag_cloud.rb</code>、<code>tag_generator.rb</code>、<code>catetory_generator.rb</code>这几个文件的#正则表达式#部分都加上\u，就可以了。  <br/>
+思路可能有点乱，这是我凭借记忆写出来的，有可能有些出入，如果有什么不明白的，可以评论，我会及时回复的。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-05T19:06:00+08:00" pubdate data-updated="true">Sep 5<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/octopress/'>octopress</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/octopress/'>octopress</a>, <a class='tag' href='/tags/tag/'>tag</a>, <a class='tag' href='/tags/中文支持/'>中文支持</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2012/09/05/add-tag-cloud-and-support-chinese//blog/page/4/index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
 
 
     <article class="post">
@@ -431,65 +515,12 @@ Tags:
 	
 </div></article>
 
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2012/09/02/first-note/">
-		
-			Intern in Intel</a>
-	</h2>
-	<div class="entry-content">
-		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实习三周了，感觉还不错，从之前的不能想象我居然开始在公司里上班，到现在慢慢接受且熟悉了现在的生活。第一天到公司的时候，感觉什么都这么新鲜，刷卡进楼，再刷卡进办公区，看到很多忙碌的人，说着各种术语，还夹杂着英文单词，烧个image、这个得work on一下、更新下wiki，什么都这么陌生，我的电脑没配下来之前一直用一个台式电脑，装的居然还是OpenSUSE系统，好恨之前没把linux用熟，而且公司的网络还特别奇怪，得设置代理，设置完了吧用Firefox可以上去网，命令行里可以ping到网站，但一用命令下载什么软件包却始终连不上，到现在也没太整明白，只知道用IE可以上去公司的内网，火狐却不行，上公司的邮箱和lync需要一个无线网络连接，下软件包却需要换另一个网络连接，总之很麻烦。  <br/>
-公司里到处可以见到讨论技术的人，楼梯口的沙发，电梯里，等待打饭的人，甚至是卫生间里。卫生间里有个大叔专门负责清洁，把那擦的一尘不染，而且总是笑眯眯的，遇到人讨论架构啊系统啊什么的，感觉他跟我一样好奇，听着他们的对话，总有种错觉，那个大叔是intel的专家，掌握着鬼魅般的技术，笑看一切，好吧，我承认是黑客小说看多了。公司的食堂还不错，很便宜，而且第一顿饭的印象很好，记得打了份鸡腿，一份白菜豆腐，一碗米饭，一碗红豆粥，才8块几，据说这个食堂是有intel补贴的，怪不得呢，可惜就是不提供晚饭，谁让这边从不加班呢。每次到中午11：30去吃饭的人都很多，排好几个很长的队伍，然后取盘子，然后去窗口自己选一份份摆好的菜，然后是米饭和粥，再到出口那块刷饭卡，有两个漂亮的工作人员刷卡然后发一张餐巾纸，这两个人特别厉害，我观察过很多回了，那么多种类的菜，不同的价格，而且盘里两到三个菜加上饭和粥或汤，她们却能看一眼就算出来多少钱然后刷卡，不需要停顿，很强的，intel里到处都是神人啊！  <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;老板人很好，电话面试我的人就是他，记得当时问了很多c语言的东西，比如指针和数组的区别，复制构造函数怎么写等，到这边之后发现暂时还没用到c和c++，第一天刚来就带我一起去了一个会议室，跟我讲要做JIRA插件开发，同时接手一个要离职的同事的工作，老板讲话很和蔼，也很有条理，会时不时的看着你的眼睛，期待你的反馈，让我感动的是他居然亲自到我电脑这告诉我怎么申请出入办公区的卡，需要什么在线培训等，第一周基本是让我熟悉JIRA使用，每天都会来问问进展，有什么问题，第二周开始让我写daily report，包括昨天干了什么，今天打算干什么，遇到什么问题等，记得第一天写了之后没一会，他就过来给我讲我report里写的遇到的问题，很好的老板，口头语是没错，太对了，而且很喜欢笑，是个快乐的IT男。第二周开始与那个要离职的人交接，把他做过的、维护过的一些程序给我看，有将尽十个plugin和gadget，我差不多每天看一个，先熟悉功能，然后看看代码，不懂的的地方他就给我讲讲，可惜我的JAVA和js不是特别熟悉，而且JIRA有很多自己的API，还有SOAP和REST协议神马的，要一天之内理解他一两个月写出的程序，很有困难，所以也只能了解个大概，知道原理，具体的以后再深入研究吧。这周三开始有任务了，老板第一天就跟我说过，让我修改一个第三方插件，我一看，数了数，有90个类。。。 结构很复杂的样子，让我修改其中的bug，然后扩充一项功能，昨天看了一下午，晚上回来头昏昏沉沉的，但还得继续学java，其实虽说是插件，但每个插件基本都是一个网站，而且还是有前端，有后台action处理的，类似jsp和servlet组成的网站，但还有所不同，要用到jira的api，还有jira奇怪的前后台通信方式和它奇怪的数据库，唉，老板居然给我这个新手这么大的任务，崩溃了，看来明天还得去公司呆着去。  <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;公司的环境挺好的，饼干饮料咖啡奶茶啥的，随便享用，我最喜欢喝那的拿铁咖啡和泡沫奶茶，记得昨天去喝奶茶，按了按钮，居然出来的只是牛奶，看来暂时没有茶的原料了。公司挺人性化的，边上还放了杯子，我原来一直用那的杯子，用完之后冲一下，后来一个屋的同事告诉我那个是供外来人员用的，得自己带杯子过来。。。 我瞬间感觉我又out了，从那之后我就不好意思用那的杯子了，不过我的水杯比较能装，有时候去那就打两份咖啡，哈哈。这有一点特别好，就是从来不加班，大部分人都是5点左右就走了，不走的六点之前基本也都走了，我是在哪都是呆着，况且还有免费空调，就每天多呆会。  <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加油，认真实习，好公司好环境只是暂时的，要想变成永恒，还得靠自己的努力。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-02T22:08:00+08:00" pubdate data-updated="true">Sep 2<span>nd</span>, 2012</time></div>
-	<div class="tags">
-
-Category:
-
-	<a class='category' href='/blog/categories/实习生活/'>实习生活</a>
-
-
-</div>
-	<div class="tags">
-
-Tags:
-  
-    <a class='tag' href='/tags/intel/'>intel</a>, <a class='tag' href='/tags/intern/'>intern</a>
-  
-
-</div>
-	
-		<div class="comments"><a href="/blog/2012/09/02/first-note//blog/page/4/index.html#disqus_thread">Comments</a></div>
-	
-</div></article>
-
 <nav id="pagenavi">
     
         <a href="/blog/page/3/" class="prev">Prev</a>
     
+    
+        <a href="/blog/page/5/" class="next">Next</a>
     
     <div class="center"><a href="/blog/archives">Blog Archives</a></div>
 </nav></div>
