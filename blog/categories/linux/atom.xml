@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | 心静茹水]]></title>
   <link href="http://seagg.github.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://seagg.github.com/"/>
-  <updated>2013-05-09T11:32:58+08:00</updated>
+  <updated>2013-05-09T11:46:05+08:00</updated>
   <id>http://seagg.github.com/</id>
   <author>
     <name><![CDATA[Zhao, Xuhai]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux crontab格式]]></title>
+    <link href="http://seagg.github.com/blog/2013/05/09/crontab/"/>
+    <updated>2013-05-09T11:30:00+08:00</updated>
+    <id>http://seagg.github.com/blog/2013/05/09/crontab</id>
+    <content type="html"><![CDATA[<pre><code>基本格式 :
+*　　*　　*　　*　　*　　command
+分　时　日　月　周　命令
+</code></pre>
+
+<p>第1列表示分钟1～59 每分钟用<em>或者 </em>/1表示  <br/>
+第2列表示小时1～23（0表示0点）  <br/>
+第3列表示日期1～31  <br/>
+第4列表示月份1～12  <br/>
+第5列标识号星期0～6（0表示星期天）  <br/>
+第6列要运行的命令</p>
+
+<p>crontab文件的一些例子：</p>
+
+<pre><code>30 21 * * * /usr/local/etc/rc.d/lighttpd restart    
+</code></pre>
+
+<p>上面的例子表示每晚的21:30重启apache。</p>
+
+<pre><code>45 4 1,10,22 * * /usr/local/etc/rc.d/lighttpd restart   
+</code></pre>
+
+<p>上面的例子表示每月1、10、22日的4 : 45重启apache。</p>
+
+<pre><code>10 1 * * 6,0 /usr/local/etc/rc.d/lighttpd restart   
+</code></pre>
+
+<p>上面的例子表示每周六、周日的1 : 10重启apache。</p>
+
+<pre><code>0,30 18-23 * * * /usr/local/etc/rc.d/lighttpd restart   
+</code></pre>
+
+<p>上面的例子表示在每天18 : 00至23 : 00之间每隔30分钟重启apache。</p>
+
+<pre><code>0 23 * * 6 /usr/local/etc/rc.d/lighttpd restart     
+</code></pre>
+
+<p>上面的例子表示每星期六的11 : 00 pm重启apache。</p>
+
+<pre><code>* */1 * * * /usr/local/etc/rc.d/lighttpd restart    
+</code></pre>
+
+<p>每一小时重启apache</p>
+
+<pre><code>* 23-7/1 * * * /usr/local/etc/rc.d/lighttpd restart     
+</code></pre>
+
+<p>晚上11点到早上7点之间，每隔一小时重启apache</p>
+
+<pre><code>0 11 4 * mon-wed /usr/local/etc/rc.d/lighttpd restart   
+</code></pre>
+
+<p>每月的4号与每周一到周三的11点重启apache</p>
+
+<pre><code>0 4 1 jan * /usr/local/etc/rc.d/lighttpd restart    
+</code></pre>
+
+<p>一月一号的4点重启apache</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux下vim命令详解]]></title>
