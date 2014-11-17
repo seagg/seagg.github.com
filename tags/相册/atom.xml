@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 相册 | 心静茹水]]></title>
   <link href="http://seagg.github.com/tags/相册/atom.xml" rel="self"/>
   <link href="http://seagg.github.com/"/>
-  <updated>2014-10-29T20:21:19+08:00</updated>
+  <updated>2014-11-17T11:08:20+08:00</updated>
   <id>http://seagg.github.com/</id>
   <author>
     <name><![CDATA[Zhao, Xuhai]]></name>
@@ -36,7 +36,7 @@ fancyBox主要用于在网页中展示相册，单击相片墙中的一个相片
 
 <p>仿造上面的添加一个相册页面的链接，比如这样：</p>
 
-<pre><code>&lt;li&gt;&lt;a href="/blog/gallery/demo"&gt;Gallery&lt;/a&gt;&lt;/li&gt;    
+<pre><code>&lt;li&gt;&lt;a href="{{ root_url }}/blog/gallery/demo"&gt;Gallery&lt;/a&gt;&lt;/li&gt;    
 </code></pre>
 
 <p>我这里偷懒了，直接在他的demo上建立的我的相册功能，这样很方便，而且完全能满足我要的功能。  <br/>

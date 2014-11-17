@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 转载 | 心静茹水]]></title>
   <link href="http://seagg.github.com/blog/categories/转载/atom.xml" rel="self"/>
   <link href="http://seagg.github.com/"/>
-  <updated>2014-10-29T20:21:19+08:00</updated>
+  <updated>2014-11-17T11:08:20+08:00</updated>
   <id>http://seagg.github.com/</id>
   <author>
     <name><![CDATA[Zhao, Xuhai]]></name>
@@ -20,7 +20,7 @@
     <id>http://seagg.github.com/blog/2012/09/03/blogging-like-a-hacker</id>
     <content type="html"><![CDATA[<p><strong>转载自<a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html">Blogging like a hacker</a></strong></p>
 
-<p>h1. Category: 转载</p>
+<p>h1. {{ page.title }}</p>
 
 <p>p(meta). 17 Nov 2008 - San Francisco</p>
 
