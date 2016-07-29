@@ -1,0 +1,41 @@
+---
+layout: post
+title: "冒泡排序"
+date: 2012-09-02 23:10
+comments: true
+categories: 算法
+tags: [排序]
+---
+冒泡排序
+``` c bubble sort
+# include <iostream>
+using namespace std;
+
+void bubblesort(int a[], int size)
+{
+    int i,j;
+    for(i=0;i<size;i++)
+    {
+        for(j=0;j<size-i-1; j++)
+        {
+            if(a[j]>a[j+1])
+            {
+                swap(a[j],a[j+1]);
+            }
+        }
+    }
+}
+void main()
+{
+    int a[10],i;
+    for(i=0;i<10;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    bubblesort(a,10);
+    for(i=0;i<10;i++)
+    {
+        printf("%-4d", a[i]);
+    }
+}
+```

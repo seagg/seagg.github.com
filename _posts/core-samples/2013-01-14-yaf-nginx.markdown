@@ -1,0 +1,52 @@
+---
+layout: post
+title: "Yaf框架在nginx虚拟主机中的配置"
+date: 2013-01-14 20:19
+comments: true
+categories: PHP
+tags: [nginx, yaf]
+---
+主要是配置一下rewrite规则，重写URL。另外，`fastcgi_param PATH_INFO`这个不能有，要不然rewrite不能生效...    
+``` nginx Yaf框架在nginx虚拟主机中的配置
+server
+{
+	    listen       80;
+	    server_name demo.yafphp.com;
+	    index index.html index.htm index.php;
+	    root  /home/wwwroot/demo.yafphp.com/public;
+	    error_log /data/order8.log;
+
+	    location ~ \.php$
+	    {
+	            fastcgi_pass  unix:/tmp/php-cgi.sock;
+	            fastcgi_index index.php;
+	            include fcgi.conf;
+
+	            include fastcgi_params;
+	            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	          # fastcgi_param PATH_INFO $fastcgi_script_name; # Don't include this line. 
+	    }
+
+	   if (!-e $request_filename) {
+	           rewrite ^/(.*\.(js|ico|gif|jpg|png|css|bmp|html|xls)$) /public/$1 last;
+	           rewrite ^/(.*) /index.php?$1 last;
+	   }
+
+
+	    location /status {
+	            stub_status on;
+	            access_log   off;
+	    }
+
+	    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+	            {
+	                    expires      30d;
+	            }
+
+	    location ~ .*\.(js|css)?$
+	            {
+	                    expires      12h;
+	            }
+
+}
+```

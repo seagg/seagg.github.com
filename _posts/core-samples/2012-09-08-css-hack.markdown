@@ -1,0 +1,88 @@
+---
+layout: post
+title: "CSS Hack: 浏览器兼容性问题"
+date: 2012-09-08 11:14
+comments: true
+categories: web前端
+tags: [兼容, CSS Hack]
+---
+直接看实例吧，下面的程序转载自: [Superc](http://www.cnblogs.com/superc/archive/2012/03/11/2390652.html)和[飘](http://www.cnblogs.com/WuQiang/archive/2011/08/23/2150240.html)
+<pre><code>"\9"　例:"margin:0px auto\9;".这里的"\9"可以区别所有IE和FireFox.
+"*"　IE6、IE7可以识别.IE8、FireFox不能.
+"_"　IE6可以识别"_",IE7、IE8、FireFox不能.
+如此,就可以完全区分开IE6、IE7、IE8、FireFox了.</code></pre>    
+
+还是不知道怎么区分.好吧,来看个例子:    
+``` html Example 1
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>区别IE6、IE7、IE8、FireFox的CSS hack - http://www.52css.com%3c/title>
+    <style type="text/css">
+    <!--
+    #test,#note{
+        margin:0 auto;
+        text-align:center;    
+    }
+    #test {
+        width:200px;
+        height:30px;
+        border: 1px solid #000000;
+        color:#fff;
+		line-height:30px;
+	}
+	.color{
+		background-color: #CC00FF;        /*所有浏览器都会显示为紫色*/
+		background-color: #FF0000\9;    /*IE6、IE7、IE8会显示红色*/
+		*background-color: #0066FF;        /*IE6、IE7会变为蓝色*/            
+		_background-color: #009933;        /*IE6会变为绿色*/
+	}
+	-->
+	</style>
+</head>
+<body>
+	<div id="test" class="color">测试方块 www.mycsu.net </div>
+	<div id="note">
+		<strong style="color:#009933">IE6</strong>
+		<strong style="color:#0066FF">IE7</strong>
+		<strong style="color:#FF0000">IE8</strong>
+		<strong style="color:#CC00FF">FireFox</strong>
+	</div>
+</body>
+</html>
+```
+---
+还有这个例子也不错：     
+``` html Example 2
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Css Hack</title>  
+    <style>  
+    #test   
+    {   
+        width:300px;   
+        height:300px;   
+          
+        background-color:blue;      /*firefox*/
+        background-color:red\9;      /*all ie*/
+        background-color:yellow\0;    /*ie8*/
+        +background-color:pink;        /*ie7*/
+        _background-color:orange;       /*ie6*/
+    }  
+    :root #test { background-color:purple\9; }  /*ie9*/
+    @media all and (min-width:0px){ #test {background-color:black\0;} }  /*opera*/
+    @media screen and (-webkit-min-device-pixel-ratio:0){ #test {background-color:gray;} }  /*chrome and safari*/
+    </style>  
+</head>  
+<body>  
+    <div id="test">test</div>  
+</body>  
+</html> 
+```
+附上一张CSS Hack样式属性前缀表
+
+<center>
+<img src="/images/css_hack.jpg">
+</center>

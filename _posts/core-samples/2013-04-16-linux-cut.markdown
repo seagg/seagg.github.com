@@ -1,0 +1,38 @@
+---
+layout: post
+title: "Linux终端快捷键"
+date: 2013-04-16 17:28
+comments: true
+categories: Linux
+tags: 
+---
+###常用：###
+`Ctrl+a`:开始位置    
+`Ctrl+e`:最后位置    
+`Ctrl+k`:删除此处至末尾所有内容    
+`Ctrl+u`:删除此处至开始所有内容    
+`Ctrl-L`:刷新屏幕    
+`Ctrl-C`:杀死当前任务    
+
+###终端:###
+`Shift+Ctrl+T`:新建标签页    
+`Shift+Ctrl+W`:关闭标签页    
+`Ctrl+PageUp`:前一标签页    
+`Ctrl+PageDown`:后一标签页    
+`Shift+Ctrl+PageUp`:标签页左移    
+`Shift+Ctrl+PageDown`:标签页右移    
+`Alt+1`:切换到标签页1    
+`Alt+2`:切换到标签页2    
+`Alt+3`:切换到标签页3    
+`Shift+Ctrl+N`:新建窗口    
+`Shift+Ctrl+Q`:关闭终端    
+
+###终端中的复制／粘贴:###
+`Shift+Ctrl+C`:复制    
+`Shift+Ctrl+V`:粘贴    
+
+###终端改变大小：###
+`F11`：全屏    
+`Ctrl+plus`:放大    
+`Ctrl+minus`:减小    
+`Ctrl+0`:原始大小    
