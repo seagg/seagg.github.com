@@ -6,7 +6,8 @@ comments: true
 categories: Lua
 tags: 
 ---
-好高兴啊，昨天翻遍了lua自带的库，又在网上找了一天如何在lua中序列化以及反序列化，但结果都不是我要的，因为我要在lua中反序列化由php序列化函数序列化的一个字符串，比如这样的：`
+好高兴啊，昨天翻遍了lua自带的库，又在网上找了一天如何在lua中序列化以及反序列化，但结果都不是我要的，因为我要在lua中反序列化由php序列化函数序列化的一个字符串，比如这样的：
+
 ```php
 a:9:{s:10:"comment_id";s:1:"1";s:7:"user_id";s:7:"7082457";s:9:"user_name";s:9:"putulbaby";    
 s:11:"user_avatar";s:68:"http://avatar.bbs.miui.com/data/avatar/001/05/37/38_avatar_small.jpg";       

@@ -7,7 +7,8 @@ categories: 算法
 tags: [排序]
 ---
 冒泡排序
-``` c bubble sort
+
+```c
 # include <iostream>
 using namespace std;
 

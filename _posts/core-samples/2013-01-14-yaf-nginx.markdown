@@ -7,7 +7,8 @@ categories: PHP
 tags: [nginx, yaf]
 ---
 主要是配置一下rewrite规则，重写URL。另外，`fastcgi_param PATH_INFO`这个不能有，要不然rewrite不能生效...    
-``` nginx Yaf框架在nginx虚拟主机中的配置
+
+```nginx
 server
 {
 	    listen       80;

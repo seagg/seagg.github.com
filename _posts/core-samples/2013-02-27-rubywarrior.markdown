@@ -22,7 +22,8 @@ tags: [游戏]
 每一关，人物默认都是向右走的，这里走一步发现撞墙了，所以要转向。走两步发现遇到怪兽了，要用`warrior.attack!`进行攻击。    
 为了防止失血过多，当发现这一轮没有受到攻击且剩余血<20的时候，可以通过休息来补充血液。    
 弓箭手与怪兽的一个不同就是弓箭手可以远程攻击，有可能你向前走一步，进入弓箭手的射程，但你还没走到他面前，这一过程一直要减血。所以为了防止到弓箭手面前的时候剩余血液不足以干掉他的情况发生，需要有个判断，就是当这一轮受到攻击，且血液不足以走到弓箭手面前将他干掉，需要后退几步，退出他的射程，然后休息补血，血液充足了再向前走。    
-```c 第七关的说明
+
+```c
 Level 7
 
 You feel a wall right in front of you and an opening behind you.
@@ -66,7 +67,7 @@ Warrior Abilities:
 When you're done editing player.rb, run the rubywarrior command again.
 ```
 
-```ruby Code for beginner-level 7
+```ruby
 class Player
   def play_turn(warrior)
     if warrior.feel.wall?
@@ -91,7 +92,8 @@ class Player
 end
 ```
 
-```c 每轮战况!
+```c
+每轮战况!
 - turn 1 -
  ------
 |>a S @|

@@ -22,7 +22,8 @@ GDB 是 GNU 开源组织发布的一个强大的 UNIX 下的程序调试工具�
 
 一个调试示例    
 源程序： 
-``` c tst.c
+
+```c
 #include <stdio.h>
 int func(int n)
 {
@@ -50,7 +51,8 @@ int main()
     hchen/test> g++ -g -Wall tst.c -o tst
 
 使用 GDB 调试：
-``` c
+
+```c
 hchen/test> gdb ./tst <---------- 启动 GDB
 GNU gdb 5.1.1
 Copyright 2002 Free Software Foundation, Inc.
