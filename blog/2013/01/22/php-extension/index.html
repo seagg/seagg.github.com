@@ -1,0 +1,379 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>nginx+fastcgi下开发php扩展 - 心静茹水</title>
+	<meta name="author" content="Zhao, Xuhai">
+
+	
+	<meta name="description" content="本文参考：用C/C++扩展你的PHP 要开发扩展，首先需要有php的源码包，可以到php官网下载，我使用的版本是5.3.10，之后解压，进入ext目录里。 先建立一个函数定义到.def文件当中，比如string self_concat(string str, int n)，这样的话， &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="心静茹水" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">心静茹水</a></h1>
+<nav id="main-nav"><ul class="main">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/tags">标签</a></li>
+  <li><a href="/blog/gallery/demo">相册</a></li>
+  <li><a href="/blog/about_me">关于</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/tags">标签</a></li>
+  <li><a href="/blog/gallery/demo">相册</a></li>
+  <li><a href="/blog/about_me">关于</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:seagg.github.com">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:seagg.github.com">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	
+	<h2 class="title">Nginx+fastcgi下开发php扩展</h2>
+	<div class="entry-content"><p>本文参考：<a href="http://www.laruence.com/2009/04/28/719.html">用C/C++扩展你的PHP</a>  <br/>
+要开发扩展，首先需要有php的源码包，可以到php官网下载，我使用的版本是5.3.10，之后解压，进入ext目录里。  <br/>
+先建立一个函数定义到.def文件当中，比如<code>string self_concat(string str, int n)</code>，这样的话，会在稍后生成的扩展框架中自动添加函数原型和一个默认实现。当然，也可以不使用这个文件，手动去建立函数。</p>
+
+<pre><code>vi myfunctions.def
+</code></pre>
+
+<p>之后是用php的ext_skel生成php扩展的框架：</p>
+
+<pre><code>./ext_skel --extname=myfunctions --proto=../myfunctions.def
+</code></pre>
+
+<p>会在ext目录下生成一个名为<code>myfunctions</code>的目录，里面包含了php扩展框架基本文件。  <br/>
+之后，是修改<code>php_myfunctions.h</code>文件，在<code>PHP_FUNCTION(confirm_myfunctions_compiled);</code>之后添加函数定义</p>
+
+<pre><code>PHP_FUNCTION(self_concat);
+</code></pre>
+
+<p>再修改<code>myfunctions.c</code>文件，在文件末尾添加函数实现
+比如</p>
+
+<figure class='code'><figcaption><span>self_concat实现</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">PHP_FUNCTION</span><span class="p">(</span><span class="n">self_concat</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">char</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">argc</span> <span class="o">=</span> <span class="n">ZEND_NUM_ARGS</span><span class="p">();</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">str_len</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">long</span> <span class="n">n</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">char</span> <span class="o">*</span><span class="n">result</span><span class="p">;</span> <span class="cm">/* Points to resulting string */</span>
+</span><span class='line'>    <span class="kt">char</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span> <span class="cm">/* Points at the next location we want to copy to */</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">result_length</span><span class="p">;</span> <span class="cm">/* Length of resulting string */</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">zend_parse_parameters</span><span class="p">(</span><span class="n">argc</span> <span class="n">TSRMLS_CC</span><span class="p">,</span> <span class="s">&quot;sl&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">str_len</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="n">FAILURE</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>    <span class="cm">/* Calculate length of result */</span>
+</span><span class='line'>    <span class="n">result_length</span> <span class="o">=</span> <span class="p">(</span><span class="n">str_len</span> <span class="o">*</span> <span class="n">n</span><span class="p">);</span>
+</span><span class='line'>    <span class="cm">/* Allocate memory for result */</span>
+</span><span class='line'>    <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">emalloc</span><span class="p">(</span><span class="n">result_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>    <span class="cm">/* Point at the beginning of the result */</span>
+</span><span class='line'>    <span class="n">ptr</span> <span class="o">=</span> <span class="n">result</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="cm">/* Copy str to the result */</span>
+</span><span class='line'>        <span class="n">memcpy</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">str</span><span class="p">,</span> <span class="n">str_len</span><span class="p">);</span>
+</span><span class='line'>        <span class="cm">/* Increment ptr to point at the next position we want to write to */</span>
+</span><span class='line'>        <span class="n">ptr</span> <span class="o">+=</span> <span class="n">str_len</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="cm">/* Null terminate the result. Always null-terminate your strings</span>
+</span><span class='line'><span class="cm">    even if they are binary strings */</span>
+</span><span class='line'>    <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="cm">/* Return result to the scripting engine without duplicating it*/</span>
+</span><span class='line'>    <span class="n">RETURN_STRINGL</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">result_length</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>之后，修改<code>config.m4</code>文件,去掉如下两行前的dnl</p>
+
+<pre><code>PHP_ARG_ENABLE(myfunctions, whether to enable myfunctions support,
+[  --enable-myfunctions           Enable myfunctions support])
+</code></pre>
+
+<p>之后去php源码跟目录，执行</p>
+
+<pre><code>./buildconf --force
+</code></pre>
+
+<p>如果提示autoconf版本不对的话，我原来的版本是2.69&#8230; 很郁闷，版本高了居然还不行。执行</p>
+
+<pre><code>apt-get install autoconf2.59
+export PHP_AUTOCONF=autoconf2.59
+./buildconf --force
+</code></pre>
+
+<p>切换到<code>ext/myfunctions</code>目录，执行：</p>
+
+<pre><code>/usr/local/php/bin/phpize 
+./configure --with-php-config=/usr/local/php/bin/php-config 
+make
+make install
+</code></pre>
+
+<p>再就是修改<code>php.ini</code>文件，在[extension]部分加入</p>
+
+<pre><code>extension = "myfunctions.so"
+</code></pre>
+
+<p>之后重启php</p>
+
+<pre><code>/etc/init.d/php-fpm restart
+</code></pre>
+
+<p>如果修改了函数，或者新增加函数，需要重新编译php</p>
+
+<pre><code>make
+make install
+/etc/init.d/php-fpm restart
+</code></pre>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-22T15:26:00+08:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2013</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/c语言/'>C语言</a>, <a class='category' href='/blog/categories/php/'>PHP</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/extension/'>extension</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2013/01/22/php-extension/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+
+<aside class="sidebar">
+  
+    <!--
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/c语言/'>C语言 (3)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>Linux (3)</a></li>
+<li class='category'><a href='/blog/categories/lua/'>Lua (2)</a></li>
+<li class='category'><a href='/blog/categories/php/'>PHP (2)</a></li>
+<li class='category'><a href='/blog/categories/ruby/'>Ruby (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (4)</a></li>
+<li class='category'><a href='/blog/categories/web前端/'>web前端 (2)</a></li>
+<li class='category'><a href='/blog/categories/实习生活/'>实习生活 (1)</a></li>
+<li class='category'><a href='/blog/categories/算法/'>算法 (2)</a></li>
+<li class='category'><a href='/blog/categories/转载/'>转载 (1)</a></li>
+
+  </ul>
+</section>
+--><!--
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/09/crontab/">Linux crontab格式</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/26/vim/">linux下vim命令详解</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/16/linux-cut/">Linux终端快捷键</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/29/github-develop/">使用github开发项目</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/27/rubywarrior/">RubyWarrior 一个人工智能小游戏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/25/gcc/">[转]用 GDB 调试程序</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/22/php-extension/">nginx+fastcgi下开发php扩展</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/14/yaf-nginx/">Yaf框架在nginx虚拟主机中的配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/24/lua-struct/">Lua中通过ffi调用c的结构体变量</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/22/lua-php-serialize/">Lua中实现php序列化及反序列化函数</a>
+      </li>
+    
+  </ul>
+</section>
+-->
+
+
+
+
+
+  
+</aside>
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Zhao, Xuhai
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fbfcf682a4226ebc8d93b6496f95bc4c8' type='text/javascript'%3E%3C/script%3E"));
+</script></footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'proudsea';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://seagg.github.com/blog/2013/01/22/php-extension/';
+        var disqus_url = 'http://seagg.github.com/blog/2013/01/22/php-extension/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-38620424-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 排序 | 心静茹水]]></title>
+  <link href="http://seagg.github.com/tags/排序/atom.xml" rel="self"/>
+  <link href="http://seagg.github.com/"/>
+  <updated>2016-04-21T11:31:22+08:00</updated>
+  <id>http://seagg.github.com/</id>
+  <author>
+    <name><![CDATA[Zhao, Xuhai]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[二叉树排序]]></title>
+    <link href="http://seagg.github.com/blog/2012/09/11/binary-tree-sort/"/>
+    <updated>2012-09-11T09:02:00+08:00</updated>
+    <id>http://seagg.github.com/blog/2012/09/11/binary-tree-sort</id>
+    <content type="html"><![CDATA[<p>唉，在公司实习都呆傻了，现在写起C++的程序都这么费劲。早上试着写了个二叉树排序都花了半个多小时，这要是半年前的我。。。  <br/>
+``` c++ 二叉树排序</p>
+
+<h1>include <iostream></h1>
+
+<p>using namespace std;
+typedef struct Node
+{</p>
+
+<pre><code>int value;
+struct Node * left;
+struct Node * right;
+</code></pre>
+
+<p>}node;
+node * root=new node;
+void addToTree(node *current,int n)
+{</p>
+
+<pre><code>if(n &gt;= current-&gt;value)
+{
+    if(current-&gt;right==NULL)
+    {
+        node * r=new node;
+        current-&gt;right=r;
+        r-&gt;value=n;
+        r-&gt;left=NULL;
+        r-&gt;right=NULL;
+    }
+    else
+    {
+        addToTree(current-&gt;right, n);
+    }
+}
+else
+{
+    if(current-&gt;left==NULL)
+    {
+        node * l=new node;
+        current-&gt;left=l;
+        l-&gt;value=n;
+        l-&gt;left=NULL;
+        l-&gt;right=NULL;
+    }
+    else
+    {
+        addToTree(current-&gt;left, n);
+    }
+}
+</code></pre>
+
+<p>}</p>
+
+<p>void printTree(node * current)
+{</p>
+
+<pre><code>if(current==NULL)
+{
+    return ;
+}
+else
+{
+    printTree(current-&gt;left);
+    cout&lt;&lt;current-&gt;value&lt;&lt;endl;
+    printTree(current-&gt;right);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>int main()
+{</p>
+
+<pre><code>root-&gt;value=13;
+root-&gt;left=NULL;
+root-&gt;right=NULL;
+addToTree(root,31);
+addToTree(root,11);
+addToTree(root,61);
+addToTree(root,23);
+addToTree(root,8);
+addToTree(root,18);
+addToTree(root,4);
+addToTree(root,2);
+addToTree(root,9);
+addToTree(root,6);
+printTree(root);
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[冒泡排序]]></title>
+    <link href="http://seagg.github.com/blog/2012/09/02/hello/"/>
+    <updated>2012-09-02T23:10:00+08:00</updated>
+    <id>http://seagg.github.com/blog/2012/09/02/hello</id>
+    <content type="html"><![CDATA[<p>冒泡排序
+``` c bubble sort</p>
+
+<h1>include <iostream></h1>
+
+<p>using namespace std;</p>
+
+<p>void bubblesort(int a[], int size)
+{</p>
+
+<pre><code>int i,j;
+for(i=0;i&lt;size;i++)
+{
+    for(j=0;j&lt;size-i-1; j++)
+    {
+        if(a[j]&gt;a[j+1])
+        {
+            swap(a[j],a[j+1]);
+        }
+    }
+}
+</code></pre>
+
+<p>}
+void main()
+{</p>
+
+<pre><code>int a[10],i;
+for(i=0;i&lt;10;i++)
+{
+    scanf("%d",&amp;a[i]);
+}
+bubblesort(a,10);
+for(i=0;i&lt;10;i++)
+{
+    printf("%-4d", a[i]);
+}
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

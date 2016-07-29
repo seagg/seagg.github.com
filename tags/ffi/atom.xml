@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: ffi | 心静茹水]]></title>
+  <link href="http://seagg.github.com/tags/ffi/atom.xml" rel="self"/>
+  <link href="http://seagg.github.com/"/>
+  <updated>2016-04-21T11:31:22+08:00</updated>
+  <id>http://seagg.github.com/</id>
+  <author>
+    <name><![CDATA[Zhao, Xuhai]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Lua中通过ffi调用c的结构体变量]]></title>
+    <link href="http://seagg.github.com/blog/2012/12/24/lua-struct/"/>
+    <updated>2012-12-24T18:08:00+08:00</updated>
+    <id>http://seagg.github.com/blog/2012/12/24/lua-struct</id>
+    <content type="html"><![CDATA[<p>``` lua
+local ffi = require("ffi")
+ffi.cdef[[
+   typedef struct {</p>
+
+<pre><code> uint8_t id;
+ char * name; 
+</code></pre>
+
+<p>   } stuInfo;
+]]--新建一个结构体
+local n = 1
+local stu = ffi.new("stuInfo[?]", n)--新建变长的结构体变量
+for i=0, n-1 do
+   stu[i].id = 1;
+   local name = "zhao";
+   local ptr=ffi.cast("char *", name);--将lua中字符串转换为c的<code>char *</code>
+   stu[i].name = ptr;
+end</p>
+
+<p>print(stu[0].id);
+local myname = ffi.string(stu[0].name);--将c中<code>char *</code>类型转换为lua的字符串
+print(myname);
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

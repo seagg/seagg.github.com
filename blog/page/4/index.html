@@ -1,0 +1,574 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>心静茹水</title>
+	<meta name="author" content="Zhao, Xuhai">
+
+	
+	<meta name="description" content="今天上班又不务正业了，主要是昨天晚上就完成了老板最近布置的修改JIRA插件，添加敏感关键字检测及提供修改功能的任务，上午给老板演示了一下，在他提出的各种极端情况下插件都能很好的工作，老板让我今天在界面上加些交互信息，使交互更加友好。 整个白天都在折腾我的Octopress博客，这个果然很需要耐心 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="心静茹水" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">心静茹水</a></h1>
+<nav id="main-nav"><ul class="main">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/tags">标签</a></li>
+  <li><a href="/blog/gallery/demo">相册</a></li>
+  <li><a href="/blog/about_me">关于</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/tags">标签</a></li>
+  <li><a href="/blog/gallery/demo">相册</a></li>
+  <li><a href="/blog/about_me">关于</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:seagg.github.com">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:seagg.github.com">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/09/05/add-tag-cloud-and-support-chinese/">
+		
+			Octopress添加tag Cloud且支持中文</a>
+	</h2>
+	<div class="entry-content">
+		<p>今天上班又不务正业了，主要是昨天晚上就完成了老板最近布置的修改JIRA插件，添加敏感关键字检测及提供修改功能的任务，上午给老板演示了一下，在他提出的各种极端情况下插件都能很好的工作，老板让我今天在界面上加些交互信息，使交互更加友好。 <br/>
+整个白天都在折腾我的Octopress博客，这个果然很需要耐心，还好我最近已经被java的各种bug折磨的宠辱不惊了。今天主要添加了tag功能。正如<a href="http://log4d.com/2012/05/tag-cloud/">Log4D</a>所说的那样，一篇文章只能输入一个category，但可以有多个tag，我很同意这个观点。我这里也是用了他所用的两个插件<a href="https://github.com/robbyedwards/octopress-tag-pages">robbyedwards/octopress-tag-pages</a>和<a href="https://github.com/robbyedwards/octopress-tag-cloud">robbyedwards/octopress-tag-cloud</a>,不过跟他不同的是，我只用了官方网站上提供的两个插件，因为我觉得category还是排列整齐点的好，毕竟一个博客的category不会很多，没有必要弄成tag那种有大有小的样式，所以category我还沿用了Octopress官方的样式。这两个插件安装起来不太难，不过有些细节需要注意的。  <br/>
+第一个插件的功能是使文章支持<code>tag</code>，第二个是集中显示<code>tag cloud</code>。</p>
+
+<p><strong>关于第一个插件的安装</strong>，我是把官网上提供的文件都复制到了相应的目录，这样在Archives中就能看到tag的信息，<a href="https://github.com/robbyedwards/octopress-tag-pages">robbyedwards/octopress-tag-pages</a>中提到的<code>Usage</code>,上面的我没有用到，只是往<code>config.yml</code>中添加了</p>
+
+<pre><code>tag_dir: tags    
+</code></pre>
+
+<p>第二个配置信息添加的时候总是出错，不过不添加也没关系。可以在下属文件中进行修改。</p>
+
+<pre><code>\source\includes\post\tags.html    
+</code></pre>
+
+<p>只需在<code>span</code>标签中添加Tags:即可。
+添加之后就可以使用tag功能了，具体是在新post出的日志中添加,语法是</p>
+
+<pre><code>tags: [tag1, tag2, ...]
+</code></pre>
+
+<p>为了使每次新post出的日志都能自动附带tags: 标签，可以修改<code>config.rb</code>文件，在110行左右添加<code>post.puts "tags: "</code>。  <br/>
+<strong>第二个插件的安装</strong>，复制相应文件到对应的目录，然后到<code>source\_includes\custom\navigation.html</code>中添加一个tag cloud页面的链接，指向刚刚添加的tags.html文件。对了，还得修改下样式，到<code>sass/custom/_styles.scss</code>中添加如下css样式：</p>
+
+<pre><code>#content article .cloud li{
+  display: inline;
+  list-style: none outside none;
+  padding: 0 4px;
+}</code></pre>
+
+
+<p>  <br/>
+之后把tags.html中的样式换成cloud即可。  <br/>
+<strong>关于使category，和tag支持中文</strong>，由于我没有用Log4D修改之后的插件，所以出现了category和tag不支持中文的情况，这个的修改参考了<a href="http://pfmiles.github.com/blog/liquid-error-about-regexp-match-when-using-octopress-tagcloud/">pf_miles</a>的日志，说的挺好的，不过对于像我这样两个tag插件都用官方原版的来说，就不能直接复制里面的代码了，否则会出现tag和category相混淆的情况。但他的思想还是可以学的嘛，提炼出来，就是把<code>plugins</code>目录下的<code>tag_cloud.rb</code>、<code>tag_generator.rb</code>、<code>catetory_generator.rb</code>这几个文件的#正则表达式#部分都加上\u，就可以了。  <br/>
+思路可能有点乱，这是我凭借记忆写出来的，有可能有些出入，如果有什么不明白的，可以评论，我会及时回复的。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-05T19:06:00+08:00" pubdate data-updated="true">Sep 5<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/octopress/'>octopress</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/octopress/'>octopress</a>, <a class='tag' href='/tags/tag/'>tag</a>, <a class='tag' href='/tags/中文支持/'>中文支持</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2012/09/05/add-tag-cloud-and-support-chinese//blog/page/4/index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/09/03/config-comment-on-octopress/">
+		
+			给octopress添加Disqus评论功能</a>
+	</h2>
+	<div class="entry-content">
+		<p>经过了几天的折腾，昨天终于把octopress博客建立好了。更新起来很方便，只需要编写类似Latex语言的markdown文件，然后<code>rake generate</code>, <code>rake deploy</code>就可以啦。</p>
+
+<p>今天加入了评论功能，这里主要记录下添加评论的过程。Octopress中其实已经集成了Disqus评论插件，只需要简单设置一下就可以。</p>
+
+<ul>
+<li><p><strong>登录<a href="http://disqus.com">Disqus网站</a></strong>, 然后注册用户名密码，邮箱验证。</p></li>
+<li><p>单击<em>Get this on your site</em>按钮</p></li>
+</ul>
+
+
+<center>
+<img src="/images/add_comment1.PNG" >
+</center>
+
+
+<ul>
+<li><strong>填写网站的信息</strong></li>
+</ul>
+
+
+<center>
+<img src="/images/add_comment2.PNG">
+</center>
+
+
+<ul>
+<li>修改_config.yml文件:</li>
+</ul>
+
+
+<pre><code>#Disqus Comments
+disqus_short_name: Site Shortname
+disqus_show_comment_count: true</code></pre>
+
+
+<p>之后就可以通过<code>rake new_post['title']</code>创建日志，日志中设定：</p>
+
+<pre><code>comment: true
+</code></pre>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-03T19:16:00+08:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2012</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/octopress/'>octopress</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/disqus/'>Disqus</a>, <a class='tag' href='/tags/comment/'>comment</a>, <a class='tag' href='/tags/评论/'>评论</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2012/09/03/config-comment-on-octopress//blog/page/4/index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/09/03/blogging-like-a-hacker/">
+		
+			Blogging Like a Hacker</a>
+	</h2>
+	<div class="entry-content">
+		<p><strong>转载自<a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html">Blogging like a hacker</a></strong></p>
+
+<p>h1. Blogging Like a Hacker</p>
+
+<p>p(meta). 17 Nov 2008 - San Francisco</p>
+
+<p>Back in 2000, when I thought I was going to be a professional writer, I spent hours a day on LiveJournal doing writing practice with other aspiring poets and authors. Since then I&#8217;ve blogged at three different domains about web standards, print design, photography, Flash, illustration, information architecture, ColdFusion, package management, PHP, CSS, advertising, Ruby, Rails, and Erlang.</p>
+
+<p>I love writing. I get a kick out of sharing my thoughts with others. The act of transforming ideas into words is an amazingly efficient way to solidify and refine your thoughts about a given topic. But as much as I enjoy blogging, I seem to be stuck in a cycle of quitting and starting over. Before starting the current iteration, I resolved to do some introspection to determine the factors that were leading to this destructive pattern.</p>
+
+<p>I already knew a lot about what I <em>didn&#8217;t</em> want. I was tired of complicated blogging engines like WordPress and Mephisto. I wanted to write great posts, not style a zillion template pages, moderate comments all day long, and constantly lag behind the latest software release. Something like Posterous looked attractive, but I wanted to style my blog, and it needed to be hosted at the domain of my choosing. For the same reason, other hosted sites (wordpress.com, blogger.com) were disqualified. There are a few people directly using GitHub as a blog (which is very cool), but that&#8217;s a bit too much of an impedance mismatch for my tastes.</p>
+
+<p>On Sunday, October 19th, I sat down in my San Francisco apartment with a glass of apple cider and a clear mind. After a period of reflection, I had an idea. While I&#8217;m not specifically trained as an author of prose, I <em>am</em> trained as an author of code. What would happen if I approached blogging from a software development perspective? What would that look like?</p>
+
+<p>First, all my writing would be stored in a Git repository. This would ensure that I could try out different ideas and explore a variety of posts all from the comfort of my preferred editor and the command line. I&#8217;d be able to publish a post via a simple deploy script or post-commit hook. Complexity would be kept to an absolute minimum, so a static site would be preferable to a dynamic site that required ongoing maintenance. My blog would need to be easily customizable; coming from a graphic design background means I&#8217;ll always be tweaking the site&#8217;s appearance and layout.</p>
+
+<p>Over the last month I&#8217;ve brought these concepts to fruition and I&#8217;m pleased to announce &#8220;Jekyll&#8221;:http://github.com/mojombo/jekyll. Jekyll is a simple, blog aware, static site generator. It takes a template directory (representing the raw form of a website), runs it through Textile and Liquid converters, and spits out a complete, static website suitable for serving with Apache or your favorite web server. If you&#8217;re reading this on the website (http://tom.preston-werner.com), you&#8217;re seeing a Jekyll generated blog!</p>
+
+<p>To understand how this all works, open up my &#8220;TPW&#8221;:http://github.com/mojombo/tpw repo in a new browser window. I&#8217;ll be referencing the code there.</p>
+
+<p>Take a look at &#8220;index.html&#8221;:http://github.com/mojombo/tpw/tree/master/index.html. This file represents the homepage of the site. At the top of the file is a chunk of YAML that contains metadata about the file. This data tells Jekyll what layout to give the file, what the page&#8217;s title should be, etc. In this case, I specify that the &#8220;default&#8221; template should be used. You can find the layout files in the &#8221;<em>layouts&#8221;:http://github.com/mojombo/tpw/tree/master/</em>layouts directory. If you open &#8220;default.html&#8221;:http://github.com/mojombo/tpw/tree/master/_layouts/default.html you can see that the homepage is constructed by wrapping index.html with this layout.</p>
+
+<p>You&#8217;ll also notice Liquid templating code in these files. &#8220;Liquid&#8221;:http://www.liquidmarkup.org/ is a simple, extensible templating language that makes it easy to embed data in your templates. For my homepage I wanted to have a list of all my blog posts. Jekyll hands me a Hash containing various data about my site. A reverse chronological list of all my blog posts can be found in <code>site.posts</code>. Each post, in turn, contains various fields such as <code>title</code> and <code>date</code>.</p>
+
+<p>Jekyll gets the list of blog posts by parsing the files in the &#8221;<em>posts&#8221;:http://github.com/mojombo/tpw/tree/master/</em>posts directory. Each post&#8217;s filename contains the publishing date and slug (what shows up in the URL) that the final HTML file should have. Open up the file corresponding to this blog post: &#8220;2008-11-17-blogging-like-a-hacker.textile&#8221;:http://github.com/mojombo/tpw/tree/master/<em>posts/2008-11-17-blogging-like-a-hacker.textile. GitHub renders textile files by default, so to better understand the file, click on the &#8220;raw&#8221;:http://github.com/mojombo/tpw/tree/master/</em>posts/2008-11-17-blogging-like-a-hacker.textile?raw=true view to see the original file. Here I&#8217;ve specified the <code>post</code> layout. If you look at that file you&#8217;ll see an example of a nested layout. Layouts can contain other layouts allowing you a great deal of flexibility in how pages are assembled. In my case I use a nested layout in order to show related posts for each blog entry. The YAML also specifies the post&#8217;s title which is then embedded in the post&#8217;s body via Liquid.</p>
+
+<p>Posts are handled in a special way by Jekyll. The date you specify in the filename is used to construct the URL in the generated site. This post, for instance, ends up at <code>http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html</code>.</p>
+
+<p>Files that do not reside in directories prefixed with an underscore are mirrored into a corresponding directory structure in the generated site. If a file does not have a YAML preface, it is not run through the Liquid interpreter. Binary files are copied over unmodified.</p>
+
+<p>In order to convert your raw site into the finished version, you simply run:</p>
+
+<pre class="terminal"><code>$ jekyll /path/to/raw/site /path/to/place/generated/site</code></pre>
+
+
+<p>Jekyll is still a very young project. I&#8217;ve only developed the exact functionality that I&#8217;ve needed. As time goes on I&#8217;d like to see the project mature and support additional features. If you end up using Jekyll for your own blog, drop me a line and let me know what you&#8217;d like to see in future versions. Better yet, fork the project over at GitHub and hack in the features yourself!</p>
+
+<p>I&#8217;ve been living with Jekyll for just over a month now. I love it. Driving the development of Jekyll based on the needs of my blog has been very rewarding. I can edit my posts in TextMate, giving me automatic and competent spell checking. I have immediate and first class access to the CSS and page templates. Everything is backed up on GitHub. I feel a lightness now when I&#8217;m writing a post. The system is simple enough that I can keep the entire conversion process in my head. The distance from my brain to my blog has shrunk, and, in the end, I think that will make me a better author.</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-03T12:42:00+08:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2012</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/转载/'>转载</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/octopress/'>octopress</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2012/09/03/blogging-like-a-hacker//blog/page/4/index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/09/03/work-in-intel/">
+		
+			新的Blog</a>
+	</h2>
+	<div class="entry-content">
+		<p>好费劲啊，octopress博客终于整好了。<br>
+我会慢慢的从网易博客<a href="http://blog.163.com/lovejingru@yeah/">永远的海哥</a>迁移到这里。  <br/>
+问题总结如下：</p>
+
+<pre><code>ssh的时候提示22 **bad file number**   
+主要原因是公司的网络问题，可能因为代理或者设置了防火墙的原因，换成外网就没问题了；   
+public key问题： 按照github-&gt;admin-&gt;ssh key中的说明就可以了；   
+中文编码问题：将post出的日志编码转换为utf-8 without BOM格式，再保存；   
+</code></pre>
+
+<p><strong>下一步研究下代码插入，高亮和comment问题。</strong></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-03T09:50:00+08:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2012</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/octopress/'>octopress</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/intel/'>intel</a>, <a class='tag' href='/tags/octopress/'>octopress</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2012/09/03/work-in-intel//blog/page/4/index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/09/02/hello/">
+		
+			冒泡排序</a>
+	</h2>
+	<div class="entry-content">
+		<p>冒泡排序</p>
+
+<figure class='code'><figcaption><span>bubble sort</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp"># include &lt;iostream&gt;</span>
+</span><span class='line'><span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="nf">bubblesort</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">size</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span><span class="n">i</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="n">bubblesort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%-4d&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-02T23:10:00+08:00" pubdate data-updated="true">Sep 2<span>nd</span>, 2012</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/算法/'>算法</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/排序/'>排序</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2012/09/02/hello//blog/page/4/index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
+
+<nav id="pagenavi">
+    
+        <a href="/blog/page/3/" class="prev">Prev</a>
+    
+    
+        <a href="/blog/page/5/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Zhao, Xuhai
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fbfcf682a4226ebc8d93b6496f95bc4c8' type='text/javascript'%3E%3C/script%3E"));
+</script></footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'proudsea';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-38620424-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</body>
+</html>

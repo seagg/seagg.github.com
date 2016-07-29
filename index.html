@@ -1,0 +1,1175 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>心静茹水</title>
+	<meta name="author" content="Zhao, Xuhai">
+
+	
+	<meta name="description" content="基本格式 :
+*　　*　　*　　*　　*　　command
+分　时　日　月　周　命令 第1列表示分钟1～59 每分钟用或者 /1表示 第2列表示小时1～23（0表示0点） 第3列表示日期1～31 第4列表示月份1～12 第5列标识号星期0～6（0表示星期天） 第6列要运行的命令 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="心静茹水" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">心静茹水</a></h1>
+<nav id="main-nav"><ul class="main">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/tags">标签</a></li>
+  <li><a href="/blog/gallery/demo">相册</a></li>
+  <li><a href="/blog/about_me">关于</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/tags">标签</a></li>
+  <li><a href="/blog/gallery/demo">相册</a></li>
+  <li><a href="/blog/about_me">关于</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:seagg.github.com">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:seagg.github.com">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/05/09/crontab/">
+		
+			Linux Crontab格式</a>
+	</h2>
+	<div class="entry-content">
+		<pre><code>基本格式 :
+*　　*　　*　　*　　*　　command
+分　时　日　月　周　命令
+</code></pre>
+
+<p>第1列表示分钟1～59 每分钟用<em>或者 </em>/1表示  <br/>
+第2列表示小时1～23（0表示0点）  <br/>
+第3列表示日期1～31  <br/>
+第4列表示月份1～12  <br/>
+第5列标识号星期0～6（0表示星期天）  <br/>
+第6列要运行的命令</p>
+
+<p>crontab文件的一些例子：</p>
+
+<pre><code>30 21 * * * /usr/local/etc/rc.d/lighttpd restart    
+</code></pre>
+
+<p>上面的例子表示每晚的21:30重启apache。</p>
+
+<pre><code>45 4 1,10,22 * * /usr/local/etc/rc.d/lighttpd restart   
+</code></pre>
+
+<p>上面的例子表示每月1、10、22日的4 : 45重启apache。</p>
+
+<pre><code>10 1 * * 6,0 /usr/local/etc/rc.d/lighttpd restart   
+</code></pre>
+
+<p>上面的例子表示每周六、周日的1 : 10重启apache。</p>
+
+<pre><code>0,30 18-23 * * * /usr/local/etc/rc.d/lighttpd restart   
+</code></pre>
+
+<p>上面的例子表示在每天18 : 00至23 : 00之间每隔30分钟重启apache。</p>
+
+<pre><code>0 23 * * 6 /usr/local/etc/rc.d/lighttpd restart     
+</code></pre>
+
+<p>上面的例子表示每星期六的11 : 00 pm重启apache。</p>
+
+<pre><code>* */1 * * * /usr/local/etc/rc.d/lighttpd restart    
+</code></pre>
+
+<p>每一小时重启apache</p>
+
+<pre><code>* 23-7/1 * * * /usr/local/etc/rc.d/lighttpd restart     
+</code></pre>
+
+<p>晚上11点到早上7点之间，每隔一小时重启apache</p>
+
+<pre><code>0 11 4 * mon-wed /usr/local/etc/rc.d/lighttpd restart   
+</code></pre>
+
+<p>每月的4号与每周一到周三的11点重启apache</p>
+
+<pre><code>0 4 1 jan * /usr/local/etc/rc.d/lighttpd restart    
+</code></pre>
+
+<p>一月一号的4点重启apache</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-09T11:30:00+08:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/linux/'>Linux</a>
+
+
+</div>
+	<div class="tags">
+
+</div>
+	
+		<div class="comments"><a href="/blog/2013/05/09/crontab//index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/04/26/vim/">
+		
+			Linux下vim命令详解</a>
+	</h2>
+	<div class="entry-content">
+		<p>高级一些的编辑器，都会包含宏功能，vim当然不能缺少了，在vim中使用宏是非常方便的：</p>
+
+<p><code>:qx</code>     开始记录宏，并将结果存入寄存器x  <br/>
+<code>q</code>     退出记录模式  <br/>
+<code>@x</code>     播放记录在x寄存器中的宏命令</p>
+
+<pre><code>稍微解释一下，当在normal模式下输入:qx后，你对文本的所有编辑动作将会被记录下来，再次输入q即退出了记录模式，
+然后输入@x对刚才记录下来的命令进行重复，此命令后可跟数字，表示要重复多少次，比如@x20，可以重复20次。
+这个在文本的批处理中是非常有用的。    
+</code></pre>
+
+<h2>同时编辑多个文件</h2>
+
+<pre><code>在vim众多的插件中，有一个叫minibuffer的插件，就是下面所说的标签页功能了，可以支持同时编辑多个文件。    
+</code></pre>
+
+<h3>标签命令</h3>
+
+<p><code>:tabe fn</code>     在一个新的标签页中编辑文件fn  <br/>
+<code>gt</code>     切换到下一个标签页  <br/>
+<code>gT</code>     切换到上一个标签页  <br/>
+<code>:tabr</code>     切换到第一个标签页  <br/>
+<code>:tabl</code>     切换到最后一个标签页  <br/>
+<code>:tabm [N]</code>     把当前tab移动到第N个tab之后</p>
+
+<pre><code>对，正如你所想象的那样，跟eclipse, ue等的标签页是一个意思！    
+</code></pre>
+
+<h3>窗口命令</h3>
+
+<p><code>ctrl+w s</code>     水平分割窗口  <br/>
+<code>ctrl+w w</code>     切换窗口  <br/>
+<code>ctrl+w q</code>     退出当前窗口(由于同时有多个文件，此命令不会影响其他窗口)  <br/>
+<code>ctrl+w v</code>     垂直分割窗口</p>
+
+<h3>其他</h3>
+
+<p>vim在保存之前不会对文件做实际的修改，只是加载到缓冲区中，对文件的编辑其实是对缓冲区的编辑，直到:w时才会存入物理文件。  <br/>
+<code>:e file</code>     把file加载到新的缓冲区中  <br/>
+<code>:bn</code>     跳转到下一个缓冲区  <br/>
+<code>:bd</code>     删除缓冲区(关闭文件)  <br/>
+<code>:sp fn</code>     分割窗口，并将fn加载到新的窗口中</p>
+
+<h3>退出编辑器</h3>
+
+<p><code>:w</code>     将缓冲区写入文件，即保存修改  <br/>
+<code>:wq</code>     保存修改并退出  <br/>
+<code>:x</code>     保存修改并退出  <br/>
+<code>:q</code>     退出，如果对缓冲区进行过修改，则会提示  <br/>
+<code>:q!</code>     强制退出，放弃修改</p>
+
+<h3>查找替换</h3>
+
+<p><code>/pattern</code>     向后搜索字符串pattern  <br/>
+<code>?pattern</code>     向前搜索字符串pattern  <br/>
+<code>n</code>     下一个匹配(如果是/搜索，则是向下的下一个，?搜索则是向上的下一个)  <br/>
+<code>N</code>     上一个匹配(同上)  <br/>
+<code>:%s/old/new/g</code>     搜索整个文件，将所有的old替换为new  <br/>
+<code>:%s/old/new/gc</code>     搜索整个文件，将所有的old替换为new，每次都要你确认是否替换</p>
+
+<h3>复制粘贴</h3>
+
+<p><code>dd</code>     删除光标所在行  <br/>
+<code>dw</code>     删除一个字(word)  <br/>
+<code>x</code>     删除当前字符  <br/>
+<code>X</code>     删除前一个字符  <br/>
+<code>D</code>     删除到行末  <br/>
+<code>dG</code>    删除到文件末  <br/>
+<code>dgg</code>    删除到文件首</p>
+
+<p><code>yy</code>     复制一行，此命令前可跟数字，标识复制多行，如6yy，表示从当前行开始复制6行  <br/>
+<code>yw</code>     复制一个字  <br/>
+<code>y$</code>     复制到行末  <br/>
+<code>p</code>     粘贴粘贴板的内容到当前行的下面  <br/>
+<code>P</code>     粘贴粘贴板的内容到当前行的上面  <br/>
+<code>]p</code>     有缩进的粘贴，vim会自动调节代码的缩进  <br/>
+<code>"a</code>     将内容放入/存入a寄存器，可以支持多粘贴板</p>
+
+<pre><code>附：比如常用的一个寄存器就是系统寄存器，名称为+，所以从系统粘贴板粘贴到vim中的命令为"+p,
+注意此处的+不表示操作符，二十一个寄存器。    
+</code></pre>
+
+<h3>移动光标</h3>
+
+<pre><code>在vim中移动光标跟其他的编辑器中有很大的区别，不过一旦学会了，就会飞速的在文本中移动了。    
+</code></pre>
+
+<p><code>h,j,k,l</code>     上，下，左，右  <br/>
+<code>ctrl-f</code>     上翻一页  <br/>
+<code>ctrl-b</code>     下翻一页  <br/>
+<code>%</code>     跳到与当前括号匹配的括号处，如当前在{，则跳转到与之匹配的}处  <br/>
+<code>w</code>     跳到下一个字首，按标点或单词分割  <br/>
+<code>W</code>     跳到下一个字首，长跳，如end-of-line被认为是一个字  <br/>
+<code>e</code>     跳到下一个字尾  <br/>
+<code>E</code>     跳到下一个字尾，长跳  <br/>
+<code>b</code>     跳到上一个字  <br/>
+<code>B</code>     跳到上一个字，长跳  <br/>
+<code>0</code>     跳至行首，不管有无缩进，就是跳到第0个字符  <br/>
+<code>^</code>     跳至行首的第一个字符  <br/>
+<code>$</code>     跳至行尾  <br/>
+<code>gg</code>     跳至文件的第一行  <br/>
+<code>gd</code>     跳至当前光标所在的变量的声明处  <br/>
+<code>[N]G</code>     跳到第N行，如0G，就等价于gg，100G就是第100行  <br/>
+<code>fx</code>     在当前行中找x字符，找到了就跳转至  <br/>
+<code>;</code>     重复上一个f命令，而不用重复的输入fx  <br/>
+<code>tx</code>     与fx类似，但是只是跳转到x的前一个字符处  <br/>
+<code>Fx</code>     跟fx的方向相反  <br/>
+<code>),(</code>     跳转到上/下一个语句  <br/>
+<code>*</code>     查找光标所在处的单词，向下查找  <br/>
+<code>#</code>     查找光标所在处的单词，向上查找  <br/>
+<code>`.</code>     跳转至上次编辑位置</p>
+
+<h3>在屏幕上移动</h3>
+
+<p><code>H</code>     移动光标到当前屏幕上最上边的一行  <br/>
+<code>M</code>     移动光标到当前屏幕上中间的一行  <br/>
+<code>L</code>     移动光标到当前屏幕上最下边的一行</p>
+
+<h3>书签</h3>
+
+<p><code>ma</code>     把当前位置存成标签a  <br/>
+<code>`a</code>     跳转到标签a处</p>
+
+<h3>编辑</h3>
+
+<p><code>r</code>     替换一个字符  <br/>
+<code>J</code>     将下一行和当前行连接为一行  <br/>
+<code>cc</code>     删除当前行并进入编辑模式  <br/>
+<code>cw</code>     删除当前字，并进入编辑模式  <br/>
+<code>c$</code>     擦除从当前位置至行末的内容，并进入编辑模式  <br/>
+<code>s</code>     删除当前字符并进入编辑模式  <br/>
+<code>S</code>     删除光标所在行并进入编辑模式  <br/>
+<code>xp</code>     交换当前字符和下一个字符  <br/>
+<code>u</code>     撤销  <br/>
+<code>ctrl+r</code>     重做  <br/>
+<code>.</code>     重复上一个编辑命令  <br/>
+<code>~</code>     切换大小写，当前字符  <br/>
+<code>g~iw</code>     切换当前字的大小写  <br/>
+<code>gUiw</code>     将当前字变成大写  <br/>
+<code>guiw</code>     将当前字变成小写  <br/>
+<code>&gt;&gt;</code>     将当前行右移一个单位  <br/>
+<code>&lt;&lt;</code>     将当前行左移一个单位(一个tab符)  <br/>
+<code>==</code>     自动缩进当前行</p>
+
+<h3>插入模式</h3>
+
+<p><code>i</code>     从当前光标处进入插入模式  <br/>
+<code>I</code>     进入插入模式，并置光标于行首  <br/>
+<code>a</code>     追加模式，置光标于当前光标之后  <br/>
+<code>A</code>     追加模式，置光标于行末  <br/>
+<code>o</code>     在当前行之下新加一行，并进入插入模式  <br/>
+<code>O</code>     在当前行之上新加一行，并进入插入模式  <br/>
+<code>Esc</code>     退出插入模式</p>
+
+<h2>可视模式</h2>
+
+<h3>标记文本</h3>
+
+<p><code>v</code>     进入可视模式，单字符模式  <br/>
+<code>V</code>     进入可视模式，行模式  <br/>
+<code>ctrl+v</code>     进入可视模式，列模式，类似于UE的列模式  <br/>
+<code>o</code>     跳转光标到选中块的另一个端点  <br/>
+<code>U</code>     将选中块中的内容转成大写  <br/>
+<code>O</code>     跳转光标到块的另一个端点  <br/>
+<code>aw</code>     选中一个字  <br/>
+<code>ab</code>     选中括号中的所有内容，包括括号本身  <br/>
+<code>aB</code>     选中{}括号中的所有内容  <br/>
+<code>ib</code>     选中括号中的内容，不含括号  <br/>
+<code>iB</code>     选中{}中的内容，不含{}</p>
+
+<h3>对标记进行动作</h3>
+
+<p><code>&gt;</code>     块右移  <br/>
+<code>&lt;</code>     块左移  <br/>
+<code>y</code>     复制块  <br/>
+<code>d</code>     删除块  <br/>
+<code>~</code>     切换块中内容的大小写</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-26T09:50:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/linux/'>Linux</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/vim/'>vim</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2013/04/26/vim//index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/04/16/linux-cut/">
+		
+			Linux终端快捷键</a>
+	</h2>
+	<div class="entry-content">
+		<h3>常用：</h3>
+
+<p><code>Ctrl+a</code>:开始位置  <br/>
+<code>Ctrl+e</code>:最后位置  <br/>
+<code>Ctrl+k</code>:删除此处至末尾所有内容  <br/>
+<code>Ctrl+u</code>:删除此处至开始所有内容  <br/>
+<code>Ctrl-L</code>:刷新屏幕  <br/>
+<code>Ctrl-C</code>:杀死当前任务</p>
+
+<h3>终端:</h3>
+
+<p><code>Shift+Ctrl+T</code>:新建标签页  <br/>
+<code>Shift+Ctrl+W</code>:关闭标签页  <br/>
+<code>Ctrl+PageUp</code>:前一标签页  <br/>
+<code>Ctrl+PageDown</code>:后一标签页  <br/>
+<code>Shift+Ctrl+PageUp</code>:标签页左移  <br/>
+<code>Shift+Ctrl+PageDown</code>:标签页右移  <br/>
+<code>Alt+1</code>:切换到标签页1  <br/>
+<code>Alt+2</code>:切换到标签页2  <br/>
+<code>Alt+3</code>:切换到标签页3  <br/>
+<code>Shift+Ctrl+N</code>:新建窗口  <br/>
+<code>Shift+Ctrl+Q</code>:关闭终端</p>
+
+<h3>终端中的复制／粘贴:</h3>
+
+<p><code>Shift+Ctrl+C</code>:复制  <br/>
+<code>Shift+Ctrl+V</code>:粘贴</p>
+
+<h3>终端改变大小：</h3>
+
+<p><code>F11</code>：全屏  <br/>
+<code>Ctrl+plus</code>:放大  <br/>
+<code>Ctrl+minus</code>:减小  <br/>
+<code>Ctrl+0</code>:原始大小</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-16T17:28:00+08:00" pubdate data-updated="true">Apr 16<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/linux/'>Linux</a>
+
+
+</div>
+	<div class="tags">
+
+</div>
+	
+		<div class="comments"><a href="/blog/2013/04/16/linux-cut//index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/03/29/github-develop/">
+		
+			使用github开发项目</a>
+	</h2>
+	<div class="entry-content">
+		<h3>上传本地项目到github</h3>
+
+<p>1、进入代码所在目录并在github下创建目录  <br/>
+如<code>myProject</code>  <br/>
+2、初始化  <br/>
+ <code>git init</code>  <br/>
+3、将本目录下的文件添加  <br/>
+ <code>git add .</code>  <br/>
+4、提交并增加注释  <br/>
+ <code>git commit -am "first commit"</code>  <br/>
+5、提交到远程服务器上的指定目录<code>seagg</code>用户下的<code>myProject</code>目录  <br/>
+<code>git remote add origin git@github.com:seagg/myProject.git</code>  <br/>
+6、将其push到指定分支，其中master是远程分支，origin是前面创建的本地名称  <br/>
+ <code>git push -u origin master</code></p>
+
+<p>下载代码  <br/>
+<code>git clone git@github.com:seagg/myProject.git</code></p>
+
+<h3>在别人项目基础上开发</h3>
+
+<p>1、进入别人的项目主页，点fork链接  <br/>
+2、之后就可以clone到自己的电脑里进行开发  <br/>
+3、提交时执行如下命令即可：</p>
+
+<pre><code>git add .
+git commit -am "first commit"
+git push -u origin master
+</code></pre>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-29T10:45:00+08:00" pubdate data-updated="true">Mar 29<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/js/'>js</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2013/03/29/github-develop//index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/02/27/rubywarrior/">
+		
+			RubyWarrior 一个人工智能小游戏</a>
+	</h2>
+	<div class="entry-content">
+		<p>项目主页：<a href="http://github.com/ryanb/ruby-warrior/tree/master">http://github.com/ryanb/ruby-warrior/tree/master</a>  <br/>
+这个游戏以一种有趣交互的方式来教你使用Ruby语言和人工智能。   <br/>
+在游戏中你扮演一个勇士去攀登高塔得到顶层的珍贵的红宝石。   <br/>
+在塔中每一层也就是每一关，你需要编写一个Ruby脚本来指导主角如何到达楼梯处然后进入下一关。   <br/>
+在每一关你必须给足主角战斗的力量，你得考虑主角还有多少生命值，什么时候得休息恢复一下生命值等等。注意：每一个回合里，主角只能有一步操作，比如前进一次、休息加血、进攻、解救人质等。   <br/>
+具体的安装，运行和规则请参考github上的项目主页。这里直接贴出beginner级别的第七关代码（前几关忘记保存了&#8230;）。  <br/>
+这个游戏中每一关中的每一步都得小心翼翼，很有可能战斗过程中被干掉，所以每一步都得考虑好。比如这一关，地图是这样的：</p>
+
+<pre><code> ------
+|&gt;a S @|
+ ------
+</code></pre>
+
+<p>图中的<code>@</code>表示自己，<code>S</code>表示怪兽，<code>a</code>表示弓箭手，而目标就是干掉这两个敌人然后活着走到<code>&gt;</code>处。  <br/>
+每一关，人物默认都是向右走的，这里走一步发现撞墙了，所以要转向。走两步发现遇到怪兽了，要用<code>warrior.attack!</code>进行攻击。  <br/>
+为了防止失血过多，当发现这一轮没有受到攻击且剩余血&lt;20的时候，可以通过休息来补充血液。  <br/>
+弓箭手与怪兽的一个不同就是弓箭手可以远程攻击，有可能你向前走一步，进入弓箭手的射程，但你还没走到他面前，这一过程一直要减血。所以为了防止到弓箭手面前的时候剩余血液不足以干掉他的情况发生，需要有个判断，就是当这一轮受到攻击，且血液不足以走到弓箭手面前将他干掉，需要后退几步，退出他的射程，然后休息补血，血液充足了再向前走。</p>
+
+<figure class='code'><figcaption><span>第七关的说明</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">Level</span> <span class="mi">7</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">You</span> <span class="n">feel</span> <span class="n">a</span> <span class="n">wall</span> <span class="n">right</span> <span class="n">in</span> <span class="n">front</span> <span class="n">of</span> <span class="n">you</span> <span class="n">and</span> <span class="n">an</span> <span class="n">opening</span> <span class="n">behind</span> <span class="n">you</span><span class="p">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="nl">Tip:</span> <span class="n">You</span> <span class="n">are</span> <span class="n">not</span> <span class="n">as</span> <span class="n">effective</span> <span class="n">at</span> <span class="n">attacking</span> <span class="n">backward</span><span class="p">.</span> <span class="n">Use</span> <span class="n">warrior</span><span class="p">.</span><span class="n">feel</span><span class="p">.</span><span class="n">wall</span><span class="o">?</span> <span class="n">and</span> <span class="n">warrior</span><span class="p">.</span><span class="n">pivot</span><span class="o">!</span> <span class="n">to</span> <span class="n">turn</span> <span class="n">around</span><span class="p">.</span>
+</span><span class='line'>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span> <span class="err">@</span><span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">&gt;</span> <span class="o">=</span> <span class="n">Stairs</span>
+</span><span class='line'>  <span class="err">@</span> <span class="o">=</span> <span class="n">xuhai</span> <span class="p">(</span><span class="mi">20</span> <span class="n">HP</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">a</span> <span class="o">=</span> <span class="n">Archer</span> <span class="p">(</span><span class="mi">7</span> <span class="n">HP</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">S</span> <span class="o">=</span> <span class="n">Thick</span> <span class="n">Sludge</span> <span class="p">(</span><span class="mi">24</span> <span class="n">HP</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="n">Warrior</span> <span class="n">Abilities</span><span class="o">:</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">warrior</span><span class="p">.</span><span class="n">pivot</span><span class="o">!</span>
+</span><span class='line'>    <span class="n">Rotate</span> <span class="o">:</span><span class="n">left</span><span class="p">,</span> <span class="o">:</span><span class="n">right</span> <span class="n">or</span> <span class="o">:</span><span class="n">backward</span> <span class="p">(</span><span class="k">default</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">warrior</span><span class="p">.</span><span class="n">rescue</span><span class="o">!</span>
+</span><span class='line'>    <span class="n">Rescue</span> <span class="n">a</span> <span class="n">captive</span> <span class="n">from</span> <span class="n">his</span> <span class="n">chains</span> <span class="p">(</span><span class="n">earning</span> <span class="mi">20</span> <span class="n">points</span><span class="p">)</span> <span class="n">in</span> <span class="n">given</span> <span class="n">direction</span> <span class="p">(</span><span class="n">forward</span> <span class="n">by</span> <span class="k">default</span><span class="p">).</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">warrior</span><span class="p">.</span><span class="n">health</span>
+</span><span class='line'>    <span class="n">Returns</span> <span class="n">an</span> <span class="n">integer</span> <span class="n">representing</span> <span class="n">your</span> <span class="n">health</span><span class="p">.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">warrior</span><span class="p">.</span><span class="n">rest</span><span class="o">!</span>
+</span><span class='line'>    <span class="n">Gain</span> <span class="mi">10</span><span class="o">%</span> <span class="n">of</span> <span class="n">max</span> <span class="n">health</span> <span class="n">back</span><span class="p">,</span> <span class="n">but</span> <span class="k">do</span> <span class="n">nothing</span> <span class="n">more</span><span class="p">.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">warrior</span><span class="p">.</span><span class="n">feel</span>
+</span><span class='line'>    <span class="n">Returns</span> <span class="n">a</span> <span class="n">Space</span> <span class="k">for</span> <span class="n">the</span> <span class="n">given</span> <span class="n">direction</span> <span class="p">(</span><span class="n">forward</span> <span class="n">by</span> <span class="k">default</span><span class="p">).</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">warrior</span><span class="p">.</span><span class="n">attack</span><span class="o">!</span>
+</span><span class='line'>    <span class="n">Attacks</span> <span class="n">a</span> <span class="n">unit</span> <span class="n">in</span> <span class="n">given</span> <span class="n">direction</span> <span class="p">(</span><span class="n">forward</span> <span class="n">by</span> <span class="k">default</span><span class="p">).</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">warrior</span><span class="p">.</span><span class="n">walk</span><span class="o">!</span>
+</span><span class='line'>    <span class="n">Move</span> <span class="n">in</span> <span class="n">the</span> <span class="n">given</span> <span class="n">direction</span> <span class="p">(</span><span class="n">forward</span> <span class="n">by</span> <span class="k">default</span><span class="p">).</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="n">When</span> <span class="n">you</span><span class="err">&#39;</span><span class="n">re</span> <span class="n">done</span> <span class="n">editing</span> <span class="n">player</span><span class="p">.</span><span class="n">rb</span><span class="p">,</span> <span class="n">run</span> <span class="n">the</span> <span class="n">rubywarrior</span> <span class="n">command</span> <span class="n">again</span><span class="p">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Code for beginner-level 7</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Player</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">play_turn</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">warrior</span><span class="o">.</span><span class="n">feel</span><span class="o">.</span><span class="n">wall?</span>
+</span><span class='line'>        <span class="n">warrior</span><span class="o">.</span><span class="n">pivot!</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>       <span class="k">if</span> <span class="n">warrior</span><span class="o">.</span><span class="n">feel</span><span class="o">.</span><span class="n">enemy?</span>
+</span><span class='line'>           <span class="n">warrior</span><span class="o">.</span><span class="n">attack!</span>
+</span><span class='line'>       <span class="k">else</span>
+</span><span class='line'>           <span class="k">if</span> <span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="o">&lt;</span> <span class="mi">20</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="o">==</span> <span class="vi">@health</span> <span class="o">||</span> <span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="o">==</span> <span class="vi">@health</span> <span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>               <span class="n">warrior</span><span class="o">.</span><span class="n">rest!</span>
+</span><span class='line'>           <span class="k">else</span>
+</span><span class='line'>               <span class="k">if</span> <span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="o">&lt;</span><span class="mi">15</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="o">&lt;</span> <span class="vi">@health</span> <span class="p">)</span>
+</span><span class='line'>                   <span class="n">warrior</span><span class="o">.</span><span class="n">walk!</span><span class="p">(</span><span class="ss">:backward</span><span class="p">)</span>
+</span><span class='line'>               <span class="k">else</span>
+</span><span class='line'>                   <span class="n">warrior</span><span class="o">.</span><span class="n">walk!</span>
+</span><span class='line'>               <span class="k">end</span>
+</span><span class='line'>           <span class="k">end</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="vi">@health</span> <span class="o">=</span> <span class="n">warrior</span><span class="o">.</span><span class="n">health</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>每轮战况!</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+<span class='line-number'>172</span>
+<span class='line-number'>173</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">1</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span> <span class="err">@</span><span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">pivots</span> <span class="n">backward</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">2</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span> <span class="err">@</span><span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">walks</span> <span class="n">forward</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">3</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span><span class="err">@</span> <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">Thick</span> <span class="n">Sludge</span>
+</span><span class='line'><span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">takes</span> <span class="mi">5</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">19</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">17</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">4</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span><span class="err">@</span> <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">Thick</span> <span class="n">Sludge</span>
+</span><span class='line'><span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">takes</span> <span class="mi">5</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">14</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">14</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">5</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span><span class="err">@</span> <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">Thick</span> <span class="n">Sludge</span>
+</span><span class='line'><span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">takes</span> <span class="mi">5</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">9</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">11</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">6</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span><span class="err">@</span> <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">Thick</span> <span class="n">Sludge</span>
+</span><span class='line'><span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">takes</span> <span class="mi">5</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">4</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">8</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">7</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span><span class="err">@</span> <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">Thick</span> <span class="n">Sludge</span>
+</span><span class='line'><span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">takes</span> <span class="mi">5</span> <span class="n">damage</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">dies</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">earns</span> <span class="mi">24</span> <span class="n">points</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">8</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span>  <span class="err">@</span> <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">10</span> <span class="n">health</span>
+</span><span class='line'><span class="n">Archer</span> <span class="n">shoots</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">7</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">9</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span>  <span class="err">@</span> <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">walks</span> <span class="n">backward</span>
+</span><span class='line'><span class="n">Archer</span> <span class="n">shoots</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">nothing</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">10</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">9</span> <span class="n">health</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">11</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">11</span> <span class="n">health</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">12</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">13</span> <span class="n">health</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">13</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">15</span> <span class="n">health</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">14</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">17</span> <span class="n">health</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">15</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">19</span> <span class="n">health</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">16</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">1</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">20</span> <span class="n">health</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">17</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">walks</span> <span class="n">forward</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">18</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span>  <span class="err">@</span> <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">walks</span> <span class="n">forward</span>
+</span><span class='line'><span class="n">Archer</span> <span class="n">shoots</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">17</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">19</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span> <span class="err">@</span>  <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">walks</span> <span class="n">forward</span>
+</span><span class='line'><span class="n">Archer</span> <span class="n">shoots</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">14</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">20</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span><span class="err">@</span>   <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">Archer</span>
+</span><span class='line'><span class="n">Archer</span> <span class="n">takes</span> <span class="mi">5</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="n">Archer</span> <span class="n">shoots</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">11</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">21</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="n">a</span><span class="err">@</span>   <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">Archer</span>
+</span><span class='line'><span class="n">Archer</span> <span class="n">takes</span> <span class="mi">5</span> <span class="n">damage</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+</span><span class='line'><span class="n">Archer</span> <span class="n">dies</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">earns</span> <span class="mi">7</span> <span class="n">points</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">22</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span> <span class="err">@</span>   <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">13</span> <span class="n">health</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">23</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span> <span class="err">@</span>   <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">15</span> <span class="n">health</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">24</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span> <span class="err">@</span>   <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">17</span> <span class="n">health</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">25</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span> <span class="err">@</span>   <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">19</span> <span class="n">health</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">26</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span> <span class="err">@</span>   <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">1</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">20</span> <span class="n">health</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">27</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span> <span class="err">@</span>   <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">walks</span> <span class="n">forward</span>
+</span><span class='line'><span class="o">-</span> <span class="n">turn</span> <span class="mi">28</span> <span class="o">-</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="o">|&gt;</span><span class="err">@</span>    <span class="o">|</span>
+</span><span class='line'> <span class="o">------</span>
+</span><span class='line'><span class="n">xuhai</span> <span class="n">walks</span> <span class="n">forward</span>
+</span><span class='line'><span class="n">Success</span><span class="o">!</span> <span class="n">You</span> <span class="n">have</span> <span class="n">found</span> <span class="n">the</span> <span class="n">stairs</span><span class="p">.</span>
+</span><span class='line'><span class="n">Level</span> <span class="n">Score</span><span class="o">:</span> <span class="mi">31</span>
+</span><span class='line'><span class="n">Time</span> <span class="n">Bonus</span><span class="o">:</span> <span class="mi">2</span>
+</span><span class='line'><span class="n">Clear</span> <span class="n">Bonus</span><span class="o">:</span> <span class="mi">7</span>
+</span><span class='line'><span class="n">Total</span> <span class="n">Score</span><span class="o">:</span> <span class="mi">364</span> <span class="o">+</span> <span class="mi">40</span> <span class="o">=</span> <span class="mi">404</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>很不错的游戏，可惜没有Java或者C版的，有空考虑写一个。当然，要是能写成对战类的更好了。  <br/>
+今天在github上溜达的时候发现有个哥们的<a href="https://github.com/peterwongpp/PeterWarrior">第六关代码</a>，比较牛，不想我傻呵呵的一直用if分支。有空学习学习！</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-27T18:24:00+08:00" pubdate data-updated="true">Feb 27<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/游戏/'>游戏</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2013/02/27/rubywarrior//index.html#disqus_thread">Comments</a></div>
+	
+</div></article>
+
+<nav id="pagenavi">
+    
+    
+        <a href="/blog/page/2/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Zhao, Xuhai
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fbfcf682a4226ebc8d93b6496f95bc4c8' type='text/javascript'%3E%3C/script%3E"));
+</script></footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'proudsea';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-38620424-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</body>
+</html>

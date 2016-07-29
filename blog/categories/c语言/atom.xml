@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: C语言 | 心静茹水]]></title>
+  <link href="http://seagg.github.com/blog/categories/c语言/atom.xml" rel="self"/>
+  <link href="http://seagg.github.com/"/>
+  <updated>2016-04-21T11:31:22+08:00</updated>
+  <id>http://seagg.github.com/</id>
+  <author>
+    <name><![CDATA[Zhao, Xuhai]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[转]用 GDB 调试程序]]></title>
+    <link href="http://seagg.github.com/blog/2013/02/25/gcc/"/>
+    <updated>2013-02-25T11:42:00+08:00</updated>
+    <id>http://seagg.github.com/blog/2013/02/25/gcc</id>
+    <content type="html"><![CDATA[<p>转载自[<a href="http://blog.csdn.net/niuniuchou/article/details/5385890">http://blog.csdn.net/niuniuchou/article/details/5385890</a>]  <br/>
+GDB 概述</p>
+
+<p>GDB 是 GNU 开源组织发布的一个强大的 UNIX 下的程序调试工具。或许，各位比较喜欢那种图形界面方式的，像 VC 、 BCB 等 IDE 的调试，但如果你是在 UNIX 平台下做软件，你会发现 GDB 这个调试工具有比 VC 、 BCB 的图形化调试器更强大的功能。所谓 “ 寸有所长，尺有所短 ” 就是这个道理。</p>
+
+<p>一般来说， GDB 主要帮忙你完成下面四个方面的功能：</p>
+
+<pre><code>1 、启动你的程序，可以按照你的自定义的要求随心所欲的运行程序。
+2 、可让被调试的程序在你所指定的调置的断点处停住。（断点可以是条件表达式）
+3 、当程序被停住时，可以检查此时你的程序中所发生的事。
+4 、动态的改变你程序的执行环境。
+</code></pre>
+
+<p>从上面看来， GDB 和一般的调试工具没有什么两样，基本上也是完成这些功能，不过在细节上，你会发现 GDB 这个调试工具的强大，大家可能比较习惯了图形化的调试工具，但有时候，命令行的调试工具却有着图形化工具所不能完成的功能。让我们一一看来。</p>
+
+<p>一个调试示例  <br/>
+源程序：
+``` c tst.c</p>
+
+<h1>include &lt;stdio.h></h1>
+
+<p>int func(int n)
+{</p>
+
+<pre><code>int sum=0,i;
+for(i=0; i&lt;n; i++)
+{
+    sum+=i;
+}
+return sum;
+</code></pre>
+
+<p>}
+int main()
+{</p>
+
+<pre><code>int i;
+long result = 0;
+for(i=1; i&lt;=100; i++)
+{
+    result += i;
+}
+printf("result[1-100] = %ld \n", result );
+printf("result[1-250] = %d \n", func(250) );
+return 0;
+</code></pre>
+
+<p>}
+```
+编译生成执行文件：（ Linux 下）</p>
+
+<pre><code>hchen/test&gt; g++ -g -Wall tst.c -o tst
+</code></pre>
+
+<p>使用 GDB 调试：
+``` c
+hchen/test> gdb ./tst <---------- 启动 GDB
+GNU gdb 5.1.1
+Copyright 2002 Free Software Foundation, Inc.
+GDB is free software, covered by the GNU General Public License, and you are
+welcome to change it and/or distribute copies of it under certain conditions.
+Type "show copying" to see the conditions.
+There is absolutely no warranty for GDB. Type "show warranty" for details.
+This GDB was configured as "i386-suse-linux"...
+(gdb) l     <-------------------- l 命令相当于 list ，从第一行开始例出原码。
+1        #include <stdio.h>
+2
+3        int func(int n)
+4        {
+5                int sum=0,i;
+6                for(i=0; i&lt;n; i++)
+7                {
+8                        sum+=i;
+9                }
+10               return sum;
+(gdb)       &lt;-------------------- 直接回车表示，重复上一次命令
+11       }
+12
+13
+14       main()
+15       {
+16               int i;
+17               long result = 0;
+18               for(i=1; i&lt;=100; i++)
+19               {
+20                       result += i;<br/>
+(gdb) break 16    &lt;-------------------- 设置断点，在源程序第 16 行处。
+Breakpoint 1 at 0x8048496: file tst.c, line 16.
+(gdb) break func &lt;-------------------- 设置断点，在函数 func() 入口处。
+Breakpoint 2 at 0x8048456: file tst.c, line 5.
+(gdb) info break &lt;-------------------- 查看断点信息。
+Num Type           Disp Enb Address    What
+1   breakpoint     keep y   0x08048496 in main at tst.c:16
+2   breakpoint     keep y   0x08048456 in func at tst.c:5
+(gdb) r           &lt;--------------------- 运行程序， run 命令简写
+Starting program: /home/hchen/test/tst</p>
+
+<p>Breakpoint 1, main () at tst.c:17    &lt;---------- 在断点处停住。
+17               long result = 0;
+(gdb) n          &lt;--------------------- 单条语句执行， next 命令简写。
+18               for(i=1; i&lt;=100; i++)
+(gdb) n
+20                       result += i;
+(gdb) n
+18               for(i=1; i&lt;=100; i++)
+(gdb) n
+20                       result += i;
+(gdb) c          &lt;--------------------- 继续运行程序， continue 命令简写。
+Continuing.
+result[1-100] = 5050       &lt;---------- 程序输出。</p>
+
+<p>Breakpoint 2, func (n=250) at tst.c:5
+5                int sum=0,i;
+(gdb) n
+6                for(i=1; i&lt;=n; i++)
+(gdb) p i        &lt;--------------------- 打印变量 i 的值， print 命令简写。
+$1 = 134513808
+(gdb) n
+8                        sum+=i;
+(gdb) n
+6                for(i=1; i&lt;=n; i++)
+(gdb) p sum
+$2 = 1
+(gdb) n
+8                        sum+=i;
+(gdb) p i
+$3 = 2
+(gdb) n
+6                for(i=1; i&lt;=n; i++)
+(gdb) p sum
+$4 = 3
+(gdb) bt        &lt;--------------------- 查看函数堆栈。</p>
+
+<h1>0 func (n=250) at tst.c:5</h1>
+
+<h1>1 0x080484e4 in main () at tst.c:24</h1>
+
+<h1>2 0x400409ed in __libc_start_main () from /lib/libc.so.6</h1>
+
+<p>(gdb) finish    &lt;--------------------- 退出函数。
+Run till exit from #0 func (n=250) at tst.c:5
+0x080484e4 in main () at tst.c:24
+24              printf("result[1-250] = %d /n", func(250) );
+Value returned is $6 = 31375
+(gdb) c     &lt;--------------------- 继续运行。
+Continuing.
+result[1-250] = 31375    &lt;---------- 程序输出。</p>
+
+<p>Program exited with code 027. <-------- 程序退出，调试结束。
+(gdb) q     <--------------------- 退出 gdb 。
+hchen/test>
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[nginx+fastcgi下开发php扩展]]></title>
+    <link href="http://seagg.github.com/blog/2013/01/22/php-extension/"/>
+    <updated>2013-01-22T15:26:00+08:00</updated>
+    <id>http://seagg.github.com/blog/2013/01/22/php-extension</id>
+    <content type="html"><![CDATA[<p>本文参考：<a href="http://www.laruence.com/2009/04/28/719.html">用C/C++扩展你的PHP</a>  <br/>
+要开发扩展，首先需要有php的源码包，可以到php官网下载，我使用的版本是5.3.10，之后解压，进入ext目录里。  <br/>
+先建立一个函数定义到.def文件当中，比如<code>string self_concat(string str, int n)</code>，这样的话，会在稍后生成的扩展框架中自动添加函数原型和一个默认实现。当然，也可以不使用这个文件，手动去建立函数。</p>
+
+<pre><code>vi myfunctions.def
+</code></pre>
+
+<p>之后是用php的ext_skel生成php扩展的框架：</p>
+
+<pre><code>./ext_skel --extname=myfunctions --proto=../myfunctions.def
+</code></pre>
+
+<p>会在ext目录下生成一个名为<code>myfunctions</code>的目录，里面包含了php扩展框架基本文件。  <br/>
+之后，是修改<code>php_myfunctions.h</code>文件，在<code>PHP_FUNCTION(confirm_myfunctions_compiled);</code>之后添加函数定义</p>
+
+<pre><code>PHP_FUNCTION(self_concat);
+</code></pre>
+
+<p>再修改<code>myfunctions.c</code>文件，在文件末尾添加函数实现
+比如
+``` c self_concat实现
+PHP_FUNCTION(self_concat)
+{</p>
+
+<pre><code>char *str = NULL;
+int argc = ZEND_NUM_ARGS();
+int str_len;
+long n;
+char *result; /* Points to resulting string */
+char *ptr; /* Points at the next location we want to copy to */
+int result_length; /* Length of resulting string */
+if (zend_parse_parameters(argc TSRMLS_CC, "sl", &amp;str, &amp;str_len, &amp;n) == FAILURE)
+    return;
+/* Calculate length of result */
+result_length = (str_len * n);
+/* Allocate memory for result */
+result = (char *) emalloc(result_length + 1);
+/* Point at the beginning of the result */
+ptr = result;
+while (n--) {
+    /* Copy str to the result */
+    memcpy(ptr, str, str_len);
+    /* Increment ptr to point at the next position we want to write to */
+    ptr += str_len;
+}
+/* Null terminate the result. Always null-terminate your strings
+even if they are binary strings */
+*ptr = '\0';
+/* Return result to the scripting engine without duplicating it*/
+RETURN_STRINGL(result, result_length, 0);
+</code></pre>
+
+<p>}</p>
+
+<p><code>``
+之后，修改</code>config.m4`文件,去掉如下两行前的dnl</p>
+
+<pre><code>PHP_ARG_ENABLE(myfunctions, whether to enable myfunctions support,
+[  --enable-myfunctions           Enable myfunctions support])
+</code></pre>
+
+<p>之后去php源码跟目录，执行</p>
+
+<pre><code>./buildconf --force
+</code></pre>
+
+<p>如果提示autoconf版本不对的话，我原来的版本是2.69... 很郁闷，版本高了居然还不行。执行</p>
+
+<pre><code>apt-get install autoconf2.59
+export PHP_AUTOCONF=autoconf2.59
+./buildconf --force
+</code></pre>
+
+<p>切换到<code>ext/myfunctions</code>目录，执行：</p>
+
+<pre><code>/usr/local/php/bin/phpize 
+./configure --with-php-config=/usr/local/php/bin/php-config 
+make
+make install
+</code></pre>
+
+<p>再就是修改<code>php.ini</code>文件，在[extension]部分加入</p>
+
+<pre><code>extension = "myfunctions.so"
+</code></pre>
+
+<p>之后重启php</p>
+
+<pre><code>/etc/init.d/php-fpm restart
+</code></pre>
+
+<p>如果修改了函数，或者新增加函数，需要重新编译php</p>
+
+<pre><code>make
+make install
+/etc/init.d/php-fpm restart
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[指针数组与数组指针]]></title>
+    <link href="http://seagg.github.com/blog/2012/09/06/array-and-pointer/"/>
+    <updated>2012-09-06T08:59:00+08:00</updated>
+    <id>http://seagg.github.com/blog/2012/09/06/array-and-pointer</id>
+    <content type="html"><![CDATA[<p>昨天从面试宝典上看了道关于指针的面试题，发现这个上次绿盟科技笔试的时候考过，当时很凌乱，有几个记混了。</p>
+
+<p>题目是这样的：</p>
+
+<ul>
+<li>定义一个整形数</li>
+<li>定义一个指向整形数的指针</li>
+<li>定义一个指向指针的指针，它指向的指针，是一个指向整形数的指针</li>
+<li>定义一个具有10个整形数的数组</li>
+<li>定义一个具有10个指针的数组，这些指针都是指向整形数的</li>
+<li>定义一个指向有10个整形数 数组的指针</li>
+<li>定义一个指向函数的指针，该函数有一个整形参数 并返回一个整形数据</li>
+<li>定义一个有10个指针的数组，每个指针指向一个函数，该函数有一个整形参数，返回一个整形数</li>
+</ul>
+
+
+<pre><code>a) int a; // An integer 
+b) int *a; // A pointer to an integer 
+c) int **a; // A pointer to a pointer to an integer 
+d) int a[10]; // An array of 10 integers 
+e) int *a[10]; // An array of 10 pointers to integers 
+f) int (*a)[10]; // A pointer to an array of 10 integers 
+g) int (*a)(int); // A pointer to a function a that takes an integer argument and returns an integer 
+h) int (*a[10])(int); // An array of 10 pointers to functions that take an integer argument and return an integer </code></pre>
+
+
+<p><span style="color:red; font-weight:bold">诀窍：弄清楚* [] ()的优先级</span>   <br/>
+详细解答参考这里：<a href="http://blog.csdn.net/lyl494223339/article/details/7854396">解答</a></p>
+]]></content>
+  </entry>
+  
+</feed>

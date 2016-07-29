@@ -1,0 +1,310 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Linux crontab格式 - 心静茹水</title>
+	<meta name="author" content="Zhao, Xuhai">
+
+	
+	<meta name="description" content="基本格式 :
+*　　*　　*　　*　　*　　command
+分　时　日　月　周　命令 第1列表示分钟1～59 每分钟用或者 /1表示 第2列表示小时1～23（0表示0点） 第3列表示日期1～31 第4列表示月份1～12 第5列标识号星期0～6（0表示星期天） 第6列要运行的命令 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="心静茹水" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">心静茹水</a></h1>
+<nav id="main-nav"><ul class="main">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/tags">标签</a></li>
+  <li><a href="/blog/gallery/demo">相册</a></li>
+  <li><a href="/blog/about_me">关于</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/tags">标签</a></li>
+  <li><a href="/blog/gallery/demo">相册</a></li>
+  <li><a href="/blog/about_me">关于</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:seagg.github.com">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:seagg.github.com">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	
+	<h2 class="title">Linux Crontab格式</h2>
+	<div class="entry-content"><pre><code>基本格式 :
+*　　*　　*　　*　　*　　command
+分　时　日　月　周　命令
+</code></pre>
+
+<p>第1列表示分钟1～59 每分钟用<em>或者 </em>/1表示  <br/>
+第2列表示小时1～23（0表示0点）  <br/>
+第3列表示日期1～31  <br/>
+第4列表示月份1～12  <br/>
+第5列标识号星期0～6（0表示星期天）  <br/>
+第6列要运行的命令</p>
+
+<p>crontab文件的一些例子：</p>
+
+<pre><code>30 21 * * * /usr/local/etc/rc.d/lighttpd restart    
+</code></pre>
+
+<p>上面的例子表示每晚的21:30重启apache。</p>
+
+<pre><code>45 4 1,10,22 * * /usr/local/etc/rc.d/lighttpd restart   
+</code></pre>
+
+<p>上面的例子表示每月1、10、22日的4 : 45重启apache。</p>
+
+<pre><code>10 1 * * 6,0 /usr/local/etc/rc.d/lighttpd restart   
+</code></pre>
+
+<p>上面的例子表示每周六、周日的1 : 10重启apache。</p>
+
+<pre><code>0,30 18-23 * * * /usr/local/etc/rc.d/lighttpd restart   
+</code></pre>
+
+<p>上面的例子表示在每天18 : 00至23 : 00之间每隔30分钟重启apache。</p>
+
+<pre><code>0 23 * * 6 /usr/local/etc/rc.d/lighttpd restart     
+</code></pre>
+
+<p>上面的例子表示每星期六的11 : 00 pm重启apache。</p>
+
+<pre><code>* */1 * * * /usr/local/etc/rc.d/lighttpd restart    
+</code></pre>
+
+<p>每一小时重启apache</p>
+
+<pre><code>* 23-7/1 * * * /usr/local/etc/rc.d/lighttpd restart     
+</code></pre>
+
+<p>晚上11点到早上7点之间，每隔一小时重启apache</p>
+
+<pre><code>0 11 4 * mon-wed /usr/local/etc/rc.d/lighttpd restart   
+</code></pre>
+
+<p>每月的4号与每周一到周三的11点重启apache</p>
+
+<pre><code>0 4 1 jan * /usr/local/etc/rc.d/lighttpd restart    
+</code></pre>
+
+<p>一月一号的4点重启apache</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-09T11:30:00+08:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/linux/'>Linux</a>
+
+
+</div>
+	<div class="tags">
+
+</div>
+	
+		<div class="comments"><a href="/blog/2013/05/09/crontab/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+
+<aside class="sidebar">
+  
+    <!--
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/c语言/'>C语言 (3)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>Linux (3)</a></li>
+<li class='category'><a href='/blog/categories/lua/'>Lua (2)</a></li>
+<li class='category'><a href='/blog/categories/php/'>PHP (2)</a></li>
+<li class='category'><a href='/blog/categories/ruby/'>Ruby (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (4)</a></li>
+<li class='category'><a href='/blog/categories/web前端/'>web前端 (2)</a></li>
+<li class='category'><a href='/blog/categories/实习生活/'>实习生活 (1)</a></li>
+<li class='category'><a href='/blog/categories/算法/'>算法 (2)</a></li>
+<li class='category'><a href='/blog/categories/转载/'>转载 (1)</a></li>
+
+  </ul>
+</section>
+--><!--
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/09/crontab/">Linux crontab格式</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/26/vim/">linux下vim命令详解</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/16/linux-cut/">Linux终端快捷键</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/29/github-develop/">使用github开发项目</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/27/rubywarrior/">RubyWarrior 一个人工智能小游戏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/25/gcc/">[转]用 GDB 调试程序</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/22/php-extension/">nginx+fastcgi下开发php扩展</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/14/yaf-nginx/">Yaf框架在nginx虚拟主机中的配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/24/lua-struct/">Lua中通过ffi调用c的结构体变量</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/22/lua-php-serialize/">Lua中实现php序列化及反序列化函数</a>
+      </li>
+    
+  </ul>
+</section>
+-->
+
+
+
+
+
+  
+</aside>
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Zhao, Xuhai
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fbfcf682a4226ebc8d93b6496f95bc4c8' type='text/javascript'%3E%3C/script%3E"));
+</script></footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'proudsea';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://seagg.github.com/blog/2013/05/09/crontab/';
+        var disqus_url = 'http://seagg.github.com/blog/2013/05/09/crontab/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-38620424-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</body>
+</html>

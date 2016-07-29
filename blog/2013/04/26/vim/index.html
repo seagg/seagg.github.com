@@ -1,0 +1,432 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>linux下vim命令详解 - 心静茹水</title>
+	<meta name="author" content="Zhao, Xuhai">
+
+	
+	<meta name="description" content="高级一些的编辑器，都会包含宏功能，vim当然不能缺少了，在vim中使用宏是非常方便的： :qx 开始记录宏，并将结果存入寄存器x q 退出记录模式 @x 播放记录在x寄存器中的宏命令 稍微解释一下，当在normal模式下输入:qx后，你对文本的所有编辑动作将会被记录下来，再次输入q即退出了记录模式 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="心静茹水" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">心静茹水</a></h1>
+<nav id="main-nav"><ul class="main">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/tags">标签</a></li>
+  <li><a href="/blog/gallery/demo">相册</a></li>
+  <li><a href="/blog/about_me">关于</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/tags">标签</a></li>
+  <li><a href="/blog/gallery/demo">相册</a></li>
+  <li><a href="/blog/about_me">关于</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:seagg.github.com">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:seagg.github.com">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	
+	<h2 class="title">Linux下vim命令详解</h2>
+	<div class="entry-content"><p>高级一些的编辑器，都会包含宏功能，vim当然不能缺少了，在vim中使用宏是非常方便的：</p>
+
+<p><code>:qx</code>     开始记录宏，并将结果存入寄存器x  <br/>
+<code>q</code>     退出记录模式  <br/>
+<code>@x</code>     播放记录在x寄存器中的宏命令</p>
+
+<pre><code>稍微解释一下，当在normal模式下输入:qx后，你对文本的所有编辑动作将会被记录下来，再次输入q即退出了记录模式，
+然后输入@x对刚才记录下来的命令进行重复，此命令后可跟数字，表示要重复多少次，比如@x20，可以重复20次。
+这个在文本的批处理中是非常有用的。    
+</code></pre>
+
+<h2>同时编辑多个文件</h2>
+
+<pre><code>在vim众多的插件中，有一个叫minibuffer的插件，就是下面所说的标签页功能了，可以支持同时编辑多个文件。    
+</code></pre>
+
+<h3>标签命令</h3>
+
+<p><code>:tabe fn</code>     在一个新的标签页中编辑文件fn  <br/>
+<code>gt</code>     切换到下一个标签页  <br/>
+<code>gT</code>     切换到上一个标签页  <br/>
+<code>:tabr</code>     切换到第一个标签页  <br/>
+<code>:tabl</code>     切换到最后一个标签页  <br/>
+<code>:tabm [N]</code>     把当前tab移动到第N个tab之后</p>
+
+<pre><code>对，正如你所想象的那样，跟eclipse, ue等的标签页是一个意思！    
+</code></pre>
+
+<h3>窗口命令</h3>
+
+<p><code>ctrl+w s</code>     水平分割窗口  <br/>
+<code>ctrl+w w</code>     切换窗口  <br/>
+<code>ctrl+w q</code>     退出当前窗口(由于同时有多个文件，此命令不会影响其他窗口)  <br/>
+<code>ctrl+w v</code>     垂直分割窗口</p>
+
+<h3>其他</h3>
+
+<p>vim在保存之前不会对文件做实际的修改，只是加载到缓冲区中，对文件的编辑其实是对缓冲区的编辑，直到:w时才会存入物理文件。  <br/>
+<code>:e file</code>     把file加载到新的缓冲区中  <br/>
+<code>:bn</code>     跳转到下一个缓冲区  <br/>
+<code>:bd</code>     删除缓冲区(关闭文件)  <br/>
+<code>:sp fn</code>     分割窗口，并将fn加载到新的窗口中</p>
+
+<h3>退出编辑器</h3>
+
+<p><code>:w</code>     将缓冲区写入文件，即保存修改  <br/>
+<code>:wq</code>     保存修改并退出  <br/>
+<code>:x</code>     保存修改并退出  <br/>
+<code>:q</code>     退出，如果对缓冲区进行过修改，则会提示  <br/>
+<code>:q!</code>     强制退出，放弃修改</p>
+
+<h3>查找替换</h3>
+
+<p><code>/pattern</code>     向后搜索字符串pattern  <br/>
+<code>?pattern</code>     向前搜索字符串pattern  <br/>
+<code>n</code>     下一个匹配(如果是/搜索，则是向下的下一个，?搜索则是向上的下一个)  <br/>
+<code>N</code>     上一个匹配(同上)  <br/>
+<code>:%s/old/new/g</code>     搜索整个文件，将所有的old替换为new  <br/>
+<code>:%s/old/new/gc</code>     搜索整个文件，将所有的old替换为new，每次都要你确认是否替换</p>
+
+<h3>复制粘贴</h3>
+
+<p><code>dd</code>     删除光标所在行  <br/>
+<code>dw</code>     删除一个字(word)  <br/>
+<code>x</code>     删除当前字符  <br/>
+<code>X</code>     删除前一个字符  <br/>
+<code>D</code>     删除到行末  <br/>
+<code>dG</code>    删除到文件末  <br/>
+<code>dgg</code>    删除到文件首</p>
+
+<p><code>yy</code>     复制一行，此命令前可跟数字，标识复制多行，如6yy，表示从当前行开始复制6行  <br/>
+<code>yw</code>     复制一个字  <br/>
+<code>y$</code>     复制到行末  <br/>
+<code>p</code>     粘贴粘贴板的内容到当前行的下面  <br/>
+<code>P</code>     粘贴粘贴板的内容到当前行的上面  <br/>
+<code>]p</code>     有缩进的粘贴，vim会自动调节代码的缩进  <br/>
+<code>"a</code>     将内容放入/存入a寄存器，可以支持多粘贴板</p>
+
+<pre><code>附：比如常用的一个寄存器就是系统寄存器，名称为+，所以从系统粘贴板粘贴到vim中的命令为"+p,
+注意此处的+不表示操作符，二十一个寄存器。    
+</code></pre>
+
+<h3>移动光标</h3>
+
+<pre><code>在vim中移动光标跟其他的编辑器中有很大的区别，不过一旦学会了，就会飞速的在文本中移动了。    
+</code></pre>
+
+<p><code>h,j,k,l</code>     上，下，左，右  <br/>
+<code>ctrl-f</code>     上翻一页  <br/>
+<code>ctrl-b</code>     下翻一页  <br/>
+<code>%</code>     跳到与当前括号匹配的括号处，如当前在{，则跳转到与之匹配的}处  <br/>
+<code>w</code>     跳到下一个字首，按标点或单词分割  <br/>
+<code>W</code>     跳到下一个字首，长跳，如end-of-line被认为是一个字  <br/>
+<code>e</code>     跳到下一个字尾  <br/>
+<code>E</code>     跳到下一个字尾，长跳  <br/>
+<code>b</code>     跳到上一个字  <br/>
+<code>B</code>     跳到上一个字，长跳  <br/>
+<code>0</code>     跳至行首，不管有无缩进，就是跳到第0个字符  <br/>
+<code>^</code>     跳至行首的第一个字符  <br/>
+<code>$</code>     跳至行尾  <br/>
+<code>gg</code>     跳至文件的第一行  <br/>
+<code>gd</code>     跳至当前光标所在的变量的声明处  <br/>
+<code>[N]G</code>     跳到第N行，如0G，就等价于gg，100G就是第100行  <br/>
+<code>fx</code>     在当前行中找x字符，找到了就跳转至  <br/>
+<code>;</code>     重复上一个f命令，而不用重复的输入fx  <br/>
+<code>tx</code>     与fx类似，但是只是跳转到x的前一个字符处  <br/>
+<code>Fx</code>     跟fx的方向相反  <br/>
+<code>),(</code>     跳转到上/下一个语句  <br/>
+<code>*</code>     查找光标所在处的单词，向下查找  <br/>
+<code>#</code>     查找光标所在处的单词，向上查找  <br/>
+<code>`.</code>     跳转至上次编辑位置</p>
+
+<h3>在屏幕上移动</h3>
+
+<p><code>H</code>     移动光标到当前屏幕上最上边的一行  <br/>
+<code>M</code>     移动光标到当前屏幕上中间的一行  <br/>
+<code>L</code>     移动光标到当前屏幕上最下边的一行</p>
+
+<h3>书签</h3>
+
+<p><code>ma</code>     把当前位置存成标签a  <br/>
+<code>`a</code>     跳转到标签a处</p>
+
+<h3>编辑</h3>
+
+<p><code>r</code>     替换一个字符  <br/>
+<code>J</code>     将下一行和当前行连接为一行  <br/>
+<code>cc</code>     删除当前行并进入编辑模式  <br/>
+<code>cw</code>     删除当前字，并进入编辑模式  <br/>
+<code>c$</code>     擦除从当前位置至行末的内容，并进入编辑模式  <br/>
+<code>s</code>     删除当前字符并进入编辑模式  <br/>
+<code>S</code>     删除光标所在行并进入编辑模式  <br/>
+<code>xp</code>     交换当前字符和下一个字符  <br/>
+<code>u</code>     撤销  <br/>
+<code>ctrl+r</code>     重做  <br/>
+<code>.</code>     重复上一个编辑命令  <br/>
+<code>~</code>     切换大小写，当前字符  <br/>
+<code>g~iw</code>     切换当前字的大小写  <br/>
+<code>gUiw</code>     将当前字变成大写  <br/>
+<code>guiw</code>     将当前字变成小写  <br/>
+<code>&gt;&gt;</code>     将当前行右移一个单位  <br/>
+<code>&lt;&lt;</code>     将当前行左移一个单位(一个tab符)  <br/>
+<code>==</code>     自动缩进当前行</p>
+
+<h3>插入模式</h3>
+
+<p><code>i</code>     从当前光标处进入插入模式  <br/>
+<code>I</code>     进入插入模式，并置光标于行首  <br/>
+<code>a</code>     追加模式，置光标于当前光标之后  <br/>
+<code>A</code>     追加模式，置光标于行末  <br/>
+<code>o</code>     在当前行之下新加一行，并进入插入模式  <br/>
+<code>O</code>     在当前行之上新加一行，并进入插入模式  <br/>
+<code>Esc</code>     退出插入模式</p>
+
+<h2>可视模式</h2>
+
+<h3>标记文本</h3>
+
+<p><code>v</code>     进入可视模式，单字符模式  <br/>
+<code>V</code>     进入可视模式，行模式  <br/>
+<code>ctrl+v</code>     进入可视模式，列模式，类似于UE的列模式  <br/>
+<code>o</code>     跳转光标到选中块的另一个端点  <br/>
+<code>U</code>     将选中块中的内容转成大写  <br/>
+<code>O</code>     跳转光标到块的另一个端点  <br/>
+<code>aw</code>     选中一个字  <br/>
+<code>ab</code>     选中括号中的所有内容，包括括号本身  <br/>
+<code>aB</code>     选中{}括号中的所有内容  <br/>
+<code>ib</code>     选中括号中的内容，不含括号  <br/>
+<code>iB</code>     选中{}中的内容，不含{}</p>
+
+<h3>对标记进行动作</h3>
+
+<p><code>&gt;</code>     块右移  <br/>
+<code>&lt;</code>     块左移  <br/>
+<code>y</code>     复制块  <br/>
+<code>d</code>     删除块  <br/>
+<code>~</code>     切换块中内容的大小写</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-26T09:50:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+Category:
+
+	<a class='category' href='/blog/categories/linux/'>Linux</a>
+
+
+</div>
+	<div class="tags">
+
+Tags:
+  
+    <a class='tag' href='/tags/vim/'>vim</a>
+  
+
+</div>
+	
+		<div class="comments"><a href="/blog/2013/04/26/vim/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+
+<aside class="sidebar">
+  
+    <!--
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/c语言/'>C语言 (3)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>Linux (3)</a></li>
+<li class='category'><a href='/blog/categories/lua/'>Lua (2)</a></li>
+<li class='category'><a href='/blog/categories/php/'>PHP (2)</a></li>
+<li class='category'><a href='/blog/categories/ruby/'>Ruby (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (4)</a></li>
+<li class='category'><a href='/blog/categories/web前端/'>web前端 (2)</a></li>
+<li class='category'><a href='/blog/categories/实习生活/'>实习生活 (1)</a></li>
+<li class='category'><a href='/blog/categories/算法/'>算法 (2)</a></li>
+<li class='category'><a href='/blog/categories/转载/'>转载 (1)</a></li>
+
+  </ul>
+</section>
+--><!--
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/09/crontab/">Linux crontab格式</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/26/vim/">linux下vim命令详解</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/16/linux-cut/">Linux终端快捷键</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/29/github-develop/">使用github开发项目</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/27/rubywarrior/">RubyWarrior 一个人工智能小游戏</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/25/gcc/">[转]用 GDB 调试程序</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/22/php-extension/">nginx+fastcgi下开发php扩展</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/14/yaf-nginx/">Yaf框架在nginx虚拟主机中的配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/24/lua-struct/">Lua中通过ffi调用c的结构体变量</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/22/lua-php-serialize/">Lua中实现php序列化及反序列化函数</a>
+      </li>
+    
+  </ul>
+</section>
+-->
+
+
+
+
+
+  
+</aside>
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Zhao, Xuhai
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fbfcf682a4226ebc8d93b6496f95bc4c8' type='text/javascript'%3E%3C/script%3E"));
+</script></footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'proudsea';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://seagg.github.com/blog/2013/04/26/vim/';
+        var disqus_url = 'http://seagg.github.com/blog/2013/04/26/vim/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-38620424-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</body>
+</html>

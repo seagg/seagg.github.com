@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 兼容 | 心静茹水]]></title>
+  <link href="http://seagg.github.com/tags/兼容/atom.xml" rel="self"/>
+  <link href="http://seagg.github.com/"/>
+  <updated>2016-04-21T11:31:22+08:00</updated>
+  <id>http://seagg.github.com/</id>
+  <author>
+    <name><![CDATA[Zhao, Xuhai]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CSS Hack: 浏览器兼容性问题]]></title>
+    <link href="http://seagg.github.com/blog/2012/09/08/css-hack/"/>
+    <updated>2012-09-08T11:14:00+08:00</updated>
+    <id>http://seagg.github.com/blog/2012/09/08/css-hack</id>
+    <content type="html"><![CDATA[<p>直接看实例吧，下面的程序转载自: <a href="http://www.cnblogs.com/superc/archive/2012/03/11/2390652.html">Superc</a>和<a href="http://www.cnblogs.com/WuQiang/archive/2011/08/23/2150240.html">飘</a></p>
+
+<pre><code>"\9"　例:"margin:0px auto\9;".这里的"\9"可以区别所有IE和FireFox.
+"*"　IE6、IE7可以识别.IE8、FireFox不能.
+"_"　IE6可以识别"_",IE7、IE8、FireFox不能.
+如此,就可以完全区分开IE6、IE7、IE8、FireFox了.</code></pre>
+
+
+<p></p>
+
+<p>还是不知道怎么区分.好吧,来看个例子:  <br/>
+``` html Example 1
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"></p>
+
+<pre><code>&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+&lt;title&gt;区别IE6、IE7、IE8、FireFox的CSS hack - http://www.52css.com%3c/title&gt;
+&lt;style type="text/css"&gt;
+&lt;!--
+#test,#note{
+    margin:0 auto;
+    text-align:center;    
+}
+#test {
+    width:200px;
+    height:30px;
+    border: 1px solid #000000;
+    color:#fff;
+    line-height:30px;
+}
+.color{
+    background-color: #CC00FF;        /*所有浏览器都会显示为紫色*/
+    background-color: #FF0000\9;    /*IE6、IE7、IE8会显示红色*/
+    *background-color: #0066FF;        /*IE6、IE7会变为蓝色*/            
+    _background-color: #009933;        /*IE6会变为绿色*/
+}
+--&gt;
+&lt;/style&gt;
+</code></pre>
+
+<p></head>
+<body></p>
+
+<pre><code>&lt;div id="test" class="color"&gt;测试方块 www.mycsu.net &lt;/div&gt;
+&lt;div id="note"&gt;
+    &lt;strong style="color:#009933"&gt;IE6&lt;/strong&gt;
+    &lt;strong style="color:#0066FF"&gt;IE7&lt;/strong&gt;
+    &lt;strong style="color:#FF0000"&gt;IE8&lt;/strong&gt;
+    &lt;strong style="color:#CC00FF"&gt;FireFox&lt;/strong&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p></body>
+</html></p>
+
+<h2>```</h2>
+
+<p>还有这个例子也不错：   <br/>
+``` html Example 2
+&lt;!DOCTYPE html><br/>
+<html><br/>
+<head></p>
+
+<pre><code>&lt;title&gt;Css Hack&lt;/title&gt;  
+&lt;style&gt;  
+#test   
+{   
+    width:300px;   
+    height:300px;   
+
+    background-color:blue;      /*firefox*/
+    background-color:red\9;      /*all ie*/
+    background-color:yellow\0;    /*ie8*/
+    +background-color:pink;        /*ie7*/
+    _background-color:orange;       /*ie6*/
+}  
+:root #test { background-color:purple\9; }  /*ie9*/
+@media all and (min-width:0px){ #test {background-color:black\0;} }  /*opera*/
+@media screen and (-webkit-min-device-pixel-ratio:0){ #test {background-color:gray;} }  /*chrome and safari*/
+&lt;/style&gt;  
+</code></pre>
+
+<p></head><br/>
+<body></p>
+
+<pre><code>&lt;div id="test"&gt;test&lt;/div&gt;  
+</code></pre>
+
+<p></body><br/>
+</html>
+```
+附上一张CSS Hack样式属性前缀表</p>
+
+<center>
+<img src="http://seagg.github.com/images/css_hack.jpg">
+</center>
+
+]]></content>
+  </entry>
+  
+</feed>

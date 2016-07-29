@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 评论 | 心静茹水]]></title>
+  <link href="http://seagg.github.com/tags/评论/atom.xml" rel="self"/>
+  <link href="http://seagg.github.com/"/>
+  <updated>2016-04-21T11:31:22+08:00</updated>
+  <id>http://seagg.github.com/</id>
+  <author>
+    <name><![CDATA[Zhao, Xuhai]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[给octopress添加Disqus评论功能]]></title>
+    <link href="http://seagg.github.com/blog/2012/09/03/config-comment-on-octopress/"/>
+    <updated>2012-09-03T19:16:00+08:00</updated>
+    <id>http://seagg.github.com/blog/2012/09/03/config-comment-on-octopress</id>
+    <content type="html"><![CDATA[<p>经过了几天的折腾，昨天终于把octopress博客建立好了。更新起来很方便，只需要编写类似Latex语言的markdown文件，然后<code>rake generate</code>, <code>rake deploy</code>就可以啦。</p>
+
+<p>今天加入了评论功能，这里主要记录下添加评论的过程。Octopress中其实已经集成了Disqus评论插件，只需要简单设置一下就可以。</p>
+
+<ul>
+<li><p><strong>登录<a href="http://disqus.com">Disqus网站</a></strong>, 然后注册用户名密码，邮箱验证。</p></li>
+<li><p>单击<em>Get this on your site</em>按钮</p></li>
+</ul>
+
+
+<center>
+<img src="http://seagg.github.com/images/add_comment1.PNG" >
+</center>
+
+
+<ul>
+<li><strong>填写网站的信息</strong></li>
+</ul>
+
+
+<center>
+<img src="http://seagg.github.com/images/add_comment2.PNG">
+</center>
+
+
+<ul>
+<li>修改_config.yml文件:</li>
+</ul>
+
+
+<pre><code>#Disqus Comments
+disqus_short_name: Site Shortname
+disqus_show_comment_count: true</code></pre>
+
+
+<p>之后就可以通过<code>rake new_post['title']</code>创建日志，日志中设定：</p>
+
+<pre><code>comment: true
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
