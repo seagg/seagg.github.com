@@ -1,26 +1,48 @@
 <!DOCTYPE html>
 <html>
   {% include head.html %}
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.qrcode.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      $("#qrcode").qrcode({ 
+        render: "canvas", //table方式 
+        width: 100, //宽度 
+        height:100, //高度 
+        text: window.location.href, //任意内容 
+      }); 
+    })
+  </script>
   <body>
     <div class="container">
     {% include header.html %}
     {{ content }}
-      <div class="pc_qrcode_outer" style="display: none;">
-                <div class="pc_qrcode_pc_inner">
-                    <div class="qr_code_pc">
-                      <img src="/img/qrcode.jpg" alt="">
-                      <p>微信扫一扫<br>关注我的公众号</p>
-                    </div>
-                </div>
-            </div>
-            <div class="back_top_outer">
-                <div class="back_top_inner">
-                    <div id="back-top">
-                        <a href="#top"><span></span></a>
-                    </div>
-                </div>
-            </div>
-      </div>
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                <div id="qrcode"></div>
+                <span style="text-align:center">手机扫一扫<br />分享&继续阅读</span>
+             </div>
+         </div>
+     </div>
+     <!--
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                 <img src="/img/qrcode.jpg" alt="">
+                 <p>微信扫一扫<br>关注我的公众号</p>
+             </div>
+         </div>
+     </div>
+     -->
+     <div class="back_top_outer">
+         <div class="back_top_inner">
+             <div id="back-top">
+                 <a href="#top"><span></span></a>
+             </div>
+         </div>
+     </div>
+     </div>
     </div>
     {% include footer.html %}
   </body>

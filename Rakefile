@@ -2,7 +2,7 @@ require 'time'
 
 desc 'create a new draft post'
 task :post do
-title = ENV['TITLE']
+title = ENV['title']
 slug = "#{Date.today}-#{title.downcase.gsub(/[^\w]+/, '-')}"
 
 file = File.join(
