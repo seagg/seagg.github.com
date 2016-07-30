@@ -348,7 +348,7 @@ footer {
           height: 48px;
           display: block;
           margin-bottom: 7px;
-          background: #ddd url(../img/up-arrow.png) no-repeat center center;
+          background: #ddd url(../images/up-arrow.png) no-repeat center center;
           -webkit-border-radius: 15px;
           -moz-border-radius: 15px;
           border-radius: 15px;
