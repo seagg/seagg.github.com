@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>nginx+fastcgi下开发php扩展</title>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/iconfont.css">
+  <link rel="stylesheet" href="/css/highlight.css" />
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.qrcode.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      $("#qrcode").qrcode({ 
+        render: "canvas", //table方式 
+        width: 100, //宽度 
+        height:100, //高度 
+        text: window.location.href, //任意内容 
+      }); 
+    })
+  </script>
+  <body>
+    <div class="container">
+    <header>
+  <h1>海哥</h1>
+  <nav>
+    <a href="/">首页</a> /
+    <!--<a href="/book/">书单</a> /-->
+    <a href="/about/">关于</a>
+  </nav>
+</header>
+
+
+
+
+    <div class="content markdown">
+  <div class="title">
+    <h1>nginx+fastcgi下开发php扩展</h1>
+  </div>
+  <p>本文参考：<a href="http://www.laruence.com/2009/04/28/719.html">用C/C++扩展你的PHP</a><br>
+要开发扩展，首先需要有php的源码包，可以到php官网下载，我使用的版本是5.3.10，之后解压，进入ext目录里。<br>
+先建立一个函数定义到.def文件当中，比如<code>string self_concat(string str, int n)</code>，这样的话，会在稍后生成的扩展框架中自动添加函数原型和一个默认实现。当然，也可以不使用这个文件，手动去建立函数。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">vi myfunctions.def
+</code></pre></div>
+<p>之后是用php的ext_skel生成php扩展的框架：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">./ext_skel --extname=myfunctions --proto=../myfunctions.def
+</code></pre></div>
+<p>会在ext目录下生成一个名为<code>myfunctions</code>的目录，里面包含了php扩展框架基本文件。<br>
+之后，是修改<code>php_myfunctions.h</code>文件，在<code>PHP_FUNCTION(confirm_myfunctions_compiled);</code>之后添加函数定义 </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">PHP_FUNCTION(self_concat);
+</code></pre></div>
+<p>再修改<code>myfunctions.c</code>文件，在文件末尾添加函数实现
+比如</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">PHP_FUNCTION</span><span class="p">(</span><span class="n">self_concat</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">argc</span> <span class="o">=</span> <span class="n">ZEND_NUM_ARGS</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">str_len</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="n">n</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">result</span><span class="p">;</span> <span class="cm">/* Points to resulting string */</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span> <span class="cm">/* Points at the next location we want to copy to */</span>
+    <span class="kt">int</span> <span class="n">result_length</span><span class="p">;</span> <span class="cm">/* Length of resulting string */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">zend_parse_parameters</span><span class="p">(</span><span class="n">argc</span> <span class="n">TSRMLS_CC</span><span class="p">,</span> <span class="s">&quot;sl&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">str_len</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="n">FAILURE</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="cm">/* Calculate length of result */</span>
+    <span class="n">result_length</span> <span class="o">=</span> <span class="p">(</span><span class="n">str_len</span> <span class="o">*</span> <span class="n">n</span><span class="p">);</span>
+    <span class="cm">/* Allocate memory for result */</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">emalloc</span><span class="p">(</span><span class="n">result_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="cm">/* Point at the beginning of the result */</span>
+    <span class="n">ptr</span> <span class="o">=</span> <span class="n">result</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="cm">/* Copy str to the result */</span>
+        <span class="n">memcpy</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">str</span><span class="p">,</span> <span class="n">str_len</span><span class="p">);</span>
+        <span class="cm">/* Increment ptr to point at the next position we want to write to */</span>
+        <span class="n">ptr</span> <span class="o">+=</span> <span class="n">str_len</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/* Null terminate the result. Always null-terminate your strings</span>
+<span class="cm">    even if they are binary strings */</span>
+    <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+    <span class="cm">/* Return result to the scripting engine without duplicating it*/</span>
+    <span class="n">RETURN_STRINGL</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">result_length</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>之后，修改<code>config.m4</code>文件,去掉如下两行前的dnl</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">PHP_ARG_ENABLE(myfunctions, whether to enable myfunctions support,
+[  --enable-myfunctions           Enable myfunctions support])
+</code></pre></div>
+<p>之后去php源码跟目录，执行</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">./buildconf --force
+</code></pre></div>
+<p>如果提示autoconf版本不对的话，我原来的版本是2.69&hellip; 很郁闷，版本高了居然还不行。执行</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">apt-get install autoconf2.59
+export PHP_AUTOCONF=autoconf2.59
+./buildconf --force
+</code></pre></div>
+<p>切换到<code>ext/myfunctions</code>目录，执行：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">/usr/local/php/bin/phpize 
+./configure --with-php-config=/usr/local/php/bin/php-config 
+make
+make install
+</code></pre></div>
+<p>再就是修改<code>php.ini</code>文件，在[extension]部分加入</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">extension = &quot;myfunctions.so&quot;
+</code></pre></div>
+<p>之后重启php</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">/etc/init.d/php-fpm restart
+</code></pre></div>
+<p>如果修改了函数，或者新增加函数，需要重新编译php</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">make
+make install
+/etc/init.d/php-fpm restart
+</code></pre></div>
+<!-- 下面的代码可以使用键盘文章翻页,兼容Vim和游戏快键键 上一篇: h,←, a 下一篇: l,→, d -->
+<script type="text/javascript">
+$(function(){
+  $(document).keydown(function(e) {
+    var url = false;
+        if (e.which == 37 || e.which == 72|| e.which == 65) {
+            
+        url = '/php/2013/01/14/yaf-nginx.html';
+        
+        }
+        else if (e.which == 39 || e.which == 76|| e.which == 68) {
+            
+        url = '/c%E8%AF%AD%E8%A8%80/2013/02/25/gcc.html';
+        
+        }
+        if (url) {
+            window.location = url;
+        }
+  });
+})
+</script>
+
+
+
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                <div id="qrcode"></div>
+                <span style="text-align:center">手机扫一扫<br />分享&继续阅读</span>
+             </div>
+         </div>
+     </div>
+     <!--
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                 <img src="/img/qrcode.jpg" alt="">
+                 <p>微信扫一扫<br>关注我的公众号</p>
+             </div>
+         </div>
+     </div>
+     -->
+     <div class="back_top_outer">
+         <div class="back_top_inner">
+             <div id="back-top">
+                 <a href="#top"><span></span></a>
+             </div>
+         </div>
+     </div>
+     </div>
+    </div>
+    <footer>
+  <p>Copyright © 2016 seagg.</p>
+  <p>
+    <a href="https://github.com/seagg" class="  iconfont social github">&#xe69f;</a>
+    <i class="iconfont social twitter">&#xf000e;</i>
+    <a href="https://weibo.com/proudxu" class="  iconfont social weibo">&#xe69f;</a>
+  </p>
+</footer>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        $("#back-top").hide()
+
+        $(function(){
+            $(window).scroll(function(){
+                if($(this).scrollTop() > 100){
+                    $('#back-top').fadeIn();
+                } else {
+                    $('#back-top').fadeOut();
+                }
+            });
+            $('#back-top a').click(function(){
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 800);
+
+                return false;
+            });
+        });
+    });
+</script>
+
+
+  </body>
+</html>

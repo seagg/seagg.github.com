@@ -1,0 +1,961 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>心静茹水</title>
+    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</description>
+    <link>/</link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 30 Jul 2016 15:10:38 +0800</pubDate>
+    <lastBuildDate>Sat, 30 Jul 2016 15:10:38 +0800</lastBuildDate>
+    <generator>Jekyll v3.2.0</generator>
+    
+      <item>
+        <title>test_today</title>
+        <description>&lt;p&gt;test today&lt;/p&gt;
+</description>
+        <pubDate>Mon, 18 Apr 2016 10:19:00 +0800</pubDate>
+        <link>/2016/04/18/test-today.html</link>
+        <guid isPermaLink="true">/2016/04/18/test-today.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>mktime</title>
+        <description>&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-go&quot; data-lang=&quot;go&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;main&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;fmt&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;os&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;time&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;strconv&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;arg_num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arg_num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;-n&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Unix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;showMsg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arg_num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;-s&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;timestamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;strconv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Atoi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Unix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;timestamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;showMsg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arg_num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;-d&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;2006-01-02 15:04:05&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Unix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;showMsg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;showMsg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;showMsg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Bad args&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Usage:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;    -n: 返回当前时间的时间戳&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;    -s [+时间戳]: 将时间戳转化为具体时间&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;    -d [+具体时间]: 将具体时间转化为时间戳&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        <pubDate>Mon, 17 Nov 2014 11:07:00 +0800</pubDate>
+        <link>/go/2014/11/17/mktime.html</link>
+        <guid isPermaLink="true">/go/2014/11/17/mktime.html</guid>
+        
+        
+        <category>go</category>
+        
+      </item>
+    
+      <item>
+        <title>Linux crontab格式</title>
+        <description>&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;基本格式 :
+*　　*　　*　　*　　*　　command
+分　时　日　月　周　命令
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;第1列表示分钟1～59 每分钟用*或者 */1表示&lt;br&gt;
+第2列表示小时1～23（0表示0点）&lt;br&gt;
+第3列表示日期1～31&lt;br&gt;
+第4列表示月份1～12&lt;br&gt;
+第5列标识号星期0～6（0表示星期天）&lt;br&gt;
+第6列要运行的命令    &lt;/p&gt;
+
+&lt;p&gt;crontab文件的一些例子：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;30 21 * * * /usr/local/etc/rc.d/lighttpd restart    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;上面的例子表示每晚的21:30重启apache。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;45 4 1,10,22 * * /usr/local/etc/rc.d/lighttpd restart   
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;上面的例子表示每月1、10、22日的4 : 45重启apache。   &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;10 1 * * 6,0 /usr/local/etc/rc.d/lighttpd restart   
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;上面的例子表示每周六、周日的1 : 10重启apache。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;0,30 18-23 * * * /usr/local/etc/rc.d/lighttpd restart   
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;上面的例子表示在每天18 : 00至23 : 00之间每隔30分钟重启apache。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;0 23 * * 6 /usr/local/etc/rc.d/lighttpd restart     
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;上面的例子表示每星期六的11 : 00 pm重启apache。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;* */1 * * * /usr/local/etc/rc.d/lighttpd restart    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;每一小时重启apache&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;* 23-7/1 * * * /usr/local/etc/rc.d/lighttpd restart     
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;晚上11点到早上7点之间，每隔一小时重启apache&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;0 11 4 * mon-wed /usr/local/etc/rc.d/lighttpd restart   
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;每月的4号与每周一到周三的11点重启apache&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;0 4 1 jan * /usr/local/etc/rc.d/lighttpd restart    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;一月一号的4点重启apache&lt;/p&gt;
+</description>
+        <pubDate>Thu, 09 May 2013 11:30:00 +0800</pubDate>
+        <link>/linux/2013/05/09/crontab.html</link>
+        <guid isPermaLink="true">/linux/2013/05/09/crontab.html</guid>
+        
+        
+        <category>Linux</category>
+        
+      </item>
+    
+      <item>
+        <title>linux下vim命令详解</title>
+        <description>&lt;p&gt;高级一些的编辑器，都会包含宏功能，vim当然不能缺少了，在vim中使用宏是非常方便的：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;:qx&lt;/code&gt;     开始记录宏，并将结果存入寄存器x&lt;br&gt;
+&lt;code&gt;q&lt;/code&gt;     退出记录模式&lt;br&gt;
+&lt;code&gt;@x&lt;/code&gt;     播放记录在x寄存器中的宏命令&lt;br&gt;
+    稍微解释一下，当在normal模式下输入:qx后，你对文本的所有编辑动作将会被记录下来，再次输入q即退出了记录模式，
+    然后输入@x对刚才记录下来的命令进行重复，此命令后可跟数字，表示要重复多少次，比如@x20，可以重复20次。
+    这个在文本的批处理中是非常有用的。    &lt;/p&gt;
+
+&lt;h2 id=&quot;&gt;同时编辑多个文件&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;在vim众多的插件中，有一个叫minibuffer的插件，就是下面所说的标签页功能了，可以支持同时编辑多个文件。    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&quot;&gt;标签命令&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;:tabe fn&lt;/code&gt;     在一个新的标签页中编辑文件fn&lt;br&gt;
+&lt;code&gt;gt&lt;/code&gt;     切换到下一个标签页&lt;br&gt;
+&lt;code&gt;gT&lt;/code&gt;     切换到上一个标签页&lt;br&gt;
+&lt;code&gt;:tabr&lt;/code&gt;     切换到第一个标签页&lt;br&gt;
+&lt;code&gt;:tabl&lt;/code&gt;     切换到最后一个标签页&lt;br&gt;
+&lt;code&gt;:tabm [N]&lt;/code&gt;     把当前tab移动到第N个tab之后&lt;br&gt;
+    对，正如你所想象的那样，跟eclipse, ue等的标签页是一个意思！    &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;窗口命令&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;ctrl+w s&lt;/code&gt;     水平分割窗口&lt;br&gt;
+&lt;code&gt;ctrl+w w&lt;/code&gt;     切换窗口&lt;br&gt;
+&lt;code&gt;ctrl+w q&lt;/code&gt;     退出当前窗口(由于同时有多个文件，此命令不会影响其他窗口)&lt;br&gt;
+&lt;code&gt;ctrl+w v&lt;/code&gt;     垂直分割窗口    &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;其他&lt;/h3&gt;
+
+&lt;p&gt;vim在保存之前不会对文件做实际的修改，只是加载到缓冲区中，对文件的编辑其实是对缓冲区的编辑，直到:w时才会存入物理文件。&lt;br&gt;
+&lt;code&gt;:e file&lt;/code&gt;     把file加载到新的缓冲区中&lt;br&gt;
+&lt;code&gt;:bn&lt;/code&gt;     跳转到下一个缓冲区&lt;br&gt;
+&lt;code&gt;:bd&lt;/code&gt;     删除缓冲区(关闭文件)&lt;br&gt;
+&lt;code&gt;:sp fn&lt;/code&gt;     分割窗口，并将fn加载到新的窗口中    &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;退出编辑器&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;:w&lt;/code&gt;     将缓冲区写入文件，即保存修改&lt;br&gt;
+&lt;code&gt;:wq&lt;/code&gt;     保存修改并退出&lt;br&gt;
+&lt;code&gt;:x&lt;/code&gt;     保存修改并退出&lt;br&gt;
+&lt;code&gt;:q&lt;/code&gt;     退出，如果对缓冲区进行过修改，则会提示&lt;br&gt;
+&lt;code&gt;:q!&lt;/code&gt;     强制退出，放弃修改    &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;查找替换&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;/pattern&lt;/code&gt;     向后搜索字符串pattern&lt;br&gt;
+&lt;code&gt;?pattern&lt;/code&gt;     向前搜索字符串pattern&lt;br&gt;
+&lt;code&gt;n&lt;/code&gt;     下一个匹配(如果是/搜索，则是向下的下一个，?搜索则是向上的下一个)&lt;br&gt;
+&lt;code&gt;N&lt;/code&gt;     上一个匹配(同上)&lt;br&gt;
+&lt;code&gt;:%s/old/new/g&lt;/code&gt;     搜索整个文件，将所有的old替换为new&lt;br&gt;
+&lt;code&gt;:%s/old/new/gc&lt;/code&gt;     搜索整个文件，将所有的old替换为new，每次都要你确认是否替换   &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;复制粘贴&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;dd&lt;/code&gt;     删除光标所在行&lt;br&gt;
+&lt;code&gt;dw&lt;/code&gt;     删除一个字(word)&lt;br&gt;
+&lt;code&gt;x&lt;/code&gt;     删除当前字符&lt;br&gt;
+&lt;code&gt;X&lt;/code&gt;     删除前一个字符&lt;br&gt;
+&lt;code&gt;D&lt;/code&gt;     删除到行末&lt;br&gt;
+&lt;code&gt;dG&lt;/code&gt;    删除到文件末&lt;br&gt;
+&lt;code&gt;dgg&lt;/code&gt;    删除到文件首    &lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;yy&lt;/code&gt;     复制一行，此命令前可跟数字，标识复制多行，如6yy，表示从当前行开始复制6行&lt;br&gt;
+&lt;code&gt;yw&lt;/code&gt;     复制一个字&lt;br&gt;
+&lt;code&gt;y$&lt;/code&gt;     复制到行末&lt;br&gt;
+&lt;code&gt;p&lt;/code&gt;     粘贴粘贴板的内容到当前行的下面&lt;br&gt;
+&lt;code&gt;P&lt;/code&gt;     粘贴粘贴板的内容到当前行的上面&lt;br&gt;
+&lt;code&gt;]p&lt;/code&gt;     有缩进的粘贴，vim会自动调节代码的缩进&lt;br&gt;
+&lt;code&gt;&amp;quot;a&lt;/code&gt;     将内容放入/存入a寄存器，可以支持多粘贴板&lt;br&gt;
+    附：比如常用的一个寄存器就是系统寄存器，名称为+，所以从系统粘贴板粘贴到vim中的命令为&amp;quot;+p,
+    注意此处的+不表示操作符，二十一个寄存器。    &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;移动光标&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;在vim中移动光标跟其他的编辑器中有很大的区别，不过一旦学会了，就会飞速的在文本中移动了。    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;h,j,k,l&lt;/code&gt;     上，下，左，右&lt;br&gt;
+&lt;code&gt;ctrl-f&lt;/code&gt;     上翻一页&lt;br&gt;
+&lt;code&gt;ctrl-b&lt;/code&gt;     下翻一页&lt;br&gt;
+&lt;code&gt;%&lt;/code&gt;     跳到与当前括号匹配的括号处，如当前在{，则跳转到与之匹配的}处&lt;br&gt;
+&lt;code&gt;w&lt;/code&gt;     跳到下一个字首，按标点或单词分割&lt;br&gt;
+&lt;code&gt;W&lt;/code&gt;     跳到下一个字首，长跳，如end-of-line被认为是一个字&lt;br&gt;
+&lt;code&gt;e&lt;/code&gt;     跳到下一个字尾&lt;br&gt;
+&lt;code&gt;E&lt;/code&gt;     跳到下一个字尾，长跳&lt;br&gt;
+&lt;code&gt;b&lt;/code&gt;     跳到上一个字&lt;br&gt;
+&lt;code&gt;B&lt;/code&gt;     跳到上一个字，长跳&lt;br&gt;
+&lt;code&gt;0&lt;/code&gt;     跳至行首，不管有无缩进，就是跳到第0个字符&lt;br&gt;
+&lt;code&gt;^&lt;/code&gt;     跳至行首的第一个字符&lt;br&gt;
+&lt;code&gt;$&lt;/code&gt;     跳至行尾&lt;br&gt;
+&lt;code&gt;gg&lt;/code&gt;     跳至文件的第一行&lt;br&gt;
+&lt;code&gt;gd&lt;/code&gt;     跳至当前光标所在的变量的声明处&lt;br&gt;
+&lt;code&gt;[N]G&lt;/code&gt;     跳到第N行，如0G，就等价于gg，100G就是第100行&lt;br&gt;
+&lt;code&gt;fx&lt;/code&gt;     在当前行中找x字符，找到了就跳转至&lt;br&gt;
+&lt;code&gt;;&lt;/code&gt;     重复上一个f命令，而不用重复的输入fx&lt;br&gt;
+&lt;code&gt;tx&lt;/code&gt;     与fx类似，但是只是跳转到x的前一个字符处&lt;br&gt;
+&lt;code&gt;Fx&lt;/code&gt;     跟fx的方向相反&lt;br&gt;
+&lt;code&gt;),(&lt;/code&gt;     跳转到上/下一个语句&lt;br&gt;
+&lt;code&gt;*&lt;/code&gt;     查找光标所在处的单词，向下查找&lt;br&gt;
+&lt;code&gt;#&lt;/code&gt;     查找光标所在处的单词，向上查找&lt;br&gt;
+`&lt;code&gt;.&lt;/code&gt;     跳转至上次编辑位置    &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;在屏幕上移动&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;H&lt;/code&gt;     移动光标到当前屏幕上最上边的一行&lt;br&gt;
+&lt;code&gt;M&lt;/code&gt;     移动光标到当前屏幕上中间的一行&lt;br&gt;
+&lt;code&gt;L&lt;/code&gt;     移动光标到当前屏幕上最下边的一行    &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;书签&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;ma&lt;/code&gt;     把当前位置存成标签a&lt;br&gt;
+`&lt;code&gt;a&lt;/code&gt;     跳转到标签a处    &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;编辑&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;r&lt;/code&gt;     替换一个字符&lt;br&gt;
+&lt;code&gt;J&lt;/code&gt;     将下一行和当前行连接为一行&lt;br&gt;
+&lt;code&gt;cc&lt;/code&gt;     删除当前行并进入编辑模式&lt;br&gt;
+&lt;code&gt;cw&lt;/code&gt;     删除当前字，并进入编辑模式&lt;br&gt;
+&lt;code&gt;c$&lt;/code&gt;     擦除从当前位置至行末的内容，并进入编辑模式&lt;br&gt;
+&lt;code&gt;s&lt;/code&gt;     删除当前字符并进入编辑模式&lt;br&gt;
+&lt;code&gt;S&lt;/code&gt;     删除光标所在行并进入编辑模式&lt;br&gt;
+&lt;code&gt;xp&lt;/code&gt;     交换当前字符和下一个字符&lt;br&gt;
+&lt;code&gt;u&lt;/code&gt;     撤销&lt;br&gt;
+&lt;code&gt;ctrl+r&lt;/code&gt;     重做&lt;br&gt;
+&lt;code&gt;.&lt;/code&gt;     重复上一个编辑命令&lt;br&gt;
+&lt;code&gt;~&lt;/code&gt;     切换大小写，当前字符&lt;br&gt;
+&lt;code&gt;g~iw&lt;/code&gt;     切换当前字的大小写&lt;br&gt;
+&lt;code&gt;gUiw&lt;/code&gt;     将当前字变成大写&lt;br&gt;
+&lt;code&gt;guiw&lt;/code&gt;     将当前字变成小写&lt;br&gt;
+&lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;     将当前行右移一个单位&lt;br&gt;
+&lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt;     将当前行左移一个单位(一个tab符)&lt;br&gt;
+&lt;code&gt;==&lt;/code&gt;     自动缩进当前行    &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;插入模式&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;i&lt;/code&gt;     从当前光标处进入插入模式&lt;br&gt;
+&lt;code&gt;I&lt;/code&gt;     进入插入模式，并置光标于行首&lt;br&gt;
+&lt;code&gt;a&lt;/code&gt;     追加模式，置光标于当前光标之后&lt;br&gt;
+&lt;code&gt;A&lt;/code&gt;     追加模式，置光标于行末&lt;br&gt;
+&lt;code&gt;o&lt;/code&gt;     在当前行之下新加一行，并进入插入模式&lt;br&gt;
+&lt;code&gt;O&lt;/code&gt;     在当前行之上新加一行，并进入插入模式&lt;br&gt;
+&lt;code&gt;Esc&lt;/code&gt;     退出插入模式   &lt;/p&gt;
+
+&lt;h2 id=&quot;&gt;可视模式&lt;/h2&gt;
+
+&lt;h3 id=&quot;&gt;标记文本&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;v&lt;/code&gt;     进入可视模式，单字符模式&lt;br&gt;
+&lt;code&gt;V&lt;/code&gt;     进入可视模式，行模式&lt;br&gt;
+&lt;code&gt;ctrl+v&lt;/code&gt;     进入可视模式，列模式，类似于UE的列模式&lt;br&gt;
+&lt;code&gt;o&lt;/code&gt;     跳转光标到选中块的另一个端点&lt;br&gt;
+&lt;code&gt;U&lt;/code&gt;     将选中块中的内容转成大写&lt;br&gt;
+&lt;code&gt;O&lt;/code&gt;     跳转光标到块的另一个端点&lt;br&gt;
+&lt;code&gt;aw&lt;/code&gt;     选中一个字&lt;br&gt;
+&lt;code&gt;ab&lt;/code&gt;     选中括号中的所有内容，包括括号本身&lt;br&gt;
+&lt;code&gt;aB&lt;/code&gt;     选中{}括号中的所有内容&lt;br&gt;
+&lt;code&gt;ib&lt;/code&gt;     选中括号中的内容，不含括号&lt;br&gt;
+&lt;code&gt;iB&lt;/code&gt;     选中{}中的内容，不含{}    &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;对标记进行动作&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;gt;&lt;/code&gt;     块右移&lt;br&gt;
+&lt;code&gt;&amp;lt;&lt;/code&gt;     块左移&lt;br&gt;
+&lt;code&gt;y&lt;/code&gt;     复制块&lt;br&gt;
+&lt;code&gt;d&lt;/code&gt;     删除块&lt;br&gt;
+&lt;code&gt;~&lt;/code&gt;     切换块中内容的大小写    &lt;/p&gt;
+</description>
+        <pubDate>Fri, 26 Apr 2013 09:50:00 +0800</pubDate>
+        <link>/linux/2013/04/26/vim.html</link>
+        <guid isPermaLink="true">/linux/2013/04/26/vim.html</guid>
+        
+        <category>vim</category>
+        
+        
+        <category>Linux</category>
+        
+      </item>
+    
+      <item>
+        <title>Linux终端快捷键</title>
+        <description>&lt;h3 id=&quot;&gt;常用：&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Ctrl+a&lt;/code&gt;:开始位置&lt;br&gt;
+&lt;code&gt;Ctrl+e&lt;/code&gt;:最后位置&lt;br&gt;
+&lt;code&gt;Ctrl+k&lt;/code&gt;:删除此处至末尾所有内容&lt;br&gt;
+&lt;code&gt;Ctrl+u&lt;/code&gt;:删除此处至开始所有内容&lt;br&gt;
+&lt;code&gt;Ctrl-L&lt;/code&gt;:刷新屏幕&lt;br&gt;
+&lt;code&gt;Ctrl-C&lt;/code&gt;:杀死当前任务    &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;终端:&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Shift+Ctrl+T&lt;/code&gt;:新建标签页&lt;br&gt;
+&lt;code&gt;Shift+Ctrl+W&lt;/code&gt;:关闭标签页&lt;br&gt;
+&lt;code&gt;Ctrl+PageUp&lt;/code&gt;:前一标签页&lt;br&gt;
+&lt;code&gt;Ctrl+PageDown&lt;/code&gt;:后一标签页&lt;br&gt;
+&lt;code&gt;Shift+Ctrl+PageUp&lt;/code&gt;:标签页左移&lt;br&gt;
+&lt;code&gt;Shift+Ctrl+PageDown&lt;/code&gt;:标签页右移&lt;br&gt;
+&lt;code&gt;Alt+1&lt;/code&gt;:切换到标签页1&lt;br&gt;
+&lt;code&gt;Alt+2&lt;/code&gt;:切换到标签页2&lt;br&gt;
+&lt;code&gt;Alt+3&lt;/code&gt;:切换到标签页3&lt;br&gt;
+&lt;code&gt;Shift+Ctrl+N&lt;/code&gt;:新建窗口&lt;br&gt;
+&lt;code&gt;Shift+Ctrl+Q&lt;/code&gt;:关闭终端    &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;终端中的复制／粘贴:&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Shift+Ctrl+C&lt;/code&gt;:复制&lt;br&gt;
+&lt;code&gt;Shift+Ctrl+V&lt;/code&gt;:粘贴    &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;终端改变大小：&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;F11&lt;/code&gt;：全屏&lt;br&gt;
+&lt;code&gt;Ctrl+plus&lt;/code&gt;:放大&lt;br&gt;
+&lt;code&gt;Ctrl+minus&lt;/code&gt;:减小&lt;br&gt;
+&lt;code&gt;Ctrl+0&lt;/code&gt;:原始大小    &lt;/p&gt;
+</description>
+        <pubDate>Tue, 16 Apr 2013 17:28:00 +0800</pubDate>
+        <link>/linux/2013/04/16/linux-cut.html</link>
+        <guid isPermaLink="true">/linux/2013/04/16/linux-cut.html</guid>
+        
+        
+        <category>Linux</category>
+        
+      </item>
+    
+      <item>
+        <title>使用github开发项目</title>
+        <description>&lt;h3 id=&quot;github&quot;&gt;上传本地项目到github&lt;/h3&gt;
+
+&lt;p&gt;1、进入代码所在目录并在github下创建目录&lt;br&gt;
+如&lt;code&gt;myProject&lt;/code&gt;&lt;br&gt;
+2、初始化&lt;br&gt;
+ &lt;code&gt;git init&lt;/code&gt;&lt;br&gt;
+3、将本目录下的文件添加&lt;br&gt;
+ &lt;code&gt;git add .&lt;/code&gt;&lt;br&gt;
+4、提交并增加注释&lt;br&gt;
+ &lt;code&gt;git commit -am &amp;quot;first commit&amp;quot;&lt;/code&gt;&lt;br&gt;
+5、提交到远程服务器上的指定目录&lt;code&gt;seagg&lt;/code&gt;用户下的&lt;code&gt;myProject&lt;/code&gt;目录&lt;br&gt;
+&lt;code&gt;git remote add origin git@github.com:seagg/myProject.git&lt;/code&gt;&lt;br&gt;
+6、将其push到指定分支，其中master是远程分支，origin是前面创建的本地名称&lt;br&gt;
+ &lt;code&gt;git push -u origin master&lt;/code&gt;    &lt;/p&gt;
+
+&lt;p&gt;下载代码&lt;br&gt;
+&lt;code&gt;git clone git@github.com:seagg/myProject.git&lt;/code&gt;    &lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;在别人项目基础上开发&lt;/h3&gt;
+
+&lt;p&gt;1、进入别人的项目主页，点fork链接&lt;br&gt;
+2、之后就可以clone到自己的电脑里进行开发&lt;br&gt;
+3、提交时执行如下命令即可：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git add .
+git commit -am &amp;quot;first commit&amp;quot;
+git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        <pubDate>Fri, 29 Mar 2013 10:45:00 +0800</pubDate>
+        <link>/2013/03/29/github-develop.html</link>
+        <guid isPermaLink="true">/2013/03/29/github-develop.html</guid>
+        
+        <category>js</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>RubyWarrior 一个人工智能小游戏</title>
+        <description>&lt;p&gt;项目主页：&lt;a href=&quot;http://github.com/ryanb/ruby-warrior/tree/master&quot;&gt;http://github.com/ryanb/ruby-warrior/tree/master&lt;/a&gt;&lt;br&gt;
+这个游戏以一种有趣交互的方式来教你使用Ruby语言和人工智能。&lt;br&gt;
+在游戏中你扮演一个勇士去攀登高塔得到顶层的珍贵的红宝石。&lt;br&gt;
+在塔中每一层也就是每一关，你需要编写一个Ruby脚本来指导主角如何到达楼梯处然后进入下一关。&lt;br&gt;
+在每一关你必须给足主角战斗的力量，你得考虑主角还有多少生命值，什么时候得休息恢复一下生命值等等。注意：每一个回合里，主角只能有一步操作，比如前进一次、休息加血、进攻、解救人质等。&lt;br&gt;
+具体的安装，运行和规则请参考github上的项目主页。这里直接贴出beginner级别的第七关代码（前几关忘记保存了&amp;hellip;）。&lt;br&gt;
+这个游戏中每一关中的每一步都得小心翼翼，很有可能战斗过程中被干掉，所以每一步都得考虑好。比如这一关，地图是这样的：    &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt; ------
+|&amp;gt;a S @|
+ ------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;图中的&lt;code&gt;@&lt;/code&gt;表示自己，&lt;code&gt;S&lt;/code&gt;表示怪兽，&lt;code&gt;a&lt;/code&gt;表示弓箭手，而目标就是干掉这两个敌人然后活着走到&lt;code&gt;&amp;gt;&lt;/code&gt;处。&lt;br&gt;
+每一关，人物默认都是向右走的，这里走一步发现撞墙了，所以要转向。走两步发现遇到怪兽了，要用&lt;code&gt;warrior.attack!&lt;/code&gt;进行攻击。&lt;br&gt;
+为了防止失血过多，当发现这一轮没有受到攻击且剩余血&amp;lt;20的时候，可以通过休息来补充血液。&lt;br&gt;
+弓箭手与怪兽的一个不同就是弓箭手可以远程攻击，有可能你向前走一步，进入弓箭手的射程，但你还没走到他面前，这一过程一直要减血。所以为了防止到弓箭手面前的时候剩余血液不足以干掉他的情况发生，需要有个判断，就是当这一轮受到攻击，且血液不足以走到弓箭手面前将他干掉，需要后退几步，退出他的射程，然后休息补血，血液充足了再向前走。    &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;n&quot;&gt;Level&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;You&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;feel&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wall&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;front&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;you&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;an&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;opening&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;behind&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;you&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;nl&quot;&gt;Tip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;You&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;are&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;effective&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attacking&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;backward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Use&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;feel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wall&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pivot&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;around&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+
+  &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stairs&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Archer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&quot;n&quot;&gt;Warrior&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;Abilities&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pivot&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;Rotate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backward&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rescue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Rescue&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;captive&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;his&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chains&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;earning&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;points&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direction&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Returns&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;an&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;representing&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;your&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Gain&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;back&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;but&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nothing&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;more&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;feel&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Returns&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Space&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direction&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Attacks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direction&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;walk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Move&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direction&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+
+
+&lt;span class=&quot;n&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;you&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;re&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;done&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;editing&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;player&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rubywarrior&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;again&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Player&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;play_turn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;feel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wall?&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pivot!&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+       &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;feel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enemy?&lt;/span&gt;
+           &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attack!&lt;/span&gt;
+       &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+           &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@health&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@health&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+               &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rest!&lt;/span&gt;
+           &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+               &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@health&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                   &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;walk!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:backward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+               &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+                   &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;walk!&lt;/span&gt;
+               &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+           &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@health&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;warrior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;err&quot;&gt;每轮战况&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pivots&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;backward&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;walks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attacks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attacks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attacks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attacks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attacks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attacks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attacks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attacks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attacks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Thick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sludge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dies&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;earns&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;points&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;  &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receives&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;up&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Archer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shoots&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;  &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;walks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;backward&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Archer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shoots&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nothing&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receives&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;up&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receives&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;up&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receives&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;up&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receives&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;up&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receives&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;up&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receives&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;up&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receives&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;up&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;walks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;  &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;walks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Archer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shoots&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;walks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Archer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shoots&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attacks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Archer&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Archer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Archer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shoots&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;21&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attacks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hits&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Archer&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Archer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;takes&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;damage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;power&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Archer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dies&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;earns&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;points&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receives&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;up&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;23&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receives&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;up&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receives&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;up&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receives&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;up&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;26&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receives&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;up&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;health&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;walks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;28&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;------&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;xuhai&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;walks&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Success&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;You&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;found&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stairs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Level&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;Score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;31&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Time&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;Bonus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Clear&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;Bonus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Total&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;Score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;364&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;40&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;404&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;很不错的游戏，可惜没有Java或者C版的，有空考虑写一个。当然，要是能写成对战类的更好了。&lt;br&gt;
+今天在github上溜达的时候发现有个哥们的&lt;a href=&quot;https://github.com/peterwongpp/PeterWarrior&quot;&gt;第六关代码&lt;/a&gt;，比较牛，不想我傻呵呵的一直用if分支。有空学习学习！&lt;/p&gt;
+</description>
+        <pubDate>Wed, 27 Feb 2013 18:24:00 +0800</pubDate>
+        <link>/ruby/2013/02/27/rubywarrior.html</link>
+        <guid isPermaLink="true">/ruby/2013/02/27/rubywarrior.html</guid>
+        
+        <category>游戏</category>
+        
+        
+        <category>Ruby</category>
+        
+      </item>
+    
+      <item>
+        <title>[转]用 GDB 调试程序</title>
+        <description>&lt;p&gt;转载自[&lt;a href=&quot;http://blog.csdn.net/niuniuchou/article/details/5385890&quot;&gt;http://blog.csdn.net/niuniuchou/article/details/5385890&lt;/a&gt;]&lt;br&gt;
+GDB 概述&lt;/p&gt;
+
+&lt;p&gt;GDB 是 GNU 开源组织发布的一个强大的 UNIX 下的程序调试工具。或许，各位比较喜欢那种图形界面方式的，像 VC 、 BCB 等 IDE 的调试，但如果你是在 UNIX 平台下做软件，你会发现 GDB 这个调试工具有比 VC 、 BCB 的图形化调试器更强大的功能。所谓 “ 寸有所长，尺有所短 ” 就是这个道理。&lt;/p&gt;
+
+&lt;p&gt;一般来说， GDB 主要帮忙你完成下面四个方面的功能：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;1 、启动你的程序，可以按照你的自定义的要求随心所欲的运行程序。
+2 、可让被调试的程序在你所指定的调置的断点处停住。（断点可以是条件表达式）
+3 、当程序被停住时，可以检查此时你的程序中所发生的事。
+4 、动态的改变你程序的执行环境。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;从上面看来， GDB 和一般的调试工具没有什么两样，基本上也是完成这些功能，不过在细节上，你会发现 GDB 这个调试工具的强大，大家可能比较习惯了图形化的调试工具，但有时候，命令行的调试工具却有着图形化工具所不能完成的功能。让我们一一看来。&lt;/p&gt;
+
+&lt;p&gt;一个调试示例&lt;br&gt;
+源程序： &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;stdio.h&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;result[1-100] = %ld &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;result[1-250] = %d &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;250&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;编译生成执行文件：（ Linux 下）
+    hchen/test&amp;gt; g++ -g -Wall tst.c -o tst&lt;/p&gt;
+
+&lt;p&gt;使用 GDB 调试：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;n&quot;&gt;hchen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tst&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;----------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;启动&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GDB&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;GNU&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;5.1.1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Copyright&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2002&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Free&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Software&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foundation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;GDB&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;free&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;software&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;covered&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GNU&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;General&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;License&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;you&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;are&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;welcome&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;change&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;distribute&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;copies&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;under&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;certain&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conditions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Type&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;show copying&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;see&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conditions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;There&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;absolutely&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;no&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;warranty&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GDB&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Type&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;show warranty&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;details&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;This&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GDB&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;was&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configured&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;i386-suse-linux&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;&amp;lt;--------------------&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;命令相当于&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;，从第一行开始例出原码。&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;        &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;                &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;                &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;                &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;                        &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;               &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;&amp;lt;--------------------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;直接回车表示，重复上一次命令&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;               &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt;               &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;               &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt;               &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;                       &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;&amp;lt;--------------------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;设置断点，在源程序第&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;行处。&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Breakpoint&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x8048496&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;16.&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;--------------------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;设置断点，在函数&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;入口处。&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Breakpoint&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x8048456&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;5.&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;info&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;--------------------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;查看断点信息。&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Num&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Type&lt;/span&gt;           &lt;span class=&quot;n&quot;&gt;Disp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Enb&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Address&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;What&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;breakpoint&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;keep&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;   &lt;span class=&quot;mh&quot;&gt;0x08048496&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;breakpoint&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;keep&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;   &lt;span class=&quot;mh&quot;&gt;0x08048456&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;           &lt;span class=&quot;o&quot;&gt;&amp;lt;---------------------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;运行程序，&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;命令简写&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Starting&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;program&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hchen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tst&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;Breakpoint&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;&amp;lt;----------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;在断点处停住。&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt;               &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;&amp;lt;---------------------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;单条语句执行，&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;命令简写。&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;               &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;                       &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;               &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;                       &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;&amp;lt;---------------------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;继续运行程序，&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;命令简写。&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Continuing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5050&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;&amp;lt;----------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;程序输出。&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;Breakpoint&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;250&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;                &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;                &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;&amp;lt;---------------------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;打印变量&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;的值，&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;命令简写。&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;134513808&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;                        &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;                &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;                        &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;                &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bt&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;&amp;lt;---------------------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;查看函数堆栈。&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#0 func (n=250) at tst.c:5&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#1 0x080484e4 in main () at tst.c:24&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#2 0x400409ed in __libc_start_main () from /lib/libc.so.6&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;finish&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;&amp;lt;---------------------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;退出函数。&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Run&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;till&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;250&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;mh&quot;&gt;0x080484e4&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;              &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;result[1-250] = %d /n&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;250&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Value&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;returned&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;31375&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;&amp;lt;---------------------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;继续运行。&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Continuing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;250&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;31375&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;&amp;lt;----------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;程序输出。&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;Program&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exited&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;027.&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;--------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;程序退出，调试结束。&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;q&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;&amp;lt;---------------------&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;退出&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gdb&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;。&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hchen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        <pubDate>Mon, 25 Feb 2013 11:42:00 +0800</pubDate>
+        <link>/c%E8%AF%AD%E8%A8%80/2013/02/25/gcc.html</link>
+        <guid isPermaLink="true">/c%E8%AF%AD%E8%A8%80/2013/02/25/gcc.html</guid>
+        
+        <category>gcc</category>
+        
+        <category>gdb</category>
+        
+        
+        <category>C语言</category>
+        
+      </item>
+    
+      <item>
+        <title>nginx+fastcgi下开发php扩展</title>
+        <description>&lt;p&gt;本文参考：&lt;a href=&quot;http://www.laruence.com/2009/04/28/719.html&quot;&gt;用C/C++扩展你的PHP&lt;/a&gt;&lt;br&gt;
+要开发扩展，首先需要有php的源码包，可以到php官网下载，我使用的版本是5.3.10，之后解压，进入ext目录里。&lt;br&gt;
+先建立一个函数定义到.def文件当中，比如&lt;code&gt;string self_concat(string str, int n)&lt;/code&gt;，这样的话，会在稍后生成的扩展框架中自动添加函数原型和一个默认实现。当然，也可以不使用这个文件，手动去建立函数。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;vi myfunctions.def
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;之后是用php的ext_skel生成php扩展的框架：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;./ext_skel --extname=myfunctions --proto=../myfunctions.def
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;会在ext目录下生成一个名为&lt;code&gt;myfunctions&lt;/code&gt;的目录，里面包含了php扩展框架基本文件。&lt;br&gt;
+之后，是修改&lt;code&gt;php_myfunctions.h&lt;/code&gt;文件，在&lt;code&gt;PHP_FUNCTION(confirm_myfunctions_compiled);&lt;/code&gt;之后添加函数定义 &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;PHP_FUNCTION(self_concat);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;再修改&lt;code&gt;myfunctions.c&lt;/code&gt;文件，在文件末尾添加函数实现
+比如&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;n&quot;&gt;PHP_FUNCTION&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self_concat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZEND_NUM_ARGS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str_len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* Points to resulting string */&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ptr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* Points at the next location we want to copy to */&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result_length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* Length of resulting string */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zend_parse_parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TSRMLS_CC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;sl&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str_len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FAILURE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/* Calculate length of result */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;result_length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str_len&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/* Allocate memory for result */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;emalloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result_length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/* Point at the beginning of the result */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ptr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;cm&quot;&gt;/* Copy str to the result */&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;memcpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ptr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str_len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;cm&quot;&gt;/* Increment ptr to point at the next position we want to write to */&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ptr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str_len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/* Null terminate the result. Always null-terminate your strings&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;    even if they are binary strings */&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ptr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&amp;#39;\0&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/* Return result to the scripting engine without duplicating it*/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;RETURN_STRINGL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result_length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;之后，修改&lt;code&gt;config.m4&lt;/code&gt;文件,去掉如下两行前的dnl&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;PHP_ARG_ENABLE(myfunctions, whether to enable myfunctions support,
+[  --enable-myfunctions           Enable myfunctions support])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;之后去php源码跟目录，执行&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;./buildconf --force
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;如果提示autoconf版本不对的话，我原来的版本是2.69&amp;hellip; 很郁闷，版本高了居然还不行。执行&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;apt-get install autoconf2.59
+export PHP_AUTOCONF=autoconf2.59
+./buildconf --force
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;切换到&lt;code&gt;ext/myfunctions&lt;/code&gt;目录，执行：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;/usr/local/php/bin/phpize 
+./configure --with-php-config=/usr/local/php/bin/php-config 
+make
+make install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;再就是修改&lt;code&gt;php.ini&lt;/code&gt;文件，在[extension]部分加入&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;extension = &amp;quot;myfunctions.so&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;之后重启php&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;/etc/init.d/php-fpm restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;如果修改了函数，或者新增加函数，需要重新编译php&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;make
+make install
+/etc/init.d/php-fpm restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        <pubDate>Tue, 22 Jan 2013 15:26:00 +0800</pubDate>
+        <link>/php/c%E8%AF%AD%E8%A8%80/2013/01/22/php-extension.html</link>
+        <guid isPermaLink="true">/php/c%E8%AF%AD%E8%A8%80/2013/01/22/php-extension.html</guid>
+        
+        <category>extension</category>
+        
+        
+        <category>PHP</category>
+        
+        <category>C语言</category>
+        
+      </item>
+    
+      <item>
+        <title>Yaf框架在nginx虚拟主机中的配置</title>
+        <description>&lt;p&gt;主要是配置一下rewrite规则，重写URL。另外，&lt;code&gt;fastcgi_param PATH_INFO&lt;/code&gt;这个不能有，要不然rewrite不能生效&amp;hellip;    &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt;       &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;demo.yafphp.com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;index.html&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;index.htm&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;index.php&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;root&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;/home/wwwroot/demo.yafphp.com/public&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;error_log&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/data/order8.log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;\.php$&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;kn&quot;&gt;fastcgi_pass&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;unix:/tmp/php-cgi.sock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;kn&quot;&gt;fastcgi_index&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;index.php&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;kn&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;fcgi.conf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+                &lt;span class=&quot;kn&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;fastcgi_params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;kn&quot;&gt;fastcgi_param&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;SCRIPT_FILENAME&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$document_root$fastcgi_script_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+              &lt;span class=&quot;c1&quot;&gt;# fastcgi_param PATH_INFO $fastcgi_script_name; # Don&amp;#39;t include this line. &lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+       &lt;span class=&quot;kn&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(!-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$request_filename&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+               &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^/(.*\.(js|ico|gif|jpg|png|css|bmp|html|xls)&lt;/span&gt;$&lt;span class=&quot;s&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/public/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;last&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+               &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^/(.*)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/index.php?&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;last&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+       &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+
+        &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/status&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;kn&quot;&gt;stub_status&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;kn&quot;&gt;access_log&lt;/span&gt;   &lt;span class=&quot;no&quot;&gt;off&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;.*\.(gif|jpg|jpeg|png|bmp|swf)$&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;kn&quot;&gt;expires&lt;/span&gt;      &lt;span class=&quot;s&quot;&gt;30d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;.*\.(js|css)?$&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;kn&quot;&gt;expires&lt;/span&gt;      &lt;span class=&quot;s&quot;&gt;12h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        <pubDate>Mon, 14 Jan 2013 20:19:00 +0800</pubDate>
+        <link>/php/2013/01/14/yaf-nginx.html</link>
+        <guid isPermaLink="true">/php/2013/01/14/yaf-nginx.html</guid>
+        
+        <category>nginx</category>
+        
+        <category>yaf</category>
+        
+        
+        <category>PHP</category>
+        
+      </item>
+    
+  </channel>
+</rss>

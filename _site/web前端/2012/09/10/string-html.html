@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>textarea的内容中含有html的情况</title>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/iconfont.css">
+  <link rel="stylesheet" href="/css/highlight.css" />
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.qrcode.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      $("#qrcode").qrcode({ 
+        render: "canvas", //table方式 
+        width: 100, //宽度 
+        height:100, //高度 
+        text: window.location.href, //任意内容 
+      }); 
+    })
+  </script>
+  <body>
+    <div class="container">
+    <header>
+  <h1>海哥</h1>
+  <nav>
+    <a href="/">首页</a> /
+    <!--<a href="/book/">书单</a> /-->
+    <a href="/about/">关于</a>
+  </nav>
+</header>
+
+
+
+
+    <div class="content markdown">
+  <div class="title">
+    <h1>textarea的内容中含有html的情况</h1>
+  </div>
+  <p>还有一周就可以回学校然后回家了，上周五很顺利的跟老板和经理请了两周假，所以这周得认真工作了。<br>
+接着测试我写的插件，果然发现了问题。。。<br>
+大概是这样的，这个插件是JIRA系统间传递issues，每个issue有很多的field，老板为了保证安全，要求在传输的时候检测每个域，看有没有指定的敏感关键字，如果有要求用户传输issue中进行修改，今天测试的时候，发现有个description域传输有问题，即如果description中含有关键字，要求用户在textarea中修改，程序再读取textarea中的内容重新存入issue中供传输。<br>
+可是今天传输过程中，发现有个issue的description居然有很多html标签，显示到textarea中倒是没问题，可是读取的时候就郁闷了：<br>
+<pre><code>本来应该是这样：<br>
+<textarea ...>string</textarea>
+可是这个issue的description是这样的。。。
+<textarea cols="60" rows=“2”> &lt;feature name= &quot;http://... required= true &quot; /&gt;... </textarea>
+</code></pre>
+这样的话用textarea的value属性读取的时候就会遇到问题，双引号，大于小于号都会对value产生影响，导致传过去的有错误。<br>
+我记得好像有个类似的函数来用字符串传输html的，但函数名称想不起来了，只能用java的字符串替换函数将&quot;替换为<code>&amp;quot;</code>，将&lt;&gt;分别替换为<code>&amp;lt;</code>，<code>&amp;gt;</code><br>
+然后就传输正确了。好惊险啊，这要是突然出了什么大bug，我就走不了了。。。<br>
+附上<a href="http://114.xixik.com/character/">转义字符表</a>  </p>
+
+<!-- 下面的代码可以使用键盘文章翻页,兼容Vim和游戏快键键 上一篇: h,←, a 下一篇: l,→, d -->
+<script type="text/javascript">
+$(function(){
+  $(document).keydown(function(e) {
+    var url = false;
+        if (e.which == 37 || e.which == 72|| e.which == 65) {
+            
+        url = '/web%E5%89%8D%E7%AB%AF/2012/09/08/css-hack.html';
+        
+        }
+        else if (e.which == 39 || e.which == 76|| e.which == 68) {
+            
+        url = '/%E7%AE%97%E6%B3%95/2012/09/11/binary-tree-sort.html';
+        
+        }
+        if (url) {
+            window.location = url;
+        }
+  });
+})
+</script>
+
+
+
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                <div id="qrcode"></div>
+                <span style="text-align:center">手机扫一扫<br />分享&继续阅读</span>
+             </div>
+         </div>
+     </div>
+     <!--
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                 <img src="/img/qrcode.jpg" alt="">
+                 <p>微信扫一扫<br>关注我的公众号</p>
+             </div>
+         </div>
+     </div>
+     -->
+     <div class="back_top_outer">
+         <div class="back_top_inner">
+             <div id="back-top">
+                 <a href="#top"><span></span></a>
+             </div>
+         </div>
+     </div>
+     </div>
+    </div>
+    <footer>
+  <p>Copyright © 2016 seagg.</p>
+  <p>
+    <a href="https://github.com/seagg" class="  iconfont social github">&#xe69f;</a>
+    <i class="iconfont social twitter">&#xf000e;</i>
+    <a href="https://weibo.com/proudxu" class="  iconfont social weibo">&#xe69f;</a>
+  </p>
+</footer>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        $("#back-top").hide()
+
+        $(function(){
+            $(window).scroll(function(){
+                if($(this).scrollTop() > 100){
+                    $('#back-top').fadeIn();
+                } else {
+                    $('#back-top').fadeOut();
+                }
+            });
+            $('#back-top a').click(function(){
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 800);
+
+                return false;
+            });
+        });
+    });
+</script>
+
+
+  </body>
+</html>

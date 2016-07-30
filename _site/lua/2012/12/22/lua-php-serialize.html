@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lua中实现php序列化及反序列化函数</title>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/iconfont.css">
+  <link rel="stylesheet" href="/css/highlight.css" />
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.qrcode.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      $("#qrcode").qrcode({ 
+        render: "canvas", //table方式 
+        width: 100, //宽度 
+        height:100, //高度 
+        text: window.location.href, //任意内容 
+      }); 
+    })
+  </script>
+  <body>
+    <div class="container">
+    <header>
+  <h1>海哥</h1>
+  <nav>
+    <a href="/">首页</a> /
+    <!--<a href="/book/">书单</a> /-->
+    <a href="/about/">关于</a>
+  </nav>
+</header>
+
+
+
+
+    <div class="content markdown">
+  <div class="title">
+    <h1>Lua中实现php序列化及反序列化函数</h1>
+  </div>
+  <p>好高兴啊，昨天翻遍了lua自带的库，又在网上找了一天如何在lua中序列化以及反序列化，但结果都不是我要的，因为我要在lua中反序列化由php序列化函数序列化的一个字符串，比如这样的：</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">a:9:{s:10:&quot;comment_id&quot;;s:1:&quot;1&quot;;s:7:&quot;user_id&quot;;s:7:&quot;7082457&quot;;s:9:&quot;user_name&quot;;s:9:&quot;putulbaby&quot;;    </span>
+<span class="x">s:11:&quot;user_avatar&quot;;s:68:&quot;http://avatar.bbs.miui.com/data/avatar/001/05/37/38_avatar_small.jpg&quot;;       </span>
+<span class="x">s:15:&quot;comment_content&quot;;s:63:&quot;喜欢蓝色，就这么定了～～～～～～～～～～～&quot;;s:13:&quot;comment_grade&quot;;s:1:&quot;1&quot;;    </span>
+<span class="x">s:13:&quot;average_grade&quot;;s:3:&quot;5.0&quot;;s:6:&quot;up_num&quot;;s:1:&quot;0&quot;;s:13:&quot;reply_content&quot;;s:0:&quot;&quot;;}</span>
+</code></pre></div>
+<p>但网上一些函数都只是把lua中table类型的数据转换成字符串，如此而已，而且转换成的字符串样式各异，都没办法解析如上的字符串成数组。。。<br>
+本来想今天写一个的，无意之间发现昨天临走的时候打开的一个页面中有这样的一个函数，仔细看了看，似乎很满足我的需求，运行了一次之后，果然把上面的字符串解析了出来！！但好像有一个问题，就是如果传进去的数组中含有值为数字的字符串，序列化之后就识别成数字而不是字符串。。。 代码如下：    </p>
+<div class="highlight"><pre><code class="language-lua" data-lang="lua"><span class="n">Lua</span> <span class="n">port</span> <span class="n">of</span> <span class="n">PHP</span> <span class="n">serialization</span> <span class="n">functions</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">gitorious</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">nutria</span><span class="o">/</span><span class="n">seawolf</span><span class="o">/</span><span class="n">blobs</span><span class="o">/</span><span class="n">ae2d5e6919cff5754f9ed5f04c50f70070300f9e</span><span class="o">/</span><span class="n">variable</span><span class="o">/</span><span class="n">serialize</span><span class="o">/</span><span class="n">serialize</span><span class="p">.</span><span class="n">lua</span> <span class="n">source</span> <span class="n">code</span>
+<span class="cm">--[[</span>
+<span class="cm">  @file</span>
+<span class="cm">  Lua port of PHP serialization functions.</span>
+
+<span class="cm">  Port based on PHPSerialize and PHPUnserialize by Scott Hurring</span>
+<span class="cm">  http://hurring.com/scott/code/python/serialize/v0.4</span>
+
+<span class="cm">  @version v0.1 BETA</span>
+<span class="cm">  @author Fernando P. García; fernando at develcuy dot com</span>
+<span class="cm">  @copyright Copyright (c) 2009 Fernando P. García</span>
+<span class="cm">  @license http://opensource.org/licenses/gpl-license.php GNU Public License</span>
+
+<span class="cm">  $Id$</span>
+<span class="cm">]]</span>
+<span class="kd">local</span> <span class="n">_serialize_key</span><span class="p">,</span> <span class="n">_read_chars</span><span class="p">,</span> <span class="n">_read_until</span><span class="p">,</span> <span class="n">_unknown_type</span>
+
+<span class="k">function</span> <span class="nf">_serialize_key</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="cm">--[[</span>
+<span class="cm">  Serialize a key, which follows different rules than when </span>
+<span class="cm">  serializing values.  Many thanks to Todd DeLuca for pointing </span>
+<span class="cm">  out that keys are serialized differently than values!</span>
+
+<span class="cm">  From http://us2.php.net/manual/en/language.types.array.php</span>
+<span class="cm">  A key may be either an integer or a string. </span>
+<span class="cm">  If a key is the standard representation of an integer, it will be</span>
+<span class="cm">  interpreted as such (i.e. &quot;8&quot; will be interpreted as int 8,</span>
+<span class="cm">  while &quot;08&quot; will be interpreted as &quot;08&quot;). </span>
+<span class="cm">  Floats in key are truncated to integer. </span>
+<span class="cm">  ]]</span>
+  <span class="c1">-- Integer, Long, Float</span>
+  <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">number&#39;</span> <span class="k">then</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="s">i:&#39;</span> <span class="o">..</span> <span class="nb">tonumber</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="s">;&#39;</span>
+  <span class="c1">-- Boolean =&gt; integer</span>
+  <span class="k">elseif</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">boolean&#39;</span> <span class="k">then</span>
+    <span class="k">if</span> <span class="n">data</span> <span class="k">then</span>
+      <span class="k">return</span> <span class="s1">&#39;</span><span class="s">i:1;&#39;</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="s1">&#39;</span><span class="s">i:0;&#39;</span>
+    <span class="k">end</span>
+  <span class="c1">-- String =&gt; string or String =&gt; int (if string looks like int)</span>
+  <span class="k">elseif</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">string&#39;</span> <span class="k">then</span>
+    <span class="k">if</span> <span class="nb">tonumber</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="kc">nil</span> <span class="k">then</span>
+      <span class="k">return</span> <span class="s1">&#39;</span><span class="s">s:&#39;</span> <span class="o">..</span> <span class="nb">string.len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="s">:&quot;&#39;</span> <span class="o">..</span> <span class="n">data</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="s">&quot;;&#39;</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="s1">&#39;</span><span class="s">i:&#39;</span> <span class="o">..</span> <span class="nb">tonumber</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="s">;&#39;</span>
+    <span class="k">end</span>
+
+  <span class="c1">-- None / NULL =&gt; empty string</span>
+  <span class="k">elseif</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">nil&#39;</span> <span class="k">then</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="s">s:0:&quot;&quot;;&#39;</span>
+
+  <span class="c1">-- I dont know how to serialize this</span>
+  <span class="k">else</span>
+    <span class="nb">error</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">Unknown / Unhandled key  type (&#39;</span> <span class="o">..</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="s">)!&#39;</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="nf">serialize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="cm">--[[</span>
+<span class="cm">  Serialize a value.</span>
+<span class="cm">  ]]</span>
+  <span class="kd">local</span> <span class="n">i</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span>
+  <span class="c1">-- Numbers</span>
+  <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">number&#39;</span> <span class="k">then</span>
+    <span class="c1">-- Integer =&gt; integer</span>
+    <span class="k">if</span>  <span class="nb">math.floor</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="n">data</span> <span class="k">then</span>
+      <span class="k">return</span> <span class="s1">&#39;</span><span class="s">i:&#39;</span> <span class="o">..</span> <span class="n">data</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="s">;&#39;</span>
+    <span class="c1">-- Float, Long =&gt; double</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="s1">&#39;</span><span class="s">d:&#39;</span> <span class="o">..</span> <span class="n">data</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="s">;&#39;</span>
+    <span class="k">end</span>
+  <span class="c1">-- String =&gt; string or String =&gt; int (if string looks like int)</span>
+  <span class="c1">-- Thanks to Todd DeLuca for noticing that PHP strings that</span>
+  <span class="c1">-- look like integers are serialized as ints by PHP </span>
+  <span class="k">elseif</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">string&#39;</span> <span class="k">then</span>
+    <span class="k">if</span> <span class="nb">tonumber</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="kc">nil</span> <span class="k">then</span>
+      <span class="k">return</span> <span class="s1">&#39;</span><span class="s">s:&#39;</span> <span class="o">..</span> <span class="nb">string.len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="s">:&quot;&#39;</span> <span class="o">..</span> <span class="n">data</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="s">&quot;;&#39;</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="s1">&#39;</span><span class="s">i:&#39;</span> <span class="o">..</span> <span class="nb">tonumber</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="s">;&#39;</span>
+    <span class="k">end</span>
+  <span class="c1">-- Nil / NULL</span>
+  <span class="k">elseif</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">nil&#39;</span> <span class="k">then</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="s">N;&#39;</span>
+  <span class="c1">-- Tuple and List =&gt; array</span>
+  <span class="c1">-- The &#39;a&#39; array type is the only kind of list supported by PHP.</span>
+  <span class="c1">-- array keys are automagically numbered up from 0</span>
+  <span class="k">elseif</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">table&#39;</span> <span class="k">then</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1">-- All arrays must have keys</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">do</span>
+      <span class="nb">table.insert</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">_serialize_key</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+      <span class="nb">table.insert</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">serialize</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+      <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="s">a:&#39;</span> <span class="o">..</span> <span class="n">i</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="s">:{&#39;</span> <span class="o">..</span> <span class="nb">table.concat</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="s">}&#39;</span>
+  <span class="c1">-- Boolean =&gt; bool</span>
+  <span class="k">elseif</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">boolean&#39;</span> <span class="k">then</span>
+    <span class="k">if</span> <span class="n">data</span> <span class="k">then</span>
+      <span class="k">return</span> <span class="s1">&#39;</span><span class="s">b:1;&#39;</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="s1">&#39;</span><span class="s">b:0;&#39;</span>
+    <span class="k">end</span>
+  <span class="c1">--~ TODO:</span>
+  <span class="c1">--~ -- Table + Functions =&gt; stdClass</span>
+  <span class="c1">--~ elseif type(data) == &#39;function&#39; then</span>
+  <span class="c1">--~ # I dont know how to serialize this</span>
+  <span class="k">else</span>
+   <span class="nb">error</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">Unknown / Unhandled data type (&#39;</span> <span class="o">..</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="s">)!&#39;</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="nf">_read_until</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">stopchar</span><span class="p">)</span>
+  <span class="cm">--[[</span>
+<span class="cm">  Read from data[offset] until you encounter some char &#39;stopchar&#39;.</span>
+<span class="cm">  ]]</span>
+  <span class="kd">local</span> <span class="n">buf</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="kd">local</span> <span class="n">char</span> <span class="o">=</span> <span class="nb">string.sub</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="kd">local</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span>
+  <span class="k">while</span> <span class="ow">not</span> <span class="p">(</span><span class="n">char</span> <span class="o">==</span> <span class="n">stopchar</span><span class="p">)</span> <span class="k">do</span>
+    <span class="c1">-- Consumed all the characters and havent found &#39;;&#39;</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">&gt;</span> <span class="nb">string.len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">then</span>
+      <span class="nb">error</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">Invalid&#39;</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="nb">table.insert</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="nb">string.sub</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="k">end</span>
+  <span class="c1">-- (chars_read, data)</span>
+  <span class="k">return</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">table.concat</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="nf">_read_chars</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+  <span class="cm">--[[</span>
+<span class="cm">  Read &#39;length&#39; number of chars from data[offset].</span>
+<span class="cm">  ]]</span>
+  <span class="kd">local</span> <span class="n">buf</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">char</span>
+  <span class="c1">-- Account for the starting quote char</span>
+  <span class="c1">-- offset += 1</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">length</span> <span class="o">-</span><span class="mi">1</span> <span class="k">do</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="nb">string.sub</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
+    <span class="nb">table.insert</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="c1">-- (chars_read, data)</span>
+  <span class="k">return</span> <span class="n">length</span><span class="p">,</span> <span class="nb">table.concat</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="nf">unserialize</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span>
+  <span class="n">offset</span> <span class="o">=</span> <span class="n">offset</span> <span class="ow">or</span> <span class="mi">0</span>
+  <span class="cm">--[[</span>
+<span class="cm">  Find the next token and unserialize it.</span>
+<span class="cm">  Recurse on array.</span>
+<span class="cm">  offset = raw offset from start of data</span>
+<span class="cm">  --]]</span>
+  <span class="kd">local</span> <span class="n">buf</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">dataoffset</span><span class="p">,</span> <span class="n">typeconvert</span><span class="p">,</span> <span class="n">datalength</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">readdata</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span>
+         <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">otchars</span><span class="p">,</span> <span class="n">otype</span><span class="p">,</span> <span class="n">property</span>
+  <span class="n">buf</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">dtype</span> <span class="o">=</span> <span class="nb">string.lower</span><span class="p">(</span><span class="nb">string.sub</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+  <span class="c1">-- &#39;t:&#39; = 2 chars</span>
+  <span class="n">dataoffset</span> <span class="o">=</span> <span class="n">offset</span> <span class="o">+</span> <span class="mi">2</span>
+  <span class="n">typeconvert</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span> <span class="k">end</span>
+  <span class="n">datalength</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">chars</span> <span class="o">=</span> <span class="n">datalength</span> 
+  <span class="c1">-- int or double =&gt; Number</span>
+  <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">i&#39;</span> <span class="ow">or</span> <span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">d&#39;</span> <span class="k">then</span>
+    <span class="n">typeconvert</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="nb">tonumber</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">end</span>
+    <span class="n">chars</span><span class="p">,</span> <span class="n">readdata</span> <span class="o">=</span> <span class="n">_read_until</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dataoffset</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">;&#39;</span><span class="p">)</span>
+    <span class="c1">-- +1 for end semicolon</span>
+    <span class="n">dataoffset</span> <span class="o">=</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="n">chars</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="c1">-- bool =&gt; Boolean</span>
+  <span class="k">elseif</span> <span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">b&#39;</span> <span class="k">then</span>
+    <span class="n">typeconvert</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="nb">tonumber</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">end</span>
+    <span class="n">chars</span><span class="p">,</span> <span class="n">readdata</span> <span class="o">=</span> <span class="n">_read_until</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dataoffset</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">;&#39;</span><span class="p">)</span>
+    <span class="c1">-- +1 for end semicolon</span>
+    <span class="n">dataoffset</span> <span class="o">=</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="n">chars</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="c1">-- n =&gt; None</span>
+  <span class="k">elseif</span> <span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">n&#39;</span> <span class="k">then</span>
+    <span class="n">readdata</span> <span class="o">=</span> <span class="kc">nil</span>
+  <span class="c1">-- s =&gt; String</span>
+  <span class="k">elseif</span> <span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">s&#39;</span> <span class="k">then</span>
+    <span class="n">chars</span><span class="p">,</span> <span class="n">stringlength</span> <span class="o">=</span> <span class="n">_read_until</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dataoffset</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">:&#39;</span><span class="p">)</span>
+    <span class="c1">-- +2 for colons around length field</span>
+    <span class="n">dataoffset</span> <span class="o">=</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="n">chars</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="c1">-- +1 for start quote</span>
+    <span class="n">chars</span><span class="p">,</span> <span class="n">readdata</span> <span class="o">=</span> <span class="n">_read_chars</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">tonumber</span><span class="p">(</span><span class="n">stringlength</span><span class="p">))</span>
+    <span class="c1">-- +2 for endquote semicolon</span>
+    <span class="n">dataoffset</span> <span class="o">=</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="n">chars</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="cm">--[[</span>
+<span class="cm">    TODO</span>
+<span class="cm">    review original: if chars != int(stringlength) != int(readdata):</span>
+<span class="cm">    ]]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">chars</span> <span class="o">==</span> <span class="nb">tonumber</span><span class="p">(</span><span class="n">stringlength</span><span class="p">))</span> <span class="k">then</span>
+      <span class="nb">error</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">String length mismatch&#39;</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="c1">-- array =&gt; Table</span>
+  <span class="c1">-- If you originally serialized a Tuple or List, it will</span>
+  <span class="c1">-- be unserialized as a Dict.  PHP doesn&#39;t have tuples or lists,</span>
+  <span class="c1">-- only arrays - so everything has to get converted into an array</span>
+  <span class="c1">-- when serializing and the original type of the array is lost</span>
+  <span class="k">elseif</span> <span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">a&#39;</span> <span class="k">then</span>
+    <span class="n">readdata</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1">-- How many keys does this list have?</span>
+    <span class="n">chars</span><span class="p">,</span> <span class="n">keys</span> <span class="o">=</span> <span class="n">_read_until</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dataoffset</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">:&#39;</span><span class="p">)</span>
+    <span class="c1">-- +2 for colons around length field</span>
+    <span class="n">dataoffset</span> <span class="o">=</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="n">chars</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="c1">-- Loop through and fetch this number of key/value pairs</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">tonumber</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">do</span>
+      <span class="c1">-- Read the key</span>
+      <span class="n">key</span><span class="p">,</span> <span class="n">ktype</span><span class="p">,</span> <span class="n">kchars</span> <span class="o">=</span> <span class="n">unserialize</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dataoffset</span><span class="p">)</span>
+      <span class="n">dataoffset</span> <span class="o">=</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="n">kchars</span>
+      <span class="c1">-- Read value of the key</span>
+      <span class="n">value</span><span class="p">,</span> <span class="n">vtype</span><span class="p">,</span> <span class="n">vchars</span> <span class="o">=</span> <span class="n">unserialize</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dataoffset</span><span class="p">)</span>
+      <span class="c1">-- Cound ending bracket of nested array</span>
+      <span class="k">if</span> <span class="n">vtype</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">a&#39;</span> <span class="k">then</span>
+        <span class="n">vchars</span> <span class="o">=</span> <span class="n">vchars</span> <span class="o">+</span> <span class="mi">1</span>
+      <span class="k">end</span>
+      <span class="n">dataoffset</span> <span class="o">=</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="n">vchars</span>
+      <span class="c1">-- Set the list element</span>
+      <span class="n">readdata</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="k">end</span>
+  <span class="c1">-- object =&gt; Table</span>
+  <span class="k">elseif</span> <span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">o&#39;</span> <span class="k">then</span>
+    <span class="n">readdata</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1">-- How log is the type of this object?</span>
+    <span class="n">chars</span><span class="p">,</span> <span class="n">otchars</span> <span class="o">=</span> <span class="n">_read_until</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dataoffset</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">:&#39;</span><span class="p">)</span>
+    <span class="n">dataoffset</span> <span class="o">=</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="n">chars</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="c1">-- Which type is this object?</span>
+    <span class="n">otype</span> <span class="o">=</span> <span class="nb">string.sub</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="n">otchars</span><span class="p">)</span>
+    <span class="n">dataoffset</span> <span class="o">=</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="n">otchars</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">otype</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">stdClass&#39;</span> <span class="k">then</span>
+      <span class="c1">-- How many properties does this list have?</span>
+      <span class="n">chars</span><span class="p">,</span> <span class="n">properties</span> <span class="o">=</span> <span class="n">_read_until</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dataoffset</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">:&#39;</span><span class="p">)</span>
+      <span class="c1">-- +2 for colons around length field</span>
+      <span class="n">dataoffset</span> <span class="o">=</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="n">chars</span> <span class="o">+</span> <span class="mi">2</span>
+      <span class="c1">-- Loop through and fetch this number of key/value pairs</span>
+      <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">tonumber</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">do</span>
+        <span class="c1">-- Read the key</span>
+        <span class="n">property</span><span class="p">,</span> <span class="n">ktype</span><span class="p">,</span> <span class="n">kchars</span> <span class="o">=</span> <span class="n">unserialize</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dataoffset</span><span class="p">)</span>
+        <span class="n">dataoffset</span> <span class="o">=</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="n">kchars</span>
+        <span class="c1">-- Read value of the key</span>
+        <span class="n">value</span><span class="p">,</span> <span class="n">vtype</span><span class="p">,</span> <span class="n">vchars</span> <span class="o">=</span> <span class="n">unserialize</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dataoffset</span><span class="p">)</span>
+        <span class="c1">-- Cound ending bracket of nested array</span>
+        <span class="k">if</span> <span class="n">vtype</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">a&#39;</span> <span class="k">then</span>
+          <span class="n">vchars</span> <span class="o">=</span> <span class="n">vchars</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">end</span>
+        <span class="n">dataoffset</span> <span class="o">=</span> <span class="n">dataoffset</span> <span class="o">+</span> <span class="n">vchars</span>
+        <span class="c1">-- Set the list element</span>
+        <span class="n">readdata</span><span class="p">[</span><span class="n">property</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+      <span class="k">end</span>
+    <span class="k">else</span>
+      <span class="n">_unknown_type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">else</span>
+    <span class="n">_unknown_type</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="c1">--~ return (dtype, dataoffset-offset, typeconvert(readdata))</span>
+  <span class="k">return</span> <span class="n">typeconvert</span><span class="p">(</span><span class="n">readdata</span><span class="p">),</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">dataoffset</span> <span class="o">-</span> <span class="n">offset</span>
+<span class="k">end</span>
+<span class="c1">-- I don&#39;t know how to unserialize this</span>
+
+<span class="k">function</span> <span class="nf">_unknown_type</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span>
+  <span class="nb">error</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">Unknown / Unhandled data type (&#39;</span> <span class="o">..</span> <span class="n">type_</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="s">)!&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>之后还遇到一个问题，我的序列化的数据是从redis中通过lrange方法读出来的，我问了老板，读进去的时候已经被php序列化了，但读出来的我认为是序列化的数据用lua中的type函数检测后发现是table类型的。。。这样就不能直接套用unserialize方法进行反序列化了。之后我用lua中便利数组的方法 for key, value in pairs(lists) do print(key .. value) end ,发现序列化的值在value当中，这样就好办了，直接把value反序列化就可以了。好辛苦。。。。</p>
+
+<!-- 下面的代码可以使用键盘文章翻页,兼容Vim和游戏快键键 上一篇: h,←, a 下一篇: l,→, d -->
+<script type="text/javascript">
+$(function(){
+  $(document).keydown(function(e) {
+    var url = false;
+        if (e.which == 37 || e.which == 72|| e.which == 65) {
+            
+        url = '/%E7%AE%97%E6%B3%95/2012/09/11/binary-tree-sort.html';
+        
+        }
+        else if (e.which == 39 || e.which == 76|| e.which == 68) {
+            
+        url = '/lua/2012/12/24/lua-struct.html';
+        
+        }
+        if (url) {
+            window.location = url;
+        }
+  });
+})
+</script>
+
+
+
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                <div id="qrcode"></div>
+                <span style="text-align:center">手机扫一扫<br />分享&继续阅读</span>
+             </div>
+         </div>
+     </div>
+     <!--
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                 <img src="/img/qrcode.jpg" alt="">
+                 <p>微信扫一扫<br>关注我的公众号</p>
+             </div>
+         </div>
+     </div>
+     -->
+     <div class="back_top_outer">
+         <div class="back_top_inner">
+             <div id="back-top">
+                 <a href="#top"><span></span></a>
+             </div>
+         </div>
+     </div>
+     </div>
+    </div>
+    <footer>
+  <p>Copyright © 2016 seagg.</p>
+  <p>
+    <a href="https://github.com/seagg" class="  iconfont social github">&#xe69f;</a>
+    <i class="iconfont social twitter">&#xf000e;</i>
+    <a href="https://weibo.com/proudxu" class="  iconfont social weibo">&#xe69f;</a>
+  </p>
+</footer>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        $("#back-top").hide()
+
+        $(function(){
+            $(window).scroll(function(){
+                if($(this).scrollTop() > 100){
+                    $('#back-top').fadeIn();
+                } else {
+                    $('#back-top').fadeOut();
+                }
+            });
+            $('#back-top a').click(function(){
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 800);
+
+                return false;
+            });
+        });
+    });
+</script>
+
+
+  </body>
+</html>
