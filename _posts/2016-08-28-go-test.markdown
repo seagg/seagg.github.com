@@ -1,0 +1,133 @@
+---
+layout: post
+title: "Golang测试"
+description: 
+categories:
+tags: 
+---
+
+Go语言自带了单元测试的工具 `go test`，开发人员可以在给包添加函数的时候，顺便写个测试方法，以便后面在对该方法进行修改的时候运行下单元测试，测试下方法是否给改错了。    
+如下是util包的目录结构：
+可以看出有两个文件：`compute.go`里面有两个方法，`Sum`和`Abs`，分别用于求和和取绝对值。
+
+``` go
+package util
+
+import (
+        //"fmt"
+       )
+
+func Sum(n ...int) int {
+    var c int
+        for _, i := range n {
+            c += i
+        }
+    return c
+}
+
+func Abs(a int) int {
+    if a > 0 {
+        return a
+    } else {
+        return a * (-1)
+    }
+}
+```
+
+要想给这两个方法添加单元测试功能，需要在同一个包下，添加xxx_test.go文件，xxx为对应要测试的文件    
+需要引用`testing`包，同时使用`TestSum`对Sum方法添加单元测试功能。
+
+``` go
+package util
+
+import (
+        "testing"
+       )
+
+func TestSum(t *testing.T) {
+    if Sum(1, 2, 3) != 6 {
+        t.Fatal("sum error")
+    }
+}
+
+func TestAbs(t *testing.T) {
+    if Abs(5) != 5 {
+        t.Fatal("abs error, except:5, result:", Abs(5))
+    }
+}
+```
+
+运行方法：进入到包内，运行命令`go test -v`，参数-v可以打印详情。
+运行结果:
+
+    === RUN   TestSum
+    --- PASS: TestSum (0.00s)
+    === RUN   TestAbs
+    --- PASS: TestAbs (0.00s)
+    PASS
+    ok         util       0.006s
+
+可以看出，到目前为止，这两个方法是正确的。
+`go test`工具还有个功能是测试单元测试的覆盖率，用法为 `go test -v -cover`
+
+    === RUN   TestSum
+    --- PASS: TestSum (0.00s)
+    === RUN   TestAbs
+    --- FAIL: TestAbs (0.00s)
+    compute_test.go:15: abs error, except:4, result: 5
+    FAIL
+    coverage: 85.7% of statements
+    exit status 1
+    FAIL       util       0.006s
+
+从覆盖率来看，单元测试没有覆盖全部的代码，我们可以通过如下命令将cover的详细信息保存到cover.out中。
+
+    go test -cover -coverprofile=cover.out -covermode=count
+
+之后通过
+
+    go tool cover -func=cover.out
+
+查看每个方法的覆盖率。
+运行结果：
+
+    util/compute.go:7:      Sum            100.0%
+    util/compute.go:15:     Abs            66.7%
+    total:                  (statements)   85.7%
+
+这里发现是Abs方法没有覆盖完全，因为我们的用例只用到了正数的那个分支。
+还可以使用html的方式查看具体的覆盖情况。 
+
+    go tool cover -html=cover.out
+
+会默认打开浏览器，将覆盖情况显示到页面中：
+
+
+<center>
+<img src="/images/cover_html.png">
+</center>
+
+可以看出Abs方法的负数分支没有覆盖到。将TestAbs方法修改如下即可：
+
+``` go
+func TestAbs(t *testing.T) {
+    if Abs(5) != 5 {
+        t.Fatal("abs error, except:5, result:", Abs(5))
+    }
+    if Abs(-4) != 4 {
+        t.Fatal("abs error, except:4, result:", Abs(-4))
+    }
+}
+```
+
+再次运行：
+
+    go test -cover -coverprofile=cover2.out -covermode=count
+    go tool cover -func=cover2.out
+
+运行结果：
+
+    util/compute.go:7:         Sum            100.0%
+    util/compute.go:15:        Abs            100.0%
+    total:             (statements)       100.0%
+

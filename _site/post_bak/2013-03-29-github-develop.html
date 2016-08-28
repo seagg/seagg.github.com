@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>hello didi</title>
+  <title>使用github开发项目</title>
   <link rel="stylesheet" href="/css/normalize.css">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/iconfont.css">
@@ -40,10 +40,35 @@
 
     <div class="content markdown">
   <div class="title">
-    <h1>hello didi</h1>
+    <h1>使用github开发项目</h1>
   </div>
-  <p>test</p>
+  <h3 id="github">上传本地项目到github</h3>
 
+<p>1、进入代码所在目录并在github下创建目录<br>
+如<code>myProject</code><br>
+2、初始化<br>
+ <code>git init</code><br>
+3、将本目录下的文件添加<br>
+ <code>git add .</code><br>
+4、提交并增加注释<br>
+ <code>git commit -am &quot;first commit&quot;</code><br>
+5、提交到远程服务器上的指定目录<code>seagg</code>用户下的<code>myProject</code>目录<br>
+<code>git remote add origin git@github.com:seagg/myProject.git</code><br>
+6、将其push到指定分支，其中master是远程分支，origin是前面创建的本地名称<br>
+ <code>git push -u origin master</code>    </p>
+
+<p>下载代码<br>
+<code>git clone git@github.com:seagg/myProject.git</code>    </p>
+
+<h3 id=">在别人项目基础上开发</h3>
+
+<p>1、进入别人的项目主页，点fork链接<br>
+2、之后就可以clone到自己的电脑里进行开发<br>
+3、提交时执行如下命令即可：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">git add .
+git commit -am &quot;first commit&quot;
+git push -u origin master
+</code></pre></div>
 <!-- 下面的代码可以使用键盘文章翻页,兼容Vim和游戏快键键 上一篇: h,←, a 下一篇: l,→, d -->
 <script type="text/javascript">
 $(function(){
@@ -54,8 +79,6 @@ $(function(){
         }
         else if (e.which == 39 || e.which == 76|| e.which == 68) {
             
-        url = '/2016/08/28/go-test.html';
-        
         }
         if (url) {
             window.location = url;

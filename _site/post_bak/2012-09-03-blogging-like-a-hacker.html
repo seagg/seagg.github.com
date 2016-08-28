@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blogging Like a Hacker</title>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/iconfont.css">
+  <link rel="stylesheet" href="/css/highlight.css" />
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.qrcode.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      $("#qrcode").qrcode({ 
+        render: "canvas", //table方式 
+        width: 100, //宽度 
+        height:100, //高度 
+        text: window.location.href, //任意内容 
+      }); 
+    })
+  </script>
+  <body>
+    <div class="container">
+    <header>
+  <h1>海哥</h1>
+  <nav>
+    <a href="/">首页</a> /
+    <a href="/about/">关于</a>
+  </nav>
+</header>
+
+
+
+
+    <div class="content markdown">
+  <div class="title">
+    <h1>Blogging Like a Hacker</h1>
+  </div>
+  <p><strong>转载自<a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html">Blogging like a hacker</a></strong></p>
+
+<p>h1. Blogging Like a Hacker</p>
+
+<p>p(meta). 17 Nov 2008 - San Francisco</p>
+
+<p>Back in 2000, when I thought I was going to be a professional writer, I spent hours a day on LiveJournal doing writing practice with other aspiring poets and authors. Since then I&rsquo;ve blogged at three different domains about web standards, print design, photography, Flash, illustration, information architecture, ColdFusion, package management, PHP, CSS, advertising, Ruby, Rails, and Erlang.</p>
+
+<p>I love writing. I get a kick out of sharing my thoughts with others. The act of transforming ideas into words is an amazingly efficient way to solidify and refine your thoughts about a given topic. But as much as I enjoy blogging, I seem to be stuck in a cycle of quitting and starting over. Before starting the current iteration, I resolved to do some introspection to determine the factors that were leading to this destructive pattern.</p>
+
+<p>I already knew a lot about what I <em>didn&rsquo;t</em> want. I was tired of complicated blogging engines like WordPress and Mephisto. I wanted to write great posts, not style a zillion template pages, moderate comments all day long, and constantly lag behind the latest software release. Something like Posterous looked attractive, but I wanted to style my blog, and it needed to be hosted at the domain of my choosing. For the same reason, other hosted sites (wordpress.com, blogger.com) were disqualified. There are a few people directly using GitHub as a blog (which is very cool), but that&rsquo;s a bit too much of an impedance mismatch for my tastes.</p>
+
+<p>On Sunday, October 19th, I sat down in my San Francisco apartment with a glass of apple cider and a clear mind. After a period of reflection, I had an idea. While I&rsquo;m not specifically trained as an author of prose, I <em>am</em> trained as an author of code. What would happen if I approached blogging from a software development perspective? What would that look like?</p>
+
+<p>First, all my writing would be stored in a Git repository. This would ensure that I could try out different ideas and explore a variety of posts all from the comfort of my preferred editor and the command line. I&rsquo;d be able to publish a post via a simple deploy script or post-commit hook. Complexity would be kept to an absolute minimum, so a static site would be preferable to a dynamic site that required ongoing maintenance. My blog would need to be easily customizable; coming from a graphic design background means I&rsquo;ll always be tweaking the site&rsquo;s appearance and layout.</p>
+
+<p>Over the last month I&rsquo;ve brought these concepts to fruition and I&rsquo;m pleased to announce &ldquo;Jekyll&rdquo;:<a href="http://github.com/mojombo/jekyll">http://github.com/mojombo/jekyll</a>. Jekyll is a simple, blog aware, static site generator. It takes a template directory (representing the raw form of a website), runs it through Textile and Liquid converters, and spits out a complete, static website suitable for serving with Apache or your favorite web server. If you&rsquo;re reading this on the website (<a href="http://tom.preston-werner.com">http://tom.preston-werner.com</a>), you&rsquo;re seeing a Jekyll generated blog!</p>
+
+<p>To understand how this all works, open up my &ldquo;TPW&rdquo;:<a href="http://github.com/mojombo/tpw">http://github.com/mojombo/tpw</a> repo in a new browser window. I&rsquo;ll be referencing the code there.</p>
+
+<p>Take a look at &ldquo;index.html&rdquo;:<a href="http://github.com/mojombo/tpw/tree/master/index.html">http://github.com/mojombo/tpw/tree/master/index.html</a>. This file represents the homepage of the site. At the top of the file is a chunk of YAML that contains metadata about the file. This data tells Jekyll what layout to give the file, what the page&rsquo;s title should be, etc. In this case, I specify that the &ldquo;default&rdquo; template should be used. You can find the layout files in the &ldquo;<em>layouts&rdquo;:<a href="http://github.com/mojombo/tpw/tree/master/_layouts">http://github.com/mojombo/tpw/tree/master/_layouts</a> directory. If you open &ldquo;default.html&rdquo;:<a href="http://github.com/mojombo/tpw/tree/master/">http://github.com/mojombo/tpw/tree/master/</a></em>layouts/default.html you can see that the homepage is constructed by wrapping index.html with this layout.</p>
+
+<p>You&rsquo;ll also notice Liquid templating code in these files. &ldquo;Liquid&rdquo;:<a href="http://www.liquidmarkup.org/">http://www.liquidmarkup.org/</a> is a simple, extensible templating language that makes it easy to embed data in your templates. For my homepage I wanted to have a list of all my blog posts. Jekyll hands me a Hash containing various data about my site. A reverse chronological list of all my blog posts can be found in <code>site.posts</code>. Each post, in turn, contains various fields such as <code>title</code> and <code>date</code>.</p>
+
+<p>Jekyll gets the list of blog posts by parsing the files in the &ldquo;<em>posts&rdquo;:<a href="http://github.com/mojombo/tpw/tree/master/_posts">http://github.com/mojombo/tpw/tree/master/_posts</a> directory. Each post&rsquo;s filename contains the publishing date and slug (what shows up in the URL) that the final HTML file should have. Open up the file corresponding to this blog post: &ldquo;2008-11-17-blogging-like-a-hacker.textile&rdquo;:<a href="http://github.com/mojombo/tpw/tree/master/_posts/2008-11-17-blogging-like-a-hacker.textile">http://github.com/mojombo/tpw/tree/master/_posts/2008-11-17-blogging-like-a-hacker.textile</a>. GitHub renders textile files by default, so to better understand the file, click on the &ldquo;raw&rdquo;:<a href="http://github.com/mojombo/tpw/tree/master/">http://github.com/mojombo/tpw/tree/master/</a></em>posts/2008-11-17-blogging-like-a-hacker.textile?raw=true view to see the original file. Here I&rsquo;ve specified the <code>post</code> layout. If you look at that file you&rsquo;ll see an example of a nested layout. Layouts can contain other layouts allowing you a great deal of flexibility in how pages are assembled. In my case I use a nested layout in order to show related posts for each blog entry. The YAML also specifies the post&rsquo;s title which is then embedded in the post&rsquo;s body via Liquid.</p>
+
+<p>Posts are handled in a special way by Jekyll. The date you specify in the filename is used to construct the URL in the generated site. This post, for instance, ends up at <code><a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html">http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html</a></code>.</p>
+
+<p>Files that do not reside in directories prefixed with an underscore are mirrored into a corresponding directory structure in the generated site. If a file does not have a YAML preface, it is not run through the Liquid interpreter. Binary files are copied over unmodified.</p>
+
+<p>In order to convert your raw site into the finished version, you simply run:</p>
+
+<pre class="terminal"><code>$ jekyll /path/to/raw/site /path/to/place/generated/site</code></pre>
+
+<p>Jekyll is still a very young project. I&rsquo;ve only developed the exact functionality that I&rsquo;ve needed. As time goes on I&rsquo;d like to see the project mature and support additional features. If you end up using Jekyll for your own blog, drop me a line and let me know what you&rsquo;d like to see in future versions. Better yet, fork the project over at GitHub and hack in the features yourself!</p>
+
+<p>I&rsquo;ve been living with Jekyll for just over a month now. I love it. Driving the development of Jekyll based on the needs of my blog has been very rewarding. I can edit my posts in TextMate, giving me automatic and competent spell checking. I have immediate and first class access to the CSS and page templates. Everything is backed up on GitHub. I feel a lightness now when I&rsquo;m writing a post. The system is simple enough that I can keep the entire conversion process in my head. The distance from my brain to my blog has shrunk, and, in the end, I think that will make me a better author.</p>
+
+<!-- 下面的代码可以使用键盘文章翻页,兼容Vim和游戏快键键 上一篇: h,←, a 下一篇: l,→, d -->
+<script type="text/javascript">
+$(function(){
+  $(document).keydown(function(e) {
+    var url = false;
+        if (e.which == 37 || e.which == 72|| e.which == 65) {
+            
+        }
+        else if (e.which == 39 || e.which == 76|| e.which == 68) {
+            
+        }
+        if (url) {
+            window.location = url;
+        }
+  });
+})
+</script>
+
+
+
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                <div id="qrcode"></div>
+                <span style="text-align:center">手机扫一扫<br />分享&继续阅读</span>
+             </div>
+         </div>
+     </div>
+     <!--
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                 <img src="/img/qrcode.jpg" alt="">
+                 <p>微信扫一扫<br>关注我的公众号</p>
+             </div>
+         </div>
+     </div>
+     -->
+     <div class="back_top_outer">
+         <div class="back_top_inner">
+             <div id="back-top">
+                 <a href="#top"><span></span></a>
+             </div>
+         </div>
+     </div>
+     </div>
+    </div>
+    <footer>
+  <p>Copyright © 2016 seagg.</p>
+  <p>
+    <a href="https://github.com/seagg" class="  iconfont social github">&#xe69f;</a>
+    <i class="iconfont social twitter">&#xf000e;</i>
+    <a href="https://weibo.com/proudxu" class="  iconfont social weibo">&#xe69f;</a>
+  </p>
+</footer>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        $("#back-top").hide()
+
+        $(function(){
+            $(window).scroll(function(){
+                if($(this).scrollTop() > 100){
+                    $('#back-top').fadeIn();
+                } else {
+                    $('#back-top').fadeOut();
+                }
+            });
+            $('#back-top a').click(function(){
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 800);
+
+                return false;
+            });
+        });
+    });
+</script>
+
+
+  </body>
+</html>

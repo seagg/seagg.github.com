@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>hello didi</title>
+  <title>给octopress添加Disqus评论功能</title>
   <link rel="stylesheet" href="/css/normalize.css">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/iconfont.css">
@@ -40,10 +40,40 @@
 
     <div class="content markdown">
   <div class="title">
-    <h1>hello didi</h1>
+    <h1>给octopress添加Disqus评论功能</h1>
   </div>
-  <p>test</p>
+  <p>经过了几天的折腾，昨天终于把octopress博客建立好了。更新起来很方便，只需要编写类似Latex语言的markdown文件，然后<code>rake generate</code>, <code>rake deploy</code>就可以啦。</p>
 
+<p>今天加入了评论功能，这里主要记录下添加评论的过程。Octopress中其实已经集成了Disqus评论插件，只需要简单设置一下就可以。</p>
+
+<ul>
+<li><p><strong>登录<a href="http://disqus.com">Disqus网站</a></strong>, 然后注册用户名密码，邮箱验证。</p></li>
+<li><p>单击<em>Get this on your site</em>按钮</p></li>
+</ul>
+
+<p><center>
+<img src="/images/add_comment1.PNG" >
+</center></p>
+
+<ul>
+<li><strong>填写网站的信息</strong></li>
+</ul>
+
+<p><center>
+<img src="/images/add_comment2.PNG">
+</center></p>
+
+<ul>
+<li>修改_config.yml文件:</li>
+</ul>
+
+<pre><code>#Disqus Comments
+disqus_short_name: Site Shortname
+disqus_show_comment_count: true</code></pre>
+
+<p>之后就可以通过<code>rake new_post[&#39;title&#39;]</code>创建日志，日志中设定：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">comment: true
+</code></pre></div>
 <!-- 下面的代码可以使用键盘文章翻页,兼容Vim和游戏快键键 上一篇: h,←, a 下一篇: l,→, d -->
 <script type="text/javascript">
 $(function(){
@@ -54,8 +84,6 @@ $(function(){
         }
         else if (e.which == 39 || e.which == 76|| e.which == 68) {
             
-        url = '/2016/08/28/go-test.html';
-        
         }
         if (url) {
             window.location = url;

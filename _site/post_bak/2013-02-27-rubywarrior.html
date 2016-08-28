@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RubyWarrior 一个人工智能小游戏</title>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/iconfont.css">
+  <link rel="stylesheet" href="/css/highlight.css" />
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.qrcode.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      $("#qrcode").qrcode({ 
+        render: "canvas", //table方式 
+        width: 100, //宽度 
+        height:100, //高度 
+        text: window.location.href, //任意内容 
+      }); 
+    })
+  </script>
+  <body>
+    <div class="container">
+    <header>
+  <h1>海哥</h1>
+  <nav>
+    <a href="/">首页</a> /
+    <a href="/about/">关于</a>
+  </nav>
+</header>
+
+
+
+
+    <div class="content markdown">
+  <div class="title">
+    <h1>RubyWarrior 一个人工智能小游戏</h1>
+  </div>
+  <p>项目主页：<a href="http://github.com/ryanb/ruby-warrior/tree/master">http://github.com/ryanb/ruby-warrior/tree/master</a><br>
+这个游戏以一种有趣交互的方式来教你使用Ruby语言和人工智能。<br>
+在游戏中你扮演一个勇士去攀登高塔得到顶层的珍贵的红宝石。<br>
+在塔中每一层也就是每一关，你需要编写一个Ruby脚本来指导主角如何到达楼梯处然后进入下一关。<br>
+在每一关你必须给足主角战斗的力量，你得考虑主角还有多少生命值，什么时候得休息恢复一下生命值等等。注意：每一个回合里，主角只能有一步操作，比如前进一次、休息加血、进攻、解救人质等。<br>
+具体的安装，运行和规则请参考github上的项目主页。这里直接贴出beginner级别的第七关代码（前几关忘记保存了&hellip;）。<br>
+这个游戏中每一关中的每一步都得小心翼翼，很有可能战斗过程中被干掉，所以每一步都得考虑好。比如这一关，地图是这样的：    </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"> ------
+|&gt;a S @|
+ ------
+</code></pre></div>
+<p>图中的<code>@</code>表示自己，<code>S</code>表示怪兽，<code>a</code>表示弓箭手，而目标就是干掉这两个敌人然后活着走到<code>&gt;</code>处。<br>
+每一关，人物默认都是向右走的，这里走一步发现撞墙了，所以要转向。走两步发现遇到怪兽了，要用<code>warrior.attack!</code>进行攻击。<br>
+为了防止失血过多，当发现这一轮没有受到攻击且剩余血&lt;20的时候，可以通过休息来补充血液。<br>
+弓箭手与怪兽的一个不同就是弓箭手可以远程攻击，有可能你向前走一步，进入弓箭手的射程，但你还没走到他面前，这一过程一直要减血。所以为了防止到弓箭手面前的时候剩余血液不足以干掉他的情况发生，需要有个判断，就是当这一轮受到攻击，且血液不足以走到弓箭手面前将他干掉，需要后退几步，退出他的射程，然后休息补血，血液充足了再向前走。    </p>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">Level</span> <span class="mi">7</span>
+
+<span class="n">You</span> <span class="n">feel</span> <span class="n">a</span> <span class="n">wall</span> <span class="n">right</span> <span class="n">in</span> <span class="n">front</span> <span class="n">of</span> <span class="n">you</span> <span class="n">and</span> <span class="n">an</span> <span class="n">opening</span> <span class="n">behind</span> <span class="n">you</span><span class="p">.</span>
+
+<span class="nl">Tip</span><span class="p">:</span> <span class="n">You</span> <span class="n">are</span> <span class="n">not</span> <span class="n">as</span> <span class="n">effective</span> <span class="n">at</span> <span class="n">attacking</span> <span class="n">backward</span><span class="p">.</span> <span class="n">Use</span> <span class="n">warrior</span><span class="p">.</span><span class="n">feel</span><span class="p">.</span><span class="n">wall</span><span class="o">?</span> <span class="n">and</span> <span class="n">warrior</span><span class="p">.</span><span class="n">pivot</span><span class="o">!</span> <span class="n">to</span> <span class="n">turn</span> <span class="n">around</span><span class="p">.</span>
+
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span> <span class="err">@</span><span class="o">|</span>
+ <span class="o">------</span>
+
+  <span class="o">&gt;</span> <span class="o">=</span> <span class="n">Stairs</span>
+  <span class="err">@</span> <span class="o">=</span> <span class="n">xuhai</span> <span class="p">(</span><span class="mi">20</span> <span class="n">HP</span><span class="p">)</span>
+  <span class="n">a</span> <span class="o">=</span> <span class="n">Archer</span> <span class="p">(</span><span class="mi">7</span> <span class="n">HP</span><span class="p">)</span>
+  <span class="n">S</span> <span class="o">=</span> <span class="n">Thick</span> <span class="n">Sludge</span> <span class="p">(</span><span class="mi">24</span> <span class="n">HP</span><span class="p">)</span>
+
+
+<span class="n">Warrior</span> <span class="nl">Abilities</span><span class="p">:</span>
+
+  <span class="n">warrior</span><span class="p">.</span><span class="n">pivot</span><span class="o">!</span>
+    <span class="nl">Rotate</span> <span class="p">:</span><span class="n">left</span><span class="p">,</span> <span class="o">:</span><span class="n">right</span> <span class="nl">or</span> <span class="p">:</span><span class="n">backward</span> <span class="p">(</span><span class="k">default</span><span class="p">)</span>
+
+  <span class="n">warrior</span><span class="p">.</span><span class="n">rescue</span><span class="o">!</span>
+    <span class="n">Rescue</span> <span class="n">a</span> <span class="n">captive</span> <span class="n">from</span> <span class="n">his</span> <span class="n">chains</span> <span class="p">(</span><span class="n">earning</span> <span class="mi">20</span> <span class="n">points</span><span class="p">)</span> <span class="n">in</span> <span class="n">given</span> <span class="n">direction</span> <span class="p">(</span><span class="n">forward</span> <span class="n">by</span> <span class="k">default</span><span class="p">).</span>
+
+  <span class="n">warrior</span><span class="p">.</span><span class="n">health</span>
+    <span class="n">Returns</span> <span class="n">an</span> <span class="n">integer</span> <span class="n">representing</span> <span class="n">your</span> <span class="n">health</span><span class="p">.</span>
+
+  <span class="n">warrior</span><span class="p">.</span><span class="n">rest</span><span class="o">!</span>
+    <span class="n">Gain</span> <span class="mi">10</span><span class="o">%</span> <span class="n">of</span> <span class="n">max</span> <span class="n">health</span> <span class="n">back</span><span class="p">,</span> <span class="n">but</span> <span class="k">do</span> <span class="n">nothing</span> <span class="n">more</span><span class="p">.</span>
+
+  <span class="n">warrior</span><span class="p">.</span><span class="n">feel</span>
+    <span class="n">Returns</span> <span class="n">a</span> <span class="n">Space</span> <span class="k">for</span> <span class="n">the</span> <span class="n">given</span> <span class="n">direction</span> <span class="p">(</span><span class="n">forward</span> <span class="n">by</span> <span class="k">default</span><span class="p">).</span>
+
+  <span class="n">warrior</span><span class="p">.</span><span class="n">attack</span><span class="o">!</span>
+    <span class="n">Attacks</span> <span class="n">a</span> <span class="n">unit</span> <span class="n">in</span> <span class="n">given</span> <span class="n">direction</span> <span class="p">(</span><span class="n">forward</span> <span class="n">by</span> <span class="k">default</span><span class="p">).</span>
+
+  <span class="n">warrior</span><span class="p">.</span><span class="n">walk</span><span class="o">!</span>
+    <span class="n">Move</span> <span class="n">in</span> <span class="n">the</span> <span class="n">given</span> <span class="n">direction</span> <span class="p">(</span><span class="n">forward</span> <span class="n">by</span> <span class="k">default</span><span class="p">).</span>
+
+
+<span class="n">When</span> <span class="n">you</span><span class="err">&#39;</span><span class="n">re</span> <span class="n">done</span> <span class="n">editing</span> <span class="n">player</span><span class="p">.</span><span class="n">rb</span><span class="p">,</span> <span class="n">run</span> <span class="n">the</span> <span class="n">rubywarrior</span> <span class="n">command</span> <span class="n">again</span><span class="p">.</span>
+</code></pre></div><div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Player</span>
+  <span class="k">def</span> <span class="nf">play_turn</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">warrior</span><span class="o">.</span><span class="n">feel</span><span class="o">.</span><span class="n">wall?</span>
+        <span class="n">warrior</span><span class="o">.</span><span class="n">pivot!</span>
+    <span class="k">else</span>
+       <span class="k">if</span> <span class="n">warrior</span><span class="o">.</span><span class="n">feel</span><span class="o">.</span><span class="n">enemy?</span>
+           <span class="n">warrior</span><span class="o">.</span><span class="n">attack!</span>
+       <span class="k">else</span>
+           <span class="k">if</span> <span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="o">&lt;</span> <span class="mi">20</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="o">==</span> <span class="vi">@health</span> <span class="o">||</span> <span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="o">==</span> <span class="vi">@health</span> <span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+               <span class="n">warrior</span><span class="o">.</span><span class="n">rest!</span>
+           <span class="k">else</span>
+               <span class="k">if</span> <span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="o">&lt;</span><span class="mi">15</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="o">&lt;</span> <span class="vi">@health</span> <span class="p">)</span>
+                   <span class="n">warrior</span><span class="o">.</span><span class="n">walk!</span><span class="p">(</span><span class="ss">:backward</span><span class="p">)</span>
+               <span class="k">else</span>
+                   <span class="n">warrior</span><span class="o">.</span><span class="n">walk!</span>
+               <span class="k">end</span>
+           <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="vi">@health</span> <span class="o">=</span> <span class="n">warrior</span><span class="o">.</span><span class="n">health</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div><div class="highlight"><pre><code class="language-c" data-lang="c"><span class="err">每轮战况</span><span class="o">!</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">1</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span> <span class="err">@</span><span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">pivots</span> <span class="n">backward</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">2</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span> <span class="err">@</span><span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">walks</span> <span class="n">forward</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">3</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span><span class="err">@</span> <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">Thick</span> <span class="n">Sludge</span>
+<span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">takes</span> <span class="mi">5</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">19</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+<span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">17</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">4</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span><span class="err">@</span> <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">Thick</span> <span class="n">Sludge</span>
+<span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">takes</span> <span class="mi">5</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">14</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+<span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">14</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">5</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span><span class="err">@</span> <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">Thick</span> <span class="n">Sludge</span>
+<span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">takes</span> <span class="mi">5</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">9</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+<span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">11</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">6</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span><span class="err">@</span> <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">Thick</span> <span class="n">Sludge</span>
+<span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">takes</span> <span class="mi">5</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">4</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+<span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">8</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">7</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span> <span class="n">S</span><span class="err">@</span> <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">Thick</span> <span class="n">Sludge</span>
+<span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">takes</span> <span class="mi">5</span> <span class="n">damage</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="n">Thick</span> <span class="n">Sludge</span> <span class="n">dies</span>
+<span class="n">xuhai</span> <span class="n">earns</span> <span class="mi">24</span> <span class="n">points</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">8</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span>  <span class="err">@</span> <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">10</span> <span class="n">health</span>
+<span class="n">Archer</span> <span class="n">shoots</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+<span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">7</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">9</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span>  <span class="err">@</span> <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">walks</span> <span class="n">backward</span>
+<span class="n">Archer</span> <span class="n">shoots</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">nothing</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">10</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">9</span> <span class="n">health</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">11</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">11</span> <span class="n">health</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">12</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">13</span> <span class="n">health</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">13</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">15</span> <span class="n">health</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">14</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">17</span> <span class="n">health</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">15</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">19</span> <span class="n">health</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">16</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">1</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">20</span> <span class="n">health</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">17</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span>   <span class="err">@</span><span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">walks</span> <span class="n">forward</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">18</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span>  <span class="err">@</span> <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">walks</span> <span class="n">forward</span>
+<span class="n">Archer</span> <span class="n">shoots</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+<span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">17</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">19</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span> <span class="err">@</span>  <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">walks</span> <span class="n">forward</span>
+<span class="n">Archer</span> <span class="n">shoots</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+<span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">14</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">20</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span><span class="err">@</span>   <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">Archer</span>
+<span class="n">Archer</span> <span class="n">takes</span> <span class="mi">5</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="n">Archer</span> <span class="n">shoots</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">xuhai</span>
+<span class="n">xuhai</span> <span class="n">takes</span> <span class="mi">3</span> <span class="n">damage</span><span class="p">,</span> <span class="mi">11</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">21</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="n">a</span><span class="err">@</span>   <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">attacks</span> <span class="n">forward</span> <span class="n">and</span> <span class="n">hits</span> <span class="n">Archer</span>
+<span class="n">Archer</span> <span class="n">takes</span> <span class="mi">5</span> <span class="n">damage</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span> <span class="n">health</span> <span class="n">power</span> <span class="n">left</span>
+<span class="n">Archer</span> <span class="n">dies</span>
+<span class="n">xuhai</span> <span class="n">earns</span> <span class="mi">7</span> <span class="n">points</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">22</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span> <span class="err">@</span>   <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">13</span> <span class="n">health</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">23</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span> <span class="err">@</span>   <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">15</span> <span class="n">health</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">24</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span> <span class="err">@</span>   <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">17</span> <span class="n">health</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">25</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span> <span class="err">@</span>   <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">2</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">19</span> <span class="n">health</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">26</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span> <span class="err">@</span>   <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">receives</span> <span class="mi">1</span> <span class="n">health</span> <span class="n">from</span> <span class="n">resting</span><span class="p">,</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">20</span> <span class="n">health</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">27</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span> <span class="err">@</span>   <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">walks</span> <span class="n">forward</span>
+<span class="o">-</span> <span class="n">turn</span> <span class="mi">28</span> <span class="o">-</span>
+ <span class="o">------</span>
+<span class="o">|&gt;</span><span class="err">@</span>    <span class="o">|</span>
+ <span class="o">------</span>
+<span class="n">xuhai</span> <span class="n">walks</span> <span class="n">forward</span>
+<span class="n">Success</span><span class="o">!</span> <span class="n">You</span> <span class="n">have</span> <span class="n">found</span> <span class="n">the</span> <span class="n">stairs</span><span class="p">.</span>
+<span class="n">Level</span> <span class="nl">Score</span><span class="p">:</span> <span class="mi">31</span>
+<span class="n">Time</span> <span class="nl">Bonus</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">Clear</span> <span class="nl">Bonus</span><span class="p">:</span> <span class="mi">7</span>
+<span class="n">Total</span> <span class="nl">Score</span><span class="p">:</span> <span class="mi">364</span> <span class="o">+</span> <span class="mi">40</span> <span class="o">=</span> <span class="mi">404</span>
+</code></pre></div>
+<p>很不错的游戏，可惜没有Java或者C版的，有空考虑写一个。当然，要是能写成对战类的更好了。<br>
+今天在github上溜达的时候发现有个哥们的<a href="https://github.com/peterwongpp/PeterWarrior">第六关代码</a>，比较牛，不想我傻呵呵的一直用if分支。有空学习学习！</p>
+
+<!-- 下面的代码可以使用键盘文章翻页,兼容Vim和游戏快键键 上一篇: h,←, a 下一篇: l,→, d -->
+<script type="text/javascript">
+$(function(){
+  $(document).keydown(function(e) {
+    var url = false;
+        if (e.which == 37 || e.which == 72|| e.which == 65) {
+            
+        }
+        else if (e.which == 39 || e.which == 76|| e.which == 68) {
+            
+        }
+        if (url) {
+            window.location = url;
+        }
+  });
+})
+</script>
+
+
+
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                <div id="qrcode"></div>
+                <span style="text-align:center">手机扫一扫<br />分享&继续阅读</span>
+             </div>
+         </div>
+     </div>
+     <!--
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                 <img src="/img/qrcode.jpg" alt="">
+                 <p>微信扫一扫<br>关注我的公众号</p>
+             </div>
+         </div>
+     </div>
+     -->
+     <div class="back_top_outer">
+         <div class="back_top_inner">
+             <div id="back-top">
+                 <a href="#top"><span></span></a>
+             </div>
+         </div>
+     </div>
+     </div>
+    </div>
+    <footer>
+  <p>Copyright © 2016 seagg.</p>
+  <p>
+    <a href="https://github.com/seagg" class="  iconfont social github">&#xe69f;</a>
+    <i class="iconfont social twitter">&#xf000e;</i>
+    <a href="https://weibo.com/proudxu" class="  iconfont social weibo">&#xe69f;</a>
+  </p>
+</footer>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        $("#back-top").hide()
+
+        $(function(){
+            $(window).scroll(function(){
+                if($(this).scrollTop() > 100){
+                    $('#back-top').fadeIn();
+                } else {
+                    $('#back-top').fadeOut();
+                }
+            });
+            $('#back-top a').click(function(){
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 800);
+
+                return false;
+            });
+        });
+    });
+</script>
+
+
+  </body>
+</html>

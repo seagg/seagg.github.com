@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>hello didi</title>
+  <title>Linux crontab格式</title>
   <link rel="stylesheet" href="/css/normalize.css">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/iconfont.css">
@@ -40,9 +40,47 @@
 
     <div class="content markdown">
   <div class="title">
-    <h1>hello didi</h1>
+    <h1>Linux crontab格式</h1>
   </div>
-  <p>test</p>
+  <div class="highlight"><pre><code class="language-text" data-lang="text">基本格式 :
+*　　*　　*　　*　　*　　command
+分　时　日　月　周　命令
+</code></pre></div>
+<p>第1列表示分钟1～59 每分钟用*或者 */1表示<br>
+第2列表示小时1～23（0表示0点）<br>
+第3列表示日期1～31<br>
+第4列表示月份1～12<br>
+第5列标识号星期0～6（0表示星期天）<br>
+第6列要运行的命令    </p>
+
+<p>crontab文件的一些例子：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">30 21 * * * /usr/local/etc/rc.d/lighttpd restart    
+</code></pre></div>
+<p>上面的例子表示每晚的21:30重启apache。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">45 4 1,10,22 * * /usr/local/etc/rc.d/lighttpd restart   
+</code></pre></div>
+<p>上面的例子表示每月1、10、22日的4 : 45重启apache。   </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">10 1 * * 6,0 /usr/local/etc/rc.d/lighttpd restart   
+</code></pre></div>
+<p>上面的例子表示每周六、周日的1 : 10重启apache。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">0,30 18-23 * * * /usr/local/etc/rc.d/lighttpd restart   
+</code></pre></div>
+<p>上面的例子表示在每天18 : 00至23 : 00之间每隔30分钟重启apache。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">0 23 * * 6 /usr/local/etc/rc.d/lighttpd restart     
+</code></pre></div>
+<p>上面的例子表示每星期六的11 : 00 pm重启apache。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">* */1 * * * /usr/local/etc/rc.d/lighttpd restart    
+</code></pre></div>
+<p>每一小时重启apache</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">* 23-7/1 * * * /usr/local/etc/rc.d/lighttpd restart     
+</code></pre></div>
+<p>晚上11点到早上7点之间，每隔一小时重启apache</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">0 11 4 * mon-wed /usr/local/etc/rc.d/lighttpd restart   
+</code></pre></div>
+<p>每月的4号与每周一到周三的11点重启apache</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">0 4 1 jan * /usr/local/etc/rc.d/lighttpd restart    
+</code></pre></div>
+<p>一月一号的4点重启apache</p>
 
 <!-- 下面的代码可以使用键盘文章翻页,兼容Vim和游戏快键键 上一篇: h,←, a 下一篇: l,→, d -->
 <script type="text/javascript">
@@ -54,8 +92,6 @@ $(function(){
         }
         else if (e.which == 39 || e.which == 76|| e.which == 68) {
             
-        url = '/2016/08/28/go-test.html';
-        
         }
         if (url) {
             window.location = url;

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Golang测试</title>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/iconfont.css">
+  <link rel="stylesheet" href="/css/highlight.css" />
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.qrcode.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      $("#qrcode").qrcode({ 
+        render: "canvas", //table方式 
+        width: 100, //宽度 
+        height:100, //高度 
+        text: window.location.href, //任意内容 
+      }); 
+    })
+  </script>
+  <body>
+    <div class="container">
+    <header>
+  <h1>海哥</h1>
+  <nav>
+    <a href="/">首页</a> /
+    <a href="/about/">关于</a>
+  </nav>
+</header>
+
+
+
+
+    <div class="content markdown">
+  <div class="title">
+    <h1>Golang测试</h1>
+  </div>
+  <p>Go语言自带了单元测试的工具 <code>go test</code>，开发人员可以在给包添加函数的时候，顺便写个测试方法，以便后面在对该方法进行修改的时候运行下单元测试，测试下方法是否给改错了。<br>
+如下是util包的目录结构：
+可以看出有两个文件：<code>compute.go</code>里面有两个方法，<code>Sum</code>和<code>Abs</code>，分别用于求和和取绝对值。</p>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">util</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+        <span class="c1">//&quot;fmt&quot;</span>
+       <span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">Sum</span><span class="p">(</span><span class="nx">n</span> <span class="o">...</span><span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">c</span> <span class="kt">int</span>
+        <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">i</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">n</span> <span class="p">{</span>
+            <span class="nx">c</span> <span class="o">+=</span> <span class="nx">i</span>
+        <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">c</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nx">Abs</span><span class="p">(</span><span class="nx">a</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">a</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">a</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">a</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>要想给这两个方法添加单元测试功能，需要在同一个包下，添加xxx_test.go文件，xxx为对应要测试的文件<br>
+需要引用<code>testing</code>包，同时使用<code>TestSum</code>对Sum方法添加单元测试功能。</p>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">util</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+        <span class="s">&quot;testing&quot;</span>
+       <span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">TestSum</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">Sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">6</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;sum error&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nx">TestAbs</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">Abs</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">5</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;abs error, except:5, result:&quot;</span><span class="p">,</span> <span class="nx">Abs</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>运行方法：进入到包内，运行命令<code>go test -v</code>，参数-v可以打印详情。
+运行结果:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">=== RUN   TestSum
+--- PASS: TestSum (0.00s)
+=== RUN   TestAbs
+--- PASS: TestAbs (0.00s)
+PASS
+ok         util       0.006s
+</code></pre></div>
+<p>可以看出，到目前为止，这两个方法是正确的。
+<code>go test</code>工具还有个功能是测试单元测试的覆盖率，用法为 <code>go test -v -cover</code></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">=== RUN   TestSum
+--- PASS: TestSum (0.00s)
+=== RUN   TestAbs
+--- FAIL: TestAbs (0.00s)
+compute_test.go:15: abs error, except:4, result: 5
+FAIL
+coverage: 85.7% of statements
+exit status 1
+FAIL       util       0.006s
+</code></pre></div>
+<p>从覆盖率来看，单元测试没有覆盖全部的代码，我们可以通过如下命令将cover的详细信息保存到cover.out中。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">go test -cover -coverprofile=cover.out -covermode=count
+</code></pre></div>
+<p>之后通过</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">go tool cover -func=cover.out
+</code></pre></div>
+<p>查看每个方法的覆盖率。
+运行结果：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">util/compute.go:7:      Sum            100.0%
+util/compute.go:15:     Abs            66.7%
+total:                  (statements)   85.7%
+</code></pre></div>
+<p>这里发现是Abs方法没有覆盖完全，因为我们的用例只用到了正数的那个分支。
+还可以使用html的方式查看具体的覆盖情况。 </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">go tool cover -html=cover.out
+</code></pre></div>
+<p>会默认打开浏览器，将覆盖情况显示到页面中：</p>
+
+<p><center>
+<img src="/images/cover_html.png">
+</center></p>
+
+<p>可以看出Abs方法的负数分支没有覆盖到。将TestAbs方法修改如下即可：</p>
+<div class="highlight"><pre><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nx">TestAbs</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">Abs</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">5</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;abs error, except:5, result:&quot;</span><span class="p">,</span> <span class="nx">Abs</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="nx">Abs</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span> <span class="p">{</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;abs error, except:4, result:&quot;</span><span class="p">,</span> <span class="nx">Abs</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>再次运行：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">go test -cover -coverprofile=cover2.out -covermode=count
+go tool cover -func=cover2.out
+</code></pre></div>
+<p>运行结果：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">util/compute.go:7:         Sum            100.0%
+util/compute.go:15:        Abs            100.0%
+total:             (statements)       100.0%
+</code></pre></div>
+<!-- 下面的代码可以使用键盘文章翻页,兼容Vim和游戏快键键 上一篇: h,←, a 下一篇: l,→, d -->
+<script type="text/javascript">
+$(function(){
+  $(document).keydown(function(e) {
+    var url = false;
+        if (e.which == 37 || e.which == 72|| e.which == 65) {
+            
+        url = '/2016/08/25/hello-didi.html';
+        
+        }
+        else if (e.which == 39 || e.which == 76|| e.which == 68) {
+            
+        }
+        if (url) {
+            window.location = url;
+        }
+  });
+})
+</script>
+
+
+
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                <div id="qrcode"></div>
+                <span style="text-align:center">手机扫一扫<br />分享&继续阅读</span>
+             </div>
+         </div>
+     </div>
+     <!--
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                 <img src="/img/qrcode.jpg" alt="">
+                 <p>微信扫一扫<br>关注我的公众号</p>
+             </div>
+         </div>
+     </div>
+     -->
+     <div class="back_top_outer">
+         <div class="back_top_inner">
+             <div id="back-top">
+                 <a href="#top"><span></span></a>
+             </div>
+         </div>
+     </div>
+     </div>
+    </div>
+    <footer>
+  <p>Copyright © 2016 seagg.</p>
+  <p>
+    <a href="https://github.com/seagg" class="  iconfont social github">&#xe69f;</a>
+    <i class="iconfont social twitter">&#xf000e;</i>
+    <a href="https://weibo.com/proudxu" class="  iconfont social weibo">&#xe69f;</a>
+  </p>
+</footer>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        $("#back-top").hide()
+
+        $(function(){
+            $(window).scroll(function(){
+                if($(this).scrollTop() > 100){
+                    $('#back-top').fadeIn();
+                } else {
+                    $('#back-top').fadeOut();
+                }
+            });
+            $('#back-top a').click(function(){
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 800);
+
+                return false;
+            });
+        });
+    });
+</script>
+
+
+  </body>
+</html>

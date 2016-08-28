@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>hello didi</title>
+  <title>指针数组与数组指针</title>
   <link rel="stylesheet" href="/css/normalize.css">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/iconfont.css">
@@ -40,9 +40,33 @@
 
     <div class="content markdown">
   <div class="title">
-    <h1>hello didi</h1>
+    <h1>指针数组与数组指针</h1>
   </div>
-  <p>test</p>
+  <p>昨天从面试宝典上看了道关于指针的面试题，发现这个上次绿盟科技笔试的时候考过，当时很凌乱，有几个记混了。</p>
+
+<p>题目是这样的：   </p>
+
+<ul>
+<li>定义一个整形数<br></li>
+<li>定义一个指向整形数的指针<br></li>
+<li>定义一个指向指针的指针，它指向的指针，是一个指向整形数的指针<br></li>
+<li>定义一个具有10个整形数的数组<br></li>
+<li>定义一个具有10个指针的数组，这些指针都是指向整形数的<br></li>
+<li>定义一个指向有10个整形数 数组的指针<br></li>
+<li>定义一个指向函数的指针，该函数有一个整形参数 并返回一个整形数据<br></li>
+<li>定义一个有10个指针的数组，每个指针指向一个函数，该函数有一个整形参数，返回一个整形数<br>
+<pre><code>a) int a; // An integer 
+b) int <em>a; // A pointer to an integer 
+c) int *<em>a; // A pointer to a pointer to an integer 
+d) int a[10]; // An array of 10 integers 
+e) int *a[10]; // An array of 10 pointers to integers 
+f) int (</em>a)[10]; // A pointer to an array of 10 integers 
+g) int (</em>a)(int); // A pointer to a function a that takes an integer argument and returns an integer 
+h) int (*a[10])(int); // An array of 10 pointers to functions that take an integer argument and return an integer </code></pre></li>
+</ul>
+
+<p><span style="color:red; font-weight:bold">诀窍：弄清楚* <a href=""></a>的优先级</span><br>
+详细解答参考这里：<a href="http://blog.csdn.net/lyl494223339/article/details/7854396">解答</a></p>
 
 <!-- 下面的代码可以使用键盘文章翻页,兼容Vim和游戏快键键 上一篇: h,←, a 下一篇: l,→, d -->
 <script type="text/javascript">
@@ -54,8 +78,6 @@ $(function(){
         }
         else if (e.which == 39 || e.which == 76|| e.which == 68) {
             
-        url = '/2016/08/28/go-test.html';
-        
         }
         if (url) {
             window.location = url;
