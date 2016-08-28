@@ -6,15 +6,21 @@
 </description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 28 Aug 2016 15:20:26 +0800</pubDate>
-    <lastBuildDate>Sun, 28 Aug 2016 15:20:26 +0800</lastBuildDate>
+    <pubDate>Sun, 28 Aug 2016 21:59:42 +0800</pubDate>
+    <lastBuildDate>Sun, 28 Aug 2016 21:59:42 +0800</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
         <title>Golang单元测试</title>
         <description>&lt;p&gt;Go语言自带了单元测试的工具 &lt;code&gt;go test&lt;/code&gt;，开发人员可以在给包添加函数的时候，顺便写个测试方法，以便后面在对该方法进行修改的时候运行下单元测试，测试下方法是否给改错了。&lt;br&gt;
-如下是util包的目录结构：
-可以看出有两个文件：&lt;code&gt;compute.go&lt;/code&gt;里面有两个方法，&lt;code&gt;Sum&lt;/code&gt;和&lt;code&gt;Abs&lt;/code&gt;，分别用于求和和取绝对值。&lt;/p&gt;
+如下是util包的目录结构：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;➜ /Users/zhaoxuhai/Programs/go/src &amp;gt;tree
+.
+└── util
+    ├── compute.go
+    ├── compute_test.go
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;可以看出有两个文件：&lt;code&gt;compute.go&lt;/code&gt;里面有两个方法，&lt;code&gt;Sum&lt;/code&gt;和&lt;code&gt;Abs&lt;/code&gt;，分别用于求和和取绝对值。&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-go&quot; data-lang=&quot;go&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;util&lt;/span&gt;
 
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;

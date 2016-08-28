@@ -8,6 +8,13 @@ tags:
 
 Go语言自带了单元测试的工具 `go test`，开发人员可以在给包添加函数的时候，顺便写个测试方法，以便后面在对该方法进行修改的时候运行下单元测试，测试下方法是否给改错了。    
 如下是util包的目录结构：
+
+    ➜ /Users/zhaoxuhai/Programs/go/src >tree
+    .
+    └── util
+        ├── compute.go
+        ├── compute_test.go
+
 可以看出有两个文件：`compute.go`里面有两个方法，`Sum`和`Abs`，分别用于求和和取绝对值。
 
 ``` go

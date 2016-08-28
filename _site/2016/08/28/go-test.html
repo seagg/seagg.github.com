@@ -43,8 +43,14 @@
     <h1>Golang单元测试</h1>
   </div>
   <p>Go语言自带了单元测试的工具 <code>go test</code>，开发人员可以在给包添加函数的时候，顺便写个测试方法，以便后面在对该方法进行修改的时候运行下单元测试，测试下方法是否给改错了。<br>
-如下是util包的目录结构：
-可以看出有两个文件：<code>compute.go</code>里面有两个方法，<code>Sum</code>和<code>Abs</code>，分别用于求和和取绝对值。</p>
+如下是util包的目录结构：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">➜ /Users/zhaoxuhai/Programs/go/src &gt;tree
+.
+└── util
+    ├── compute.go
+    ├── compute_test.go
+</code></pre></div>
+<p>可以看出有两个文件：<code>compute.go</code>里面有两个方法，<code>Sum</code>和<code>Abs</code>，分别用于求和和取绝对值。</p>
 <div class="highlight"><pre><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">util</span>
 
 <span class="kn">import</span> <span class="p">(</span>
