@@ -6,8 +6,8 @@
 </description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 28 Aug 2016 14:59:53 +0800</pubDate>
-    <lastBuildDate>Sun, 28 Aug 2016 14:59:53 +0800</lastBuildDate>
+    <pubDate>Sun, 28 Aug 2016 15:20:26 +0800</pubDate>
+    <lastBuildDate>Sun, 28 Aug 2016 15:20:26 +0800</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -81,6 +81,10 @@ FAIL       util       0.006s
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;从覆盖率来看，单元测试没有覆盖全部的代码，我们可以通过如下命令将cover的详细信息保存到cover.out中。&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;go test -cover -coverprofile=cover.out -covermode=count
+注：
+-cover 允许代码分析
+-covermode 代码分析模式（set：是否执行；count：执行次数；atomic：次数，并发执行）
+-coverprofile 输出结果文件
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;之后通过&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;go tool cover -func=cover.out
