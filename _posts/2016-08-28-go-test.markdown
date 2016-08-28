@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Golang测试"
+title: "Golang单元测试"
 description: 
 categories:
 tags: 
@@ -57,7 +57,8 @@ func TestAbs(t *testing.T) {
 }
 ```
 
-运行方法：进入到包内，运行命令`go test -v`，参数-v可以打印详情。
+运行方法：进入到包内，运行命令`go test -v`，参数-v可以打印详情。    
+也可以只运行某个方法的单元测试：`go test -v -run="Abs"`，支持正则表达式。    
 运行结果:
 
     === RUN   TestSum
@@ -67,7 +68,7 @@ func TestAbs(t *testing.T) {
     PASS
     ok         util       0.006s
 
-可以看出，到目前为止，这两个方法是正确的。
+可以看出，到目前为止，这两个方法是正确的。    
 `go test`工具还有个功能是测试单元测试的覆盖率，用法为 `go test -v -cover`
 
     === RUN   TestSum
@@ -88,14 +89,14 @@ func TestAbs(t *testing.T) {
 
     go tool cover -func=cover.out
 
-查看每个方法的覆盖率。
+查看每个方法的覆盖率。    
 运行结果：
 
     util/compute.go:7:      Sum            100.0%
     util/compute.go:15:     Abs            66.7%
     total:                  (statements)   85.7%
 
-这里发现是Abs方法没有覆盖完全，因为我们的用例只用到了正数的那个分支。
+这里发现是Abs方法没有覆盖完全，因为我们的用例只用到了正数的那个分支。    
 还可以使用html的方式查看具体的覆盖情况。 
 
     go tool cover -html=cover.out

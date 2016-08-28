@@ -6,12 +6,12 @@
 </description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 28 Aug 2016 14:42:37 +0800</pubDate>
-    <lastBuildDate>Sun, 28 Aug 2016 14:42:37 +0800</lastBuildDate>
+    <pubDate>Sun, 28 Aug 2016 14:59:53 +0800</pubDate>
+    <lastBuildDate>Sun, 28 Aug 2016 14:59:53 +0800</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
-        <title>Golang测试</title>
+        <title>Golang单元测试</title>
         <description>&lt;p&gt;Go语言自带了单元测试的工具 &lt;code&gt;go test&lt;/code&gt;，开发人员可以在给包添加函数的时候，顺便写个测试方法，以便后面在对该方法进行修改的时候运行下单元测试，测试下方法是否给改错了。&lt;br&gt;
 如下是util包的目录结构：
 可以看出有两个文件：&lt;code&gt;compute.go&lt;/code&gt;里面有两个方法，&lt;code&gt;Sum&lt;/code&gt;和&lt;code&gt;Abs&lt;/code&gt;，分别用于求和和取绝对值。&lt;/p&gt;
@@ -37,7 +37,7 @@
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;要想给这两个方法添加单元测试功能，需要在同一个包下，添加xxx_test.go文件，xxx为对应要测试的文件&lt;br&gt;
+&lt;p&gt;要想给这两个方法添加单元测试功能，需要在同一个包下，添加xxx_test.go文件，xxx为对应要测试的文件， 
 需要引用&lt;code&gt;testing&lt;/code&gt;包，同时使用&lt;code&gt;TestSum&lt;/code&gt;对Sum方法添加单元测试功能。&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-go&quot; data-lang=&quot;go&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;util&lt;/span&gt;
 
@@ -57,7 +57,8 @@
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;运行方法：进入到包内，运行命令&lt;code&gt;go test -v&lt;/code&gt;，参数-v可以打印详情。
+&lt;p&gt;运行方法：进入到包内，运行命令&lt;code&gt;go test -v&lt;/code&gt;，参数-v可以打印详情。&lt;br&gt;
+也可以只运行某个方法的单元测试：&lt;code&gt;go test -v -run=&amp;quot;Abs&amp;quot;&lt;/code&gt;，支持正则表达式。&lt;br&gt;
 运行结果:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;=== RUN   TestSum
 --- PASS: TestSum (0.00s)
@@ -66,7 +67,7 @@
 PASS
 ok         util       0.006s
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;可以看出，到目前为止，这两个方法是正确的。
+&lt;p&gt;可以看出，到目前为止，这两个方法是正确的。&lt;br&gt;
 &lt;code&gt;go test&lt;/code&gt;工具还有个功能是测试单元测试的覆盖率，用法为 &lt;code&gt;go test -v -cover&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;=== RUN   TestSum
 --- PASS: TestSum (0.00s)
@@ -84,13 +85,13 @@ FAIL       util       0.006s
 &lt;p&gt;之后通过&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;go tool cover -func=cover.out
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;查看每个方法的覆盖率。
+&lt;p&gt;查看每个方法的覆盖率。&lt;br&gt;
 运行结果：&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;util/compute.go:7:      Sum            100.0%
 util/compute.go:15:     Abs            66.7%
 total:                  (statements)   85.7%
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;这里发现是Abs方法没有覆盖完全，因为我们的用例只用到了正数的那个分支。
+&lt;p&gt;这里发现是Abs方法没有覆盖完全，因为我们的用例只用到了正数的那个分支。&lt;br&gt;
 还可以使用html的方式查看具体的覆盖情况。 &lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;go tool cover -html=cover.out
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;

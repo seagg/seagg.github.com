@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Golang测试</title>
+  <title>Golang单元测试</title>
   <link rel="stylesheet" href="/css/normalize.css">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/iconfont.css">
@@ -40,7 +40,7 @@
 
     <div class="content markdown">
   <div class="title">
-    <h1>Golang测试</h1>
+    <h1>Golang单元测试</h1>
   </div>
   <p>Go语言自带了单元测试的工具 <code>go test</code>，开发人员可以在给包添加函数的时候，顺便写个测试方法，以便后面在对该方法进行修改的时候运行下单元测试，测试下方法是否给改错了。<br>
 如下是util包的目录结构：
@@ -67,7 +67,7 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>要想给这两个方法添加单元测试功能，需要在同一个包下，添加xxx_test.go文件，xxx为对应要测试的文件<br>
+<p>要想给这两个方法添加单元测试功能，需要在同一个包下，添加xxx_test.go文件，xxx为对应要测试的文件， 
 需要引用<code>testing</code>包，同时使用<code>TestSum</code>对Sum方法添加单元测试功能。</p>
 <div class="highlight"><pre><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">util</span>
 
@@ -87,7 +87,8 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>运行方法：进入到包内，运行命令<code>go test -v</code>，参数-v可以打印详情。
+<p>运行方法：进入到包内，运行命令<code>go test -v</code>，参数-v可以打印详情。<br>
+也可以只运行某个方法的单元测试：<code>go test -v -run=&quot;Abs&quot;</code>，支持正则表达式。<br>
 运行结果:</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">=== RUN   TestSum
 --- PASS: TestSum (0.00s)
@@ -96,7 +97,7 @@
 PASS
 ok         util       0.006s
 </code></pre></div>
-<p>可以看出，到目前为止，这两个方法是正确的。
+<p>可以看出，到目前为止，这两个方法是正确的。<br>
 <code>go test</code>工具还有个功能是测试单元测试的覆盖率，用法为 <code>go test -v -cover</code></p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">=== RUN   TestSum
 --- PASS: TestSum (0.00s)
@@ -114,13 +115,13 @@ FAIL       util       0.006s
 <p>之后通过</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">go tool cover -func=cover.out
 </code></pre></div>
-<p>查看每个方法的覆盖率。
+<p>查看每个方法的覆盖率。<br>
 运行结果：</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">util/compute.go:7:      Sum            100.0%
 util/compute.go:15:     Abs            66.7%
 total:                  (statements)   85.7%
 </code></pre></div>
-<p>这里发现是Abs方法没有覆盖完全，因为我们的用例只用到了正数的那个分支。
+<p>这里发现是Abs方法没有覆盖完全，因为我们的用例只用到了正数的那个分支。<br>
 还可以使用html的方式查看具体的覆盖情况。 </p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">go tool cover -html=cover.out
 </code></pre></div>
