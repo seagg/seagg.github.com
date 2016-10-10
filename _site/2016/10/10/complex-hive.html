@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Hive中复杂count语句</title>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/iconfont.css">
+  <link rel="stylesheet" href="/css/highlight.css" />
+  <script src="/js/jquery.min.js"></script>
+</head>
+
+
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.qrcode.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      $("#qrcode").qrcode({ 
+        render: "canvas", //table方式 
+        width: 100, //宽度 
+        height:100, //高度 
+        text: window.location.href, //任意内容 
+      }); 
+    })
+  </script>
+  <body>
+    <div class="container">
+    <header>
+  <h1>海哥</h1>
+  <nav>
+    <a href="/">首页</a> /
+    <a href="/about/">关于</a>
+  </nav>
+</header>
+
+
+
+
+    <div class="content markdown">
+  <div class="title">
+    <h1>Hive中复杂count语句</h1>
+  </div>
+  <p>最近用hive比较多，昨天需要统计数据表中满足特定条件的ip的个数，而且类似需求不止一个，最开始想的笨方法是每个需求搞个sql之后union起来，但太复杂，当时想要是能在count里的distinct基础上再加些条件就好了，之后就在网上找到了如下复杂count的示例。</p>
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+    <span class="k">type</span>
+    <span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+    <span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">u</span><span class="p">)</span>
+    <span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">plat</span><span class="o">=</span><span class="mi">1</span> <span class="k">THEN</span> <span class="n">u</span> <span class="k">ELSE</span> <span class="k">NULL</span> <span class="k">END</span><span class="p">)</span>
+    <span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">plat</span><span class="o">=</span><span class="mi">1</span> <span class="k">THEN</span> <span class="n">u</span> <span class="k">ELSE</span> <span class="k">NULL</span> <span class="k">END</span><span class="p">)</span>
+    <span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="k">CASE</span> <span class="k">WHEN</span> <span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="mi">2</span> <span class="k">OR</span> <span class="k">type</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="k">THEN</span> <span class="n">u</span> <span class="k">ELSE</span> <span class="k">NULL</span> <span class="k">END</span><span class="p">)</span>
+    <span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="mi">2</span> <span class="k">OR</span> <span class="k">type</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="k">THEN</span> <span class="n">u</span> <span class="k">ELSE</span> <span class="k">NULL</span> <span class="k">END</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">t</span>
+<span class="k">WHERE</span> <span class="n">dt</span> <span class="k">in</span> <span class="p">(</span><span class="ss">&quot;2012-1-12-02&quot;</span><span class="p">,</span> <span class="ss">&quot;2012-1-12-03&quot;</span><span class="p">)</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="k">type</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">type</span><span class="p">;</span>
+</code></pre></div>
+<!-- 下面的代码可以使用键盘文章翻页,兼容Vim和游戏快键键 上一篇: h,←, a 下一篇: l,→, d -->
+<script type="text/javascript">
+$(function(){
+  $(document).keydown(function(e) {
+    var url = false;
+        if (e.which == 37 || e.which == 72|| e.which == 65) {
+            
+        url = '/2016/08/28/go-test.html';
+        
+        }
+        else if (e.which == 39 || e.which == 76|| e.which == 68) {
+            
+        }
+        if (url) {
+            window.location = url;
+        }
+  });
+})
+</script>
+
+
+
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                <div id="qrcode"></div>
+                <span style="text-align:center">手机扫一扫<br />分享&继续阅读</span>
+             </div>
+         </div>
+     </div>
+     <!--
+    <div class="pc_qrcode_outer" style="display: none;">
+         <div class="pc_qrcode_pc_inner">
+             <div class="qr_code_pc">
+                 <img src="/img/qrcode.jpg" alt="">
+                 <p>微信扫一扫<br>关注我的公众号</p>
+             </div>
+         </div>
+     </div>
+     -->
+     <div class="back_top_outer">
+         <div class="back_top_inner">
+             <div id="back-top">
+                 <a href="#top"><span></span></a>
+             </div>
+         </div>
+     </div>
+     </div>
+    </div>
+    <footer>
+  <p>Copyright © 2016 seagg.</p>
+  <p>
+    <a href="https://github.com/seagg" class="  iconfont social github">&#xe69f;</a>
+    <i class="iconfont social twitter">&#xf000e;</i>
+    <a href="https://weibo.com/proudxu" class="  iconfont social weibo">&#xe69f;</a>
+  </p>
+</footer>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        $("#back-top").hide()
+
+        $(function(){
+            $(window).scroll(function(){
+                if($(this).scrollTop() > 100){
+                    $('#back-top').fadeIn();
+                } else {
+                    $('#back-top').fadeOut();
+                }
+            });
+            $('#back-top a').click(function(){
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 800);
+
+                return false;
+            });
+        });
+    });
+</script>
+
+
+  </body>
+</html>
