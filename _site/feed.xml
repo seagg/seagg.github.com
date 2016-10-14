@@ -6,9 +6,36 @@
 </description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 10 Oct 2016 15:32:42 +0800</pubDate>
-    <lastBuildDate>Mon, 10 Oct 2016 15:32:42 +0800</lastBuildDate>
+    <pubDate>Fri, 14 Oct 2016 11:15:30 +0800</pubDate>
+    <lastBuildDate>Fri, 14 Oct 2016 11:15:30 +0800</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Hive中增加列隐藏的问题</title>
+        <description>&lt;p&gt;有个hive表&lt;code&gt;id_zone&lt;/code&gt;，存储按地理位置哈希值汇聚的订单信息，按天划分partition，表建好且跑了几天数据之后，想加经纬度两列进去，就执行了如下语句：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;alter&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;table&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mid_zone&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;column&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geohash_lat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;alter&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;table&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mid_zone&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;column&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geohash_lng&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;表见好之后，用&lt;code&gt;show create table mid_zone&lt;/code&gt;,和&lt;code&gt;show columns in mid_zone&lt;/code&gt;命令查看发现两列已经建进去了，就又重新跑了前几天的数据，想把经纬度值更新进去，但无论怎么执行，两列都是NULL，起初怀疑是解析地理位置哈希的UDF写的有问题，但测试了好几次都能正确解析出数值，后来又直接把经纬度写了两个固定的数值进去看看，但也写不进去，那就不是UDF的问题了。
+后来突然想起之前看到过添加列语句后面可以加cascade关键字，特意查了下，如果不加这个的话，只会修改metadata，也就是新的partition会包含添加的字段，而不会更新旧的partitions，&lt;a href=&quot;https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL&quot;&gt;官方说明&lt;/a&gt;是这样写的：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;The CASCADE|RESTRICT clause is available in Hive 0.15.0.
+ALTER TABLE CHANGE COLUMN with CASCADE command changes the columns of a table&amp;#39;s metadata
+ ,and cascades the same change to all the partition metadata. 
+RESTRICT is the default, limiting column change only to table metadata.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;所以我又把这两列删掉，重新执行了如下命令就好了：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;alter&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;table&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mid_zone&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;column&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geohash_lat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;cascade&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;alter&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;table&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mid_zone&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;column&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geohash_lng&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;cascade&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;当然，如果partition特别多的话，执行起来会非常慢，因为要更新每个partition。
+如果条件允许的话，将表drop掉之后重新create也是可以的。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 14 Oct 2016 00:00:00 +0800</pubDate>
+        <link>/2016/10/14/hive-add-columns.html</link>
+        <guid isPermaLink="true">/2016/10/14/hive-add-columns.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>Hive中复杂count语句</title>

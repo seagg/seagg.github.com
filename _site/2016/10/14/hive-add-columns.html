@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Hive中复杂count语句</title>
+  <title>Hive中增加列隐藏的问题</title>
   <link rel="stylesheet" href="/css/normalize.css">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/iconfont.css">
@@ -40,22 +40,26 @@
 
     <div class="content markdown">
   <div class="title">
-    <h1>Hive中复杂count语句</h1>
+    <h1>Hive中增加列隐藏的问题</h1>
   </div>
-  <p>最近用hive比较多，昨天需要统计数据表中满足特定条件的ip的个数，而且类似需求不止一个，最开始想的笨方法是每个需求搞个sql之后union起来，但太复杂，当时想要是能在count里的distinct基础上再加些条件就好了，之后就在网上找到了如下复杂count的示例。</p>
-<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
-    <span class="k">type</span>
-    <span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
-    <span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">u</span><span class="p">)</span>
-    <span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">plat</span><span class="o">=</span><span class="mi">1</span> <span class="k">THEN</span> <span class="n">u</span> <span class="k">ELSE</span> <span class="k">NULL</span> <span class="k">END</span><span class="p">)</span>
-    <span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">plat</span><span class="o">=</span><span class="mi">1</span> <span class="k">THEN</span> <span class="n">u</span> <span class="k">ELSE</span> <span class="k">NULL</span> <span class="k">END</span><span class="p">)</span>
-    <span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="k">CASE</span> <span class="k">WHEN</span> <span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="mi">2</span> <span class="k">OR</span> <span class="k">type</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="k">THEN</span> <span class="n">u</span> <span class="k">ELSE</span> <span class="k">NULL</span> <span class="k">END</span><span class="p">)</span>
-    <span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="mi">2</span> <span class="k">OR</span> <span class="k">type</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="k">THEN</span> <span class="n">u</span> <span class="k">ELSE</span> <span class="k">NULL</span> <span class="k">END</span><span class="p">)</span>
-<span class="k">FROM</span> <span class="n">t</span>
-<span class="k">WHERE</span> <span class="n">dt</span> <span class="k">in</span> <span class="p">(</span><span class="ss">&quot;2012-1-12-02&quot;</span><span class="p">,</span> <span class="ss">&quot;2012-1-12-03&quot;</span><span class="p">)</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="k">type</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">type</span><span class="p">;</span>
+  <p>有个hive表<code>id_zone</code>，存储按地理位置哈希值汇聚的订单信息，按天划分partition，表建好且跑了几天数据之后，想加经纬度两列进去，就执行了如下语句：</p>
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">alter</span> <span class="k">table</span> <span class="n">mid_zone</span> <span class="k">add</span> <span class="k">column</span> <span class="p">(</span><span class="n">geohash_lat</span> <span class="n">string</span><span class="p">);</span>
+<span class="k">alter</span> <span class="k">table</span> <span class="n">mid_zone</span> <span class="k">add</span> <span class="k">column</span> <span class="p">(</span><span class="n">geohash_lng</span> <span class="n">string</span><span class="p">);</span>
 </code></pre></div>
+<p>表见好之后，用<code>show create table mid_zone</code>,和<code>show columns in mid_zone</code>命令查看发现两列已经建进去了，就又重新跑了前几天的数据，想把经纬度值更新进去，但无论怎么执行，两列都是NULL，起初怀疑是解析地理位置哈希的UDF写的有问题，但测试了好几次都能正确解析出数值，后来又直接把经纬度写了两个固定的数值进去看看，但也写不进去，那就不是UDF的问题了。
+后来突然想起之前看到过添加列语句后面可以加cascade关键字，特意查了下，如果不加这个的话，只会修改metadata，也就是新的partition会包含添加的字段，而不会更新旧的partitions，<a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL">官方说明</a>是这样写的：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">The CASCADE|RESTRICT clause is available in Hive 0.15.0.
+ALTER TABLE CHANGE COLUMN with CASCADE command changes the columns of a table&#39;s metadata
+ ,and cascades the same change to all the partition metadata. 
+RESTRICT is the default, limiting column change only to table metadata.
+</code></pre></div>
+<p>所以我又把这两列删掉，重新执行了如下命令就好了：</p>
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">alter</span> <span class="k">table</span> <span class="n">mid_zone</span> <span class="k">add</span> <span class="k">column</span> <span class="p">(</span><span class="n">geohash_lat</span> <span class="n">string</span><span class="p">)</span> <span class="k">cascade</span><span class="p">;</span>
+<span class="k">alter</span> <span class="k">table</span> <span class="n">mid_zone</span> <span class="k">add</span> <span class="k">column</span> <span class="p">(</span><span class="n">geohash_lng</span> <span class="n">string</span><span class="p">)</span> <span class="k">cascade</span><span class="p">;</span>
+</code></pre></div>
+<p>当然，如果partition特别多的话，执行起来会非常慢，因为要更新每个partition。
+如果条件允许的话，将表drop掉之后重新create也是可以的。</p>
+
 <!-- 下面的代码可以使用键盘文章翻页,兼容Vim和游戏快键键 上一篇: h,←, a 下一篇: l,→, d -->
 <script type="text/javascript">
 $(function(){
@@ -63,13 +67,11 @@ $(function(){
     var url = false;
         if (e.which == 37 || e.which == 72|| e.which == 65) {
             
-        url = '/2016/08/28/go-test.html';
+        url = '/2016/10/10/complex-hive.html';
         
         }
         else if (e.which == 39 || e.which == 76|| e.which == 68) {
             
-        url = '/2016/10/14/hive-add-columns.html';
-        
         }
         if (url) {
             window.location = url;
